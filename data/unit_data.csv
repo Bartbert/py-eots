@@ -1,0 +1,156 @@
+nationality,unit_type,branch,attack_front,defense,attack_back,move_range,move_range_extended,extended_limit,unit_name,image_name_front,image_name_back
+Japan,Ground,Army,20,12,9,,,,,,
+Japan,Ground,Army,18,12,9,,,,17 Inf Army,j17f.gif,j17b.gif
+Japan,Ground,Army,18,12,9,,,,18 Inf Army,j18f.gif,j18b.gif
+Japan,Ground,Army,18,12,9,,,,19 Inf Army,j19f.gif,j19b.gif
+Japan,Ground,Army,18,18,9,,,,,,
+Japan,Ground,Army,4,6,2,,,,4 SN Inf Bde,j4SNF.gif,j4SNB.gif
+Japan,Ground,Army,6,6,3,,,,SS Inf Bde,jSSF.gif,jSSB.gif
+Japan,Air,Army,20,10,10,2,4,FALSE,1 AD,jpn1adF.gif,jpn1adB.gif
+Japan,Air,Army,20,10,10,2,4,FALSE,2 AD,jpn2adF.gif,jpn2adB.gif
+Japan,Air,Army,20,10,10,2,4,FALSE,3 AD,jpn3adF.gif,jpn3adB.gif
+Japan,Air,Army,20,10,10,2,4,FALSE,4 AD,jpn4adF.gif,jpn4adB.gif
+Japan,Air,Army,22,10,11,2,4,FALSE,5 AD,jpn5adF.gif,jpn5adB.gif
+Japan,Air,Army,8,10,4,2,4,FALSE,6 AD,jpn6adF.gif,jpn6adB.gif
+Japan,Air,Army,8,10,4,2,4,FALSE,7 AD,jpn7adF.gif,jpn7adB.gif
+Japan,Air,Army,8,10,4,2,4,FALSE,8 AD,jpn8adF.gif,jpn8adB.gif
+Japan,Air,Army,8,10,4,2,4,FALSE,9 AD,jpn9adF.gif,jpn9adB.gif
+Japan,Air,Army,8,10,4,2,4,FALSE,10 AD,jpn10adF.gif,jpn10adB.gif
+Japan,Air,Army,6,10,3,2,4,FALSE,11 AD,jpn11adF.gif,jpn11adB.gif
+Japan,Air,Army,6,10,3,2,4,FALSE,12 AD,jpn12adF.gif,jpn12adB.gif
+Japan,Air,Army,8,10,6,4,5,TRUE,T AD,jpnTadF.gif,jpnTadB.gif
+Japan,Air,Navy,16,10,8,3,5,FALSE,21 AF,jpn21afF.gif,jpn21afB.gif
+Japan,Air,Navy,20,10,10,3,5,FALSE,22 AF,jpn22afF.gif,jpn22afB.gif
+Japan,Air,Navy,16,10,8,3,5,FALSE,23 AF,jpn23afF.gif,jpn23afB.gif
+Japan,Air,Navy,10,10,5,3,5,FALSE,24 AF,jpn24afF.gif,jpn24afB.gif
+Japan,Air,Navy,10,10,5,3,5,FALSE,25 AF,jpn25afF.gif,jpn25afB.gif
+Japan,Air,Navy,10,10,5,3,5,FALSE,26 AF,jpn26afF.gif,jpn26afB.gif
+Japan,Air,Navy,10,10,5,3,5,FALSE,27 AF,jpn27afF.gif,jpn27afB.gif
+Japan,Air,Navy,10,10,5,3,5,FALSE,28 AF,jpn28afF.gif,jpn28afB.gif
+Japan,Air,Navy,8,10,4,3,5,FALSE,50 AF,jpn50afF.gif,jpn50afB.gif
+Japan,Air,Navy,8,10,4,3,5,FALSE,51 AF,jpn51afF.gif,jpn51afB.gif
+Japan,Air,Navy,8,10,4,3,5,FALSE,61 AF,jpn61afF.gif,jpn61afB.gif
+Japan,Air,Navy,8,10,4,3,5,FALSE,62 AF,jpn62afF.gif,jpn62afB.gif
+China,Ground,Army,5,12,3,,,,,,
+China,Ground,Army,6,12,4,,,,,,
+US,Ground,Army,6,10,3,,,,,,
+US,Ground,Army,10,10,5,,,,,,
+US,Ground,Army,4,10,2,,,,,,
+US,Ground,Army,3,10,1,,,,,,
+US,Ground,Army,1,6,,,,,,,
+US,Ground,Army,18,12,9,,,,,,
+US,Ground,Army,22,12,11,,,,I Inf Corps,usIF.gif,usIB.gif
+US,Ground,Army,22,12,11,,,,IX Inf Corps,usIXF.gif,usIXB.gif
+US,Ground,Army,22,12,11,,,,XIV Inf Corps,usXIVF.gif,usXIVB.gif
+US,Ground,Army,22,12,11,,,,XXIV Inf Corps,usXXIVF.gif,usXXIVB.gif
+US,Ground,Army,9,12,6,,,,,,
+US,Air,Army,8,10,4,2,4,TRUE,FEAF,usfeafF.gif,usfeafB.gif
+US,Air,Army,2,9,1,6,,,19 AF (LR),us19aflrbF.gif,us19aflrbB.gif
+US,Air,Army,10,10,5,2,4,FALSE,5 AF,us5afF.gif,us5afB.gif
+US,Air,Army,10,10,5,2,4,FALSE,7 AF,us7afF.gif,us7afB.gif
+US,Air,Army,10,10,5,2,4,FALSE,11 AF,us11afF.gif,us11afB.gif
+US,Air,Army,10,10,5,2,4,FALSE,13 AF,us13afF.gif,us13afB.gif
+US,Air,Army,4,10,2,6,,FALSE,5 AF (LR),us5aflrbF.gif,us5aflrbB.gif
+US,Air,Army,4,10,2,6,,FALSE,7 AF (LR),us7aflrbF.gif,us7aflrbB.gif
+US,Air,Army,4,10,2,6,,FALSE,10 AF (LR),us10aflrbF.gif,us10aflrbB.gif
+US,Air,Army,4,10,2,6,,FALSE,11 AF (LR),us11aflrbF.gif,us11aflrbB.gif
+US,Air,Army,4,10,2,6,,FALSE,13 AF (LR),us13aflrbF.gif,us13aflrbB.gif
+US,Air,Army,4,10,2,6,,FALSE,14 AF (LR),us14aflrbF.gif,us14aflrbB.gif
+US,Air,Army,6,10,3,8,,FALSE,20 BC,us20bcF.gif,us20bcB.gif
+US,Air,Army,6,10,3,8,,FALSE,21 BC,us21bcF.gif,us21bcB.gif
+US,Air,Army,9,10,6,2,4,FALSE,14 AF,us14afF.gif,us14afB.gif
+US,Air,Army,6,10,5,2,4,TRUE,AVG,usavgafF.gif,usavgafB.gif
+UK,Air,Army,10,10,5,2,4,TRUE,Aus AF,ukausafF.gif,ukausafB.gif
+UK,Air,Army,10,10,5,2,4,FALSE,SEAC,ukseacafF.gif,ukseacafB.gif
+UK,Air,Army,4,10,2,6,,FALSE,SEAC (LR),ukseaclrbF.gif,ukseaclrbB.gif
+UK,Air,Army,7,9,4,2,4,TRUE,FE AF,ukfeafF.gif,ukfeafB.gif
+UK,Air,Army,6,9,3,2,4,TRUE,MA AF,ukmaafF.gif,ukmaafB.gif
+UK,Ground,Army,3,4,1,,,,,,
+UK,Ground,Army,16,12,8,,,,,,
+UK,Ground,Army,20,12,10,,,,,,
+UK,Ground,Army,6,6,4,,,,,,
+UK,Ground,Army,6,12,3,,,,,,
+UK,Ground,Army,12,12,6,,,,1 Aus Inf Corps,Com_1AusF.gif,Com_1AusB.gif
+UK,Ground,Army,12,12,6,,,,2 Aus Inf Corps,Com_2AusF.gif,Com_2AusB.gif
+UK,Ground,Army,5,5,3,,,,PM Inf Bde,Com_PMF.gif,Com_PMB.gif
+UK,Ground,Army,9,12,6,,,,3 NZ Inf Div,Com_3NZF.gif,Com_3NZB.gif
+UK,Ground,Army,22,12,11,,,,3 Aus Inf Corps,Com_3AusF.gif,Com_3AusB.gif
+UK,Ground,Army,4,10,2,,,,,,
+UK,Ground,Army,6,4,3,,,,,,
+UK,Ground,Army,12,12,8,,,,,,
+UK,Ground,Army,9,9,5,,,,,,
+UK,Ground,Army,3,5,1,,,,,,
+UK,Ground,Army,16,12,8,,,,,,
+US,Air,Navy,1,8,,2,4,TRUE,211 MA,us211maF.gif,us marker9.gif
+US,Air,Navy,6,10,3,2,4,TRUE,1 MAW,usa1mawF.gif,usa1mawB.gif
+US,Air,Navy,8,10,6,2,4,TRUE,2 MAW,usa2mawF.gif,usa2mawB.gif
+US,Air,Navy,10,10,8,2,4,TRUE,3 MAW,usa3mawF.gif,usa3mawB.gif
+US,Ground,Navy,2,6,,,,,,,
+US,Ground,Navy,8,8,4,,,,M Bde,usMF.gif,usMB.gif
+US,Ground,Navy,4,6,2,,,,SF Bde,usSFF.gif,usSFB.gif
+US,Ground,Navy,12,12,8,,,,1 M Div,us1MF.gif,us1MB.gif
+US,Ground,Navy,12,12,8,,,,2 M Div,us2MF.gif,us2MB.gif
+US,Ground,Navy,12,12,8,,,,3 M Div,us3MF.gif,us3MB.gif
+Dutch,Air,Army,7,9,4,2,4,TRUE,,,
+Dutch,Ground,Army,1,6,,,,,,,
+Dutch,Ground,Army,6,12,3,,,,,,
+Japan,Naval,Navy,12,12,8,3,,,Akagi (CV),AkagiF.gif,AkagiB.gif
+Japan,Naval,Navy,10,12,7,3,,,Soryu (CV),SoryuF.gif,SoryuB.gif
+Japan,Naval,Navy,10,12,7,3,,,Taiho (CV),TaihoF.gif,TaihoB.gif
+Japan,Naval,Navy,14,12,9,3,,,Shokaku (CV),shokakuF.gif,shokakuB.gif
+Japan,Naval,Navy,17,14,9,,,,Hiei (BB),HieiF.gif,HieiB.gif
+Japan,Naval,Navy,20,14,10,,,,Nagato (BB),nagatoF.gif,nagatoB.gif
+Japan,Naval,Navy,8,8,6,3,,,Zuiho (CVL),zuihoF.gif,zuihoB.gif
+Japan,Naval,Navy,8,8,6,3,,,Junyo (CVL),junyoF.gif,junyoB.gif
+Japan,Naval,Navy,8,8,6,3,,,Kaiyo (CVL),kaiyoF.gif,kaiyoB.gif
+Japan,Naval,Navy,8,8,6,3,,,Amagi (CVL),AmagiF.gif,amagiB.gif
+Japan,Naval,Navy,13,14,7,,,,Kongo (BB),kongo2F.gif,kongo2B.gif
+Japan,Naval,Navy,12,10,7,,,,Aoba (CA),aobaF.gif,aobaB.gif
+Japan,Naval,Navy,12,10,7,,,,Takao (CA),TakaoF.gif,TakaoB.gif
+Japan,Naval,Navy,8,8,4,,,,Kamikaze (APD),kamikazeF.gif,kamikazeB.gif
+Japan,Naval,Navy,4,8,3,,,,Tenryu (CL),TenyruF.gif,TenyruB.gif
+Japan,Naval,Navy,10,10,6,,,,Nachi (CA),NachiF.gif,NachiB.gif
+Japan,Naval,Navy,6,8,3,3,,,Ryujo,RyuhoF.gif,RyuhoB.gif
+Japan,Naval,Navy,18,18,9,,,,Yamato (BB),yamatoF.gif,yamatoB.gif
+UK,Naval,Navy,8,10,4,,,,Force Z (BB),forcezF.gif,forcezB.gif
+UK,Naval,Navy,3,8,2,,,,Kent (CA),KentF.gif,KentB.gif
+Dutch,Naval,Navy,3,8,2,,,,Dutch (CL),dutchclF.gif,dutchclB.gif
+UK,Naval,Navy,5,8,3,,,,Exeter (CA),exeterF.gif,exeterB.gif
+UK,Naval,Navy,20,16,10,,,,Duke of York (BB),dukeOfyorkF.gif,dukeOfyorkB.gif
+UK,Naval,Navy,10,12,5,2,,,Indomitable (CV),indomitableF.gif,idomitableB.gif
+UK,Naval,Navy,14,14,7,,,,Warspite (BB),warspiteF.gif,warspiteB.gif
+UK,Naval,Navy,2,8,,0,,,Hermes (CVL),hermesF.gif,flag2.png
+UK,Naval,Navy,6,8,3,,,,London (CA),londonF.gif,londonB.gif
+UK,Naval,Navy,12,14,6,2,,,Victorious (CV),victoriousF.gif,victoriousB.gif
+US,Naval,Navy,2,4,1,,,,US Asia (DD),usasiaddF.gif,usasiaddB.gif
+US,Naval,Navy,4,6,2,,,,US Asia (CA),usasiacaF.gif,usasiacaB.gif
+US,Naval,Navy,12,12,8,2,,,Enterprise (CV),EnterpriseF.gif,EnterpriseB.gif
+US,Naval,Navy,12,12,8,2,,,Lexington (CV),LexingtonF.gif,LexingtonB.gif
+US,Naval,Navy,12,12,8,2,,,Wasp (CV),WaspF.gif,WaspB.gif
+US,Naval,Navy,15,10,9,,,,MD/CA (BB),usmdcaF.gif,usmdcaB.gif
+US,Naval,Navy,15,12,7,,,,Miss. (BB),missF.gif,missB.gif
+US,Naval,Navy,9,8,6,,,,Northampton (CA),NorthamptonF.gif,NorthamptonB.gif
+US,Naval,Navy,9,8,6,,,,N. Orleans (CA),norleansF.gif,norleansB.gif
+US,Naval,Navy,16,16,8,,,,Mass (BB),MassF.gif,MassB.gif
+US,Naval,Navy,16,16,8,,,,N Carolina (BB),NCarolinaF.gif,NCarolinaB.gif
+US,Naval,Navy,16,16,8,,,,Washington (BB),WashingtonF.gif,WashingtonB.gif
+US,Naval,Navy,16,16,8,,,,New Jersy (BB),newjerseyF.gif,newjerseyB.gif
+US,Naval,Navy,16,16,8,,,,New York (BB),newyorkF.gif,newyorkB.gif
+US,Naval,Navy,16,16,8,,,,Missouri (BB),missouriF.gif,missouriB.gif
+US,Naval,Navy,10,10,7,2,,,Belleau Wood (CVL),BelleauWoodF.gif,BelleauWoodB.gif
+US,Naval,Navy,10,10,7,2,,,Cowpens (CVL),CowpensF.gif,CowpensB.gif
+US,Naval,Navy,10,10,7,2,,,San Jacinto (CVL),SanJacintoF.gif,SanJacintoB.gif
+US,Naval,Navy,10,10,7,2,,,Bataan (CVL),bataanF.gif,bataanB.gif
+US,Naval,Navy,14,14,10,2,,,Bunker Hill (CV),BunkerHillF.gif,BunkerHillB.gif
+US,Naval,Navy,14,14,10,2,,,Essex (CV),EssexF.gif,EssexB.gif
+US,Naval,Navy,14,14,10,2,,,Intrepid (CV),intrepidF.gif,intrepidB.gif
+US,Naval,Navy,14,14,10,2,,,Franklin (CV),franklinF.gif,franklinB.gif
+US,Naval,Navy,14,14,10,2,,,Hancock (CV),hancockF.gif,hancockB.gif
+US,Naval,Navy,14,14,10,2,,,Shangri La (CV),shangrilaF.gif,shangrilaB.gif
+US,Naval,Navy,14,14,10,2,,,B.H. Richard (CV),bhrichardF.gif,bhrichardB.gif
+US,Naval,Navy,6,8,3,2,,,Sangamon (CVE),SangamonF.gif,SangamonB.gif
+US,Naval,Navy,6,8,3,2,,,Casablanca (CVE),casablancaF.gif,casablancaB.gif
+US,Naval,Navy,6,8,3,2,,,St. Lo (CVE),stloF.gif,stloB.gif
+US,Naval,Navy,6,8,3,2,,,C. Bay (CVE),cbayF.gif,cbayB.gif
+US,Naval,Navy,10,12,5,,,,Alaska (BC),alaskaF.gif,alaskaB.gif
+US,Naval,Navy,8,10,4,,,,Baltimore (CA),baltimoreF.gif,baltimoreB.gif
