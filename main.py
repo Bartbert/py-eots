@@ -16,14 +16,23 @@ def print_hi():
     allied_unit_list = [CombatUnit(**kwargs) for kwargs in allied_units.to_dict(orient='records')]
     japan_unit_list = [CombatUnit(**kwargs) for kwargs in japan_units.to_dict(orient='records')]
 
-    allied_forces = allied_unit_list[50:55]
-    japan_forces = japan_unit_list[15:20]
+    allied_forces = allied_unit_list[60:65]
+    allied_forces[0].is_flipped = True
+
+    japan_forces = japan_unit_list[23:28]
+    japan_forces[3].is_flipped = True
 
     for unit in allied_forces:
-        print(unit.unit_name)
+        print(f'Unit: {unit.unit_name}, Front: {unit.attack_front}, Back: {unit.attack_back}, CF: {unit.combat_factors()}')
+
+    allied_forces_cf = sum(map(lambda x: x.combat_factors(), allied_forces))
+    print(f'Allied CF Total: {allied_forces_cf}')
 
     for unit in japan_forces:
-        print(unit.unit_name)
+        print(f'Unit: {unit.unit_name}, Front: {unit.attack_front}, Back: {unit.attack_back}, CF: {unit.combat_factors()}')
+
+    japan_forces_cf = sum(map(lambda x: x.combat_factors(), japan_forces))
+    print(f'Japan CF Total: {japan_forces_cf}')
 
     analyzer = BattleAnalyzer(intel_condition=enums.IntelCondition.INTERCEPT, reaction_player=enums.Player.ALLIES,
                               air_power_mod=enums.AirPowerModifier.Y1942, allied_ec_mod=0, japan_ec_mod=0)
