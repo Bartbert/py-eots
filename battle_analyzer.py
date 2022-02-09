@@ -77,6 +77,8 @@ class BattleAnalyzer:
             allied_result = combat_result(allied_die_roll, allied_drm)
             japan_result = combat_result(japan_die_roll, japan_drm)
 
+            # The Combat Factor loss inflicted on the player's forces by his opponent
+            # The actual Battle losses are determined based on damage allocation
             japan_loss_result = math.ceil(allied_forces_cf * allied_result)
             allied_loss_result = math.ceil(japan_forces_cf * japan_result)
 

@@ -23,13 +23,15 @@ def print_hi():
     japan_forces[3].is_flipped = True
 
     for unit in allied_forces:
-        print(f'Unit: {unit.unit_name}, Front: {unit.attack_front}, Back: {unit.attack_back}, CF: {unit.combat_factors()}')
+        print(
+            f'Unit: {unit.unit_name}, Front: {unit.attack_front}, Back: {unit.attack_back}, CF: {unit.combat_factors()}')
 
     allied_forces_cf = sum(map(lambda x: x.combat_factors(), allied_forces))
     print(f'Allied CF Total: {allied_forces_cf}')
 
     for unit in japan_forces:
-        print(f'Unit: {unit.unit_name}, Front: {unit.attack_front}, Back: {unit.attack_back}, CF: {unit.combat_factors()}')
+        print(
+            f'Unit: {unit.unit_name}, Front: {unit.attack_front}, Back: {unit.attack_back}, CF: {unit.combat_factors()}')
 
     japan_forces_cf = sum(map(lambda x: x.combat_factors(), japan_forces))
     print(f'Japan CF Total: {japan_forces_cf}')
@@ -40,6 +42,11 @@ def print_hi():
     results = analyzer.analyze_battle(allied_forces, japan_forces)
 
     print(results)
+
+    results_summary = results.groupby(by=['allied_result', 'allied_losses', 'japan_result', 'japan_losses'],
+                                      as_index=False).agg(
+        probability=pd.NamedAgg(column='allied_result', aggfunc='count'))
+    print(results_summary)
 
 
 # Press the green button in the gutter to run the script.

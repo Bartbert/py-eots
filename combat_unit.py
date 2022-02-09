@@ -9,8 +9,19 @@ class CombatUnit:
                  image_name_back: str, id: int, is_flipped: bool = False, is_in_battle_hex: bool = False,
                  is_extended_range: bool = False, attack_modifier: int = 0):
         self.nationality = nationality
-        self.unit_type = unit_type
-        self.branch = branch
+
+        if unit_type == 'Air':
+            self.unit_type = enums.UnitType.AIR
+        elif unit_type == 'Naval':
+            self.unit_type = enums.UnitType.NAVAL
+        else:
+            self.unit_type = enums.UnitType.GROUND
+
+        if branch == 'Army':
+            self.branch = enums.Branch.ARMY
+        else:
+            self.branch = enums.Branch.NAVY
+
         self.attack_front = attack_front
         self.defense = defense
         self.attack_back = attack_back
