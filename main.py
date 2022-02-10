@@ -53,6 +53,9 @@ def print_hi():
     print(results_summary)
     print(pd.unique(results['allied_losses']))
 
+    for unit in allied_forces:
+        print(f'Name: {unit.unit_name}, Flipped: {unit.damage_flipped}, Eliminated: {unit.damage_eliminated}')
+
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':

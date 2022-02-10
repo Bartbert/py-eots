@@ -1,6 +1,7 @@
 import math
 import pandas as pd
 import enums
+import copy
 from itertools import product
 from combat_unit import CombatUnit
 
@@ -32,26 +33,26 @@ def select_unit_for_damage(combat_forces: [CombatUnit], damage_to_apply: int, cr
         # enemy_air_unit_count, and this is an air unit that has NOT yet received damage.
         if (air_units_damaged == enemy_air_unit_count) & (unit.damage_flipped is False) & (
                 unit.damage_eliminated is False):
-            next()
+            continue
 
         if critical_hit:
             # Skip this unit if the damage_to_apply is less than the defense value of the unit
             if unit.defense > damage_to_apply:
-                next()
+                continue
 
             return unit
 
         else:
             # Skip this unit if the damage_to_apply is less than the defense value of the unit
             if unit.defense > damage_to_apply:
-                next()
+                continue
 
             # Skip this unit if the unit is flipped, and there are still other units that haven't been flipped
             unflipped_unit_count = sum(
                 1 for u in combat_forces if (u.damage_flipped is False) & (u.is_flipped is False))
 
             if (unit.damage_flipped | unit.is_flipped) & (unflipped_unit_count > 0):
-                next()
+                continue
 
             return unit
 
@@ -100,18 +101,22 @@ def determine_battle_winner(allied_forces: [CombatUnit], japan_forces: [CombatUn
     allied_air_unit_count = sum(1 for u in allied_forces if u.move_range > 0)
     japan_air_unit_count = sum(1 for u in japan_forces if u.move_range > 0)
 
-    for row in combat_results:
+    for row in combat_results.iterrows():
         # Apply damage to Allied units
-        allied_losses = row['allied_losses']
-        critical_hit = row['japan_die_roll'] == 9
+        allied_losses = row[1]['allied_losses']
+        critical_hit = row[1]['japan_die_roll'] == 9
 
-        apply_damage(allied_losses, critical_hit, allied_forces, japan_air_unit_count)
+        combat_forces = copy.deepcopy(allied_forces)
+
+        apply_damage(allied_losses, critical_hit, combat_forces, japan_air_unit_count)
 
         # Apply damage to Japan units
-        japan_losses = row['japan_losses']
-        critical_hit = row['allied_die_roll'] == 9
+        japan_losses = row[1]['japan_losses']
+        critical_hit = row[1]['allied_die_roll'] == 9
 
-        apply_damage(japan_losses, critical_hit, japan_forces, allied_air_unit_count)
+        combat_forces = copy.deepcopy(japan_forces)
+
+        apply_damage(japan_losses, critical_hit, combat_forces, allied_air_unit_count)
 
 
 class BattleAnalyzer:
@@ -158,8 +163,6 @@ class BattleAnalyzer:
         japan_results = []
         japan_losses = []
 
-        battle_results = []
-
         allied_forces_cf = sum(map(lambda x: x.combat_factor(), allied_forces))
         japan_forces_cf = sum(map(lambda x: x.combat_factor(), japan_forces))
 
@@ -195,4 +198,9 @@ class BattleAnalyzer:
             'japan_losses': japan_losses
         }
 
-        return pd.DataFrame(data=results_data)
+        combat_results = pd.DataFrame(data=results_data)
+
+        determine_battle_winner(allied_forces, japan_forces, combat_results)
+
+        return combat_results
+
