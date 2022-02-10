@@ -1,4 +1,5 @@
 import pandas as pd
+from IPython.display import display
 from combat_unit import CombatUnit
 from battle_analyzer import BattleAnalyzer
 import enums
@@ -26,12 +27,11 @@ def print_hi():
 
     for unit in allied_forces:
         print(
-            f'Unit: {unit.unit_name}, Front: {unit.attack_front}, Back: {unit.attack_back}, Defense: {unit.defense}, CF: {unit.combat_factor()}, Loss Delta: {unit.loss_delta()}')
+            f'Unit: {unit.unit_name}, Front: {unit.attack_front}, Back: {unit.attack_back}, Defense: {unit.defense}, '
+            f'CF: {unit.combat_factor()}, Loss Delta: {unit.loss_delta()}, Range: {unit.move_range}')
 
     allied_forces_cf = sum(map(lambda x: x.combat_factor(), allied_forces))
-    allied_air_unit_count = sum(1 for u in allied_forces if u.move_range > 0)
     print(f'Allied CF Total: {allied_forces_cf}')
-    print(f'Allied Air Unit Count: {allied_air_unit_count}')
 
     for unit in japan_forces:
         print(
@@ -45,13 +45,14 @@ def print_hi():
 
     results = analyzer.analyze_battle(allied_forces, japan_forces)
 
-    print(results)
+    display(results)
 
     results_summary = results.groupby(by=['allied_result', 'allied_losses', 'japan_result', 'japan_losses'],
                                       as_index=False).agg(
         probability=pd.NamedAgg(column='allied_result', aggfunc='count'))
     print(results_summary)
-    print(pd.unique(results['allied_losses']))
+
+    print(results.loc[95, 'allied_die_roll'])
 
     for unit in allied_forces:
         print(f'Name: {unit.unit_name}, Flipped: {unit.damage_flipped}, Eliminated: {unit.damage_eliminated}')

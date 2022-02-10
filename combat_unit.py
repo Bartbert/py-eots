@@ -33,7 +33,7 @@ class CombatUnit:
         self.image_name_back = image_name_back
         self.id = id
         self.is_flipped = is_flipped
-        self.is_in_battle_hex = is_in_battle_hex
+        self.is_in_battle_hex = (True if math.isnan(self.move_range) else False)
         self.is_extended_range = is_extended_range
         self.attack_modifier = attack_modifier
 
@@ -49,13 +49,16 @@ class CombatUnit:
 
         combat_factor = self.attack_front
 
-        if self.is_flipped:
+        if self.is_flipped | self.damage_flipped:
             combat_factor = self.attack_back
 
         combat_factor += self.attack_modifier
 
         if self.is_extended_range:
             combat_factor = int(math.ceil(combat_factor / 2))
+
+        if self.damage_eliminated | (math.isnan(self.move_range) & (not self.is_in_battle_hex)):
+            combat_factor = 0
 
         return combat_factor
 
@@ -67,3 +70,15 @@ class CombatUnit:
             loss_delta = self.attack_front - self.attack_back
 
         return loss_delta
+
+    def damage_applied(self):
+        damage_applied = 0
+
+        if self.damage_flipped:
+            damage_applied += self.defense
+
+        if self.damage_eliminated:
+            damage_applied += self.defense
+
+        return damage_applied
+

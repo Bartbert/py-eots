@@ -110,6 +110,9 @@ def determine_battle_winner(allied_forces: [CombatUnit], japan_forces: [CombatUn
 
         apply_damage(allied_losses, critical_hit, combat_forces, japan_air_unit_count)
 
+        allied_damage_applied = sum(map(lambda x: x.damage_applied(), combat_forces))
+        allied_remaining_cf = sum(map(lambda x: x.combat_factor(), combat_forces))
+
         # Apply damage to Japan units
         japan_losses = row[1]['japan_losses']
         critical_hit = row[1]['allied_die_roll'] == 9
@@ -117,6 +120,17 @@ def determine_battle_winner(allied_forces: [CombatUnit], japan_forces: [CombatUn
         combat_forces = copy.deepcopy(japan_forces)
 
         apply_damage(japan_losses, critical_hit, combat_forces, allied_air_unit_count)
+
+        japan_damage_applied = sum(map(lambda x: x.damage_applied(), combat_forces))
+        japan_remaining_cf = sum(map(lambda x: x.combat_factor(), combat_forces))
+
+        combat_results.loc[row[0], 'allied_damage_applied'] = allied_damage_applied
+        combat_results.loc[row[0], 'japan_damage_applied'] = japan_damage_applied
+
+        if allied_remaining_cf > japan_remaining_cf:
+            combat_results.loc[row[0], 'battle_winner'] = enums.Player.ALLIES
+        elif japan_remaining_cf > allied_remaining_cf:
+            combat_results.loc[row[0], 'battle_winner'] = enums.Player.JAPAN
 
 
 class BattleAnalyzer:
@@ -193,9 +207,12 @@ class BattleAnalyzer:
             'allied_die_roll': allied_die_rolls,
             'allied_result': allied_results,
             'allied_losses': allied_losses,
+            'allied_damage_applied': 0,
             'japan_die_roll': japan_die_rolls,
             'japan_result': japan_results,
-            'japan_losses': japan_losses
+            'japan_losses': japan_losses,
+            'japan_damage_applied': 0,
+            'battle_winner': enums.Player.UNKNOWN
         }
 
         combat_results = pd.DataFrame(data=results_data)

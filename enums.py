@@ -11,6 +11,7 @@ class IntelCondition(Enum):
 class Player(Enum):
     JAPAN = 1
     ALLIES = 2
+    UNKNOWN = 3
 
 
 class AirPowerModifier(IntEnum):
