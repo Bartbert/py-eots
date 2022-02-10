@@ -42,16 +42,28 @@ class CombatUnit:
         else:
             self.player = enums.Player.ALLIES
 
-    def combat_factors(self):
+        self.damage_flipped = False
+        self.damage_eliminated = False
 
-        combat_factors = self.attack_front
+    def combat_factor(self):
+
+        combat_factor = self.attack_front
 
         if self.is_flipped:
-            combat_factors = self.attack_back
+            combat_factor = self.attack_back
 
-        combat_factors += self.attack_modifier
+        combat_factor += self.attack_modifier
 
         if self.is_extended_range:
-            combat_factors = int(math.ceil(combat_factors / 2))
+            combat_factor = int(math.ceil(combat_factor / 2))
 
-        return combat_factors
+        return combat_factor
+
+    def loss_delta(self):
+
+        if self.is_flipped:
+            loss_delta = self.attack_back
+        else:
+            loss_delta = self.attack_front - self.attack_back
+
+        return loss_delta
