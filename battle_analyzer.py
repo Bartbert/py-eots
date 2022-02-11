@@ -29,10 +29,13 @@ def select_unit_for_damage(combat_forces: [CombatUnit], damage_to_apply: int, cr
 
     for unit in combat_forces:
 
+        # Skip this unit if it has already been eliminated
+        if unit.damage_eliminated:
+            continue
+
         # Skip this unit if the number of air units that have already received damage equals the
         # enemy_air_unit_count, and this is an air unit that has NOT yet received damage.
-        if (air_units_damaged == enemy_air_unit_count) & (unit.damage_flipped is False) & (
-                unit.damage_eliminated is False):
+        if (air_units_damaged == enemy_air_unit_count) & (not unit.damage_flipped) & (not unit.damage_eliminated):
             continue
 
         if critical_hit:
@@ -49,7 +52,7 @@ def select_unit_for_damage(combat_forces: [CombatUnit], damage_to_apply: int, cr
 
             # Skip this unit if the unit is flipped, and there are still other units that haven't been flipped
             unflipped_unit_count = sum(
-                1 for u in combat_forces if (u.damage_flipped is False) & (u.is_flipped is False))
+                1 for u in combat_forces if (not u.damage_flipped) & (not u.is_flipped))
 
             if (unit.damage_flipped | unit.is_flipped) & (unflipped_unit_count > 0):
                 continue
@@ -66,23 +69,25 @@ def apply_damage(total_losses: int, critical_hit, combat_forces, opponent_air_un
     allied_losses = total_losses
 
     while damage_applied < allied_losses:
-        selected_unit = select_unit_for_damage(combat_forces, damage_to_apply, critical_hit,
-                                               opponent_air_unit_count)
+
+        selected_unit = select_unit_for_damage(combat_forces, damage_to_apply, critical_hit, opponent_air_unit_count)
 
         if selected_unit is not None:
             damage_applied += selected_unit.defense
             damage_to_apply -= selected_unit.defense
 
-            if selected_unit.is_flipped:
+            if selected_unit.is_flipped | selected_unit.damage_flipped:
                 selected_unit.damage_eliminated = True
             else:
                 selected_unit.damage_flipped = True
+
         else:
             break
 
     # If this was a critical hit, and no units were selected for damage at all, then apply damage to
     # the unit with the smallest defense value
     if (damage_applied == 0) & critical_hit:
+
         combat_forces.sort(key=lambda x: (x.defense, -x.loss_delta()))
         selected_unit = combat_forces[0]
 
@@ -96,8 +101,7 @@ def apply_damage(total_losses: int, critical_hit, combat_forces, opponent_air_un
 
 
 def determine_battle_winner(allied_forces: [CombatUnit], japan_forces: [CombatUnit],
-                            combat_results: pd.DataFrame):
-
+                            combat_results: pd.DataFrame, intel_condition: enums.IntelCondition):
     allied_air_unit_count = sum(1 for u in allied_forces if u.move_range > 0)
     japan_air_unit_count = sum(1 for u in japan_forces if u.move_range > 0)
 
@@ -125,7 +129,9 @@ def determine_battle_winner(allied_forces: [CombatUnit], japan_forces: [CombatUn
         japan_remaining_cf = sum(map(lambda x: x.combat_factor(), combat_forces))
 
         combat_results.loc[row[0], 'allied_damage_applied'] = allied_damage_applied
+        combat_results.loc[row[0], 'allied_remaining_cf'] = allied_remaining_cf
         combat_results.loc[row[0], 'japan_damage_applied'] = japan_damage_applied
+        combat_results.loc[row[0], 'japan_remaining_cf'] = japan_remaining_cf
 
         if allied_remaining_cf > japan_remaining_cf:
             combat_results.loc[row[0], 'battle_winner'] = enums.Player.ALLIES
@@ -208,16 +214,17 @@ class BattleAnalyzer:
             'allied_result': allied_results,
             'allied_losses': allied_losses,
             'allied_damage_applied': 0,
+            'allied_remaining_cf': 0,
             'japan_die_roll': japan_die_rolls,
             'japan_result': japan_results,
             'japan_losses': japan_losses,
             'japan_damage_applied': 0,
+            'japan_remaining_cf': 0,
             'battle_winner': enums.Player.UNKNOWN
         }
 
         combat_results = pd.DataFrame(data=results_data)
 
-        determine_battle_winner(allied_forces, japan_forces, combat_results)
+        determine_battle_winner(allied_forces, japan_forces, combat_results, intel_condition=self.intel_condition)
 
         return combat_results
-

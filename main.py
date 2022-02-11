@@ -1,7 +1,9 @@
 import pandas as pd
+from pprint import pprint
 from IPython.display import display
 from combat_unit import CombatUnit
 from battle_analyzer import BattleAnalyzer
+from battle_analyzer import apply_damage
 import enums
 
 
@@ -52,10 +54,7 @@ def print_hi():
         probability=pd.NamedAgg(column='allied_result', aggfunc='count'))
     print(results_summary)
 
-    print(results.loc[95, 'allied_die_roll'])
-
-    for unit in allied_forces:
-        print(f'Name: {unit.unit_name}, Flipped: {unit.damage_flipped}, Eliminated: {unit.damage_eliminated}')
+    # apply_damage(total_losses=45, critical_hit=True, combat_forces=allied_forces, opponent_air_unit_count=5)
 
 
 # Press the green button in the gutter to run the script.
