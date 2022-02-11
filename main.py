@@ -42,7 +42,7 @@ def print_hi():
     japan_forces_cf = sum(map(lambda x: x.combat_factor(), japan_forces))
     print(f'Japan CF Total: {japan_forces_cf}')
 
-    analyzer = BattleAnalyzer(intel_condition=enums.IntelCondition.INTERCEPT, reaction_player=enums.Player.ALLIES,
+    analyzer = BattleAnalyzer(intel_condition=enums.IntelCondition.SURPRISE, reaction_player=enums.Player.ALLIES,
                               air_power_mod=enums.AirPowerModifier.Y1942, allied_ec_mod=0, japan_ec_mod=0)
 
     results = analyzer.analyze_battle(allied_forces, japan_forces)

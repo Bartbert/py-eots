@@ -100,43 +100,102 @@ def apply_damage(total_losses: int, critical_hit, combat_forces, opponent_air_un
             selected_unit.damage_flipped = True
 
 
-def determine_battle_winner(allied_forces: [CombatUnit], japan_forces: [CombatUnit],
-                            combat_results: pd.DataFrame, intel_condition: enums.IntelCondition):
+def determine_battle_winner(allied_forces: [CombatUnit], japan_forces: [CombatUnit], combat_results: pd.DataFrame,
+                            intel_condition: enums.IntelCondition, reaction_player: enums.Player):
     allied_air_unit_count = sum(1 for u in allied_forces if u.move_range > 0)
     japan_air_unit_count = sum(1 for u in japan_forces if u.move_range > 0)
 
     for row in combat_results.iterrows():
+
         # Apply damage to Allied units
         allied_losses = row[1]['allied_losses']
-        critical_hit = row[1]['japan_die_roll'] == 9
+        allied_critical_hit = row[1]['japan_die_roll'] == 9
+        allied_result = row[1]['allied_result']
 
-        combat_forces = copy.deepcopy(allied_forces)
+        allied_combat_forces = copy.deepcopy(allied_forces)
 
-        apply_damage(allied_losses, critical_hit, combat_forces, japan_air_unit_count)
+        apply_damage(allied_losses, allied_critical_hit, allied_combat_forces, japan_air_unit_count)
 
-        allied_damage_applied = sum(map(lambda x: x.damage_applied(), combat_forces))
-        allied_remaining_cf = sum(map(lambda x: x.combat_factor(), combat_forces))
+        allied_damage_applied = sum(map(lambda x: x.damage_applied(), allied_combat_forces))
+        allied_remaining_cf = sum(map(lambda x: x.combat_factor(), allied_combat_forces))
 
         # Apply damage to Japan units
         japan_losses = row[1]['japan_losses']
-        critical_hit = row[1]['allied_die_roll'] == 9
+        japan_critical_hit = row[1]['allied_die_roll'] == 9
+        japan_result = row[1]['japan_result']
 
-        combat_forces = copy.deepcopy(japan_forces)
+        japan_combat_forces = copy.deepcopy(japan_forces)
 
-        apply_damage(japan_losses, critical_hit, combat_forces, allied_air_unit_count)
+        apply_damage(japan_losses, japan_critical_hit, japan_combat_forces, allied_air_unit_count)
 
-        japan_damage_applied = sum(map(lambda x: x.damage_applied(), combat_forces))
-        japan_remaining_cf = sum(map(lambda x: x.combat_factor(), combat_forces))
+        japan_damage_applied = sum(map(lambda x: x.damage_applied(), japan_combat_forces))
+        japan_remaining_cf = sum(map(lambda x: x.combat_factor(), japan_combat_forces))
+
+        if (intel_condition == enums.IntelCondition.SURPRISE) & (reaction_player == enums.Player.ALLIES):
+
+            # Recalculate Japan's losses using the remaining Allied forces
+            japan_losses = int(math.ceil(allied_remaining_cf * allied_result))
+            japan_combat_forces = copy.deepcopy(japan_forces)
+            allied_air_unit_count = sum(
+                1 for u in allied_combat_forces if (u.move_range > 0) & (not u.damage_eliminated))
+            apply_damage(japan_losses, japan_critical_hit, japan_combat_forces, allied_air_unit_count)
+
+            japan_damage_applied = sum(map(lambda x: x.damage_applied(), japan_combat_forces))
+            japan_remaining_cf = sum(map(lambda x: x.combat_factor(), japan_combat_forces))
+
+        elif ((intel_condition == enums.IntelCondition.SURPRISE) & (reaction_player == enums.Player.ALLIES) | (
+                intel_condition == enums.IntelCondition.AMBUSH)):
+
+            # Recalculate Allies losses using the remaining Japan forces
+            allied_losses = int(math.ceil(japan_remaining_cf * japan_result))
+            allied_combat_forces = copy.deepcopy(allied_forces)
+            japan_air_unit_count = sum(1 for u in japan_combat_forces if (u.move_range > 0) & (not u.damage_eliminated))
+            apply_damage(allied_losses, allied_critical_hit, allied_combat_forces, japan_air_unit_count)
+
+            allied_damage_applied = sum(map(lambda x: x.damage_applied(), allied_combat_forces))
+            allied_remaining_cf = sum(map(lambda x: x.combat_factor(), allied_combat_forces))
 
         combat_results.loc[row[0], 'allied_damage_applied'] = allied_damage_applied
         combat_results.loc[row[0], 'allied_remaining_cf'] = allied_remaining_cf
+        combat_results.loc[row[0], 'allied_losses'] = allied_losses
+
         combat_results.loc[row[0], 'japan_damage_applied'] = japan_damage_applied
         combat_results.loc[row[0], 'japan_remaining_cf'] = japan_remaining_cf
+        combat_results.loc[row[0], 'japan_losses'] = japan_losses
 
-        if allied_remaining_cf > japan_remaining_cf:
-            combat_results.loc[row[0], 'battle_winner'] = enums.Player.ALLIES
-        elif japan_remaining_cf > allied_remaining_cf:
+        allied_surviving_unit_count = sum(1 for u in allied_combat_forces if (not u.damage_eliminated))
+        japan_surviving_unit_count = sum(1 for u in japan_combat_forces if (not u.damage_eliminated))
+
+        allied_surviving_air_count = sum(
+            1 for u in allied_combat_forces if (u.move_range > 0) & (not u.damage_eliminated))
+        japan_surviving_air_count = sum(
+            1 for u in japan_combat_forces if (u.move_range > 0) & (not u.damage_eliminated))
+
+        if (allied_surviving_unit_count == 0) & (japan_surviving_unit_count == 0):
+            # Offensive player wins if neither side has any surviving units
+            if reaction_player == enums.Player.ALLIES:
+                combat_results.loc[row[0], 'battle_winner'] = enums.Player.JAPAN
+            else:
+                combat_results.loc[row[0], 'battle_winner'] = enums.Player.ALLIES
+        elif (allied_surviving_air_count == 0) & (japan_surviving_air_count > 0) & (
+                reaction_player == enums.Player.JAPAN):
+            # Reaction player wins if the Offensive player has no Air capable unit but the Reaction player does
             combat_results.loc[row[0], 'battle_winner'] = enums.Player.JAPAN
+        elif (japan_surviving_air_count == 0) & (allied_surviving_air_count > 0) & (
+                reaction_player == enums.Player.ALLIES):
+            # Reaction player wins if the Offensive player has no Air capable unit but the Reaction player does
+            combat_results.loc[row[0], 'battle_winner'] = enums.Player.ALLIES
+        elif allied_remaining_cf == japan_remaining_cf:
+            # Reaction player wins ties
+            if reaction_player == enums.Player.ALLIES:
+                combat_results.loc[row[0], 'battle_winner'] = enums.Player.ALLIES
+            else:
+                combat_results.loc[row[0], 'battle_winner'] = enums.Player.JAPAN
+        else:
+            if allied_remaining_cf > japan_remaining_cf:
+                combat_results.loc[row[0], 'battle_winner'] = enums.Player.ALLIES
+            elif japan_remaining_cf > allied_remaining_cf:
+                combat_results.loc[row[0], 'battle_winner'] = enums.Player.JAPAN
 
 
 class BattleAnalyzer:
@@ -225,6 +284,7 @@ class BattleAnalyzer:
 
         combat_results = pd.DataFrame(data=results_data)
 
-        determine_battle_winner(allied_forces, japan_forces, combat_results, intel_condition=self.intel_condition)
+        determine_battle_winner(allied_forces, japan_forces, combat_results, intel_condition=self.intel_condition,
+                                reaction_player=self.reaction_player)
 
         return combat_results
