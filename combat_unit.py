@@ -6,7 +6,7 @@ class CombatUnit:
 
     def __init__(self, nationality: str, unit_type: str, branch: str, attack_front: int, defense: int, attack_back: int,
                  move_range: int, move_range_extended: int, extended_limit: bool, unit_name: str, image_name_front: str,
-                 image_name_back: str, id: int, is_flipped: bool = False, is_in_battle_hex: bool = False,
+                 image_name_back: str, unit_id: int, is_flipped: bool = False, is_in_battle_hex: bool = False,
                  is_extended_range: bool = False, attack_modifier: int = 0):
         self.nationality = nationality
 
@@ -31,7 +31,7 @@ class CombatUnit:
         self.unit_name = unit_name
         self.image_name_front = image_name_front
         self.image_name_back = image_name_back
-        self.id = id
+        self.unit_id = unit_id
         self.is_flipped = is_flipped
         self.is_in_battle_hex = (True if math.isnan(self.move_range) else False)
         self.is_extended_range = is_extended_range

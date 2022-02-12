@@ -91,9 +91,6 @@ US,Ground,Navy,4,6,2,,,,SF Bde,usSFF.gif,usSFB.gif
 US,Ground,Navy,12,12,8,,,,1 M Div,us1MF.gif,us1MB.gif
 US,Ground,Navy,12,12,8,,,,2 M Div,us2MF.gif,us2MB.gif
 US,Ground,Navy,12,12,8,,,,3 M Div,us3MF.gif,us3MB.gif
-Dutch,Air,Army,7,9,4,2,4,TRUE,,,
-Dutch,Ground,Army,1,6,,,,,,,
-Dutch,Ground,Army,6,12,3,,,,,,
 Japan,Naval,Navy,12,12,8,3,,,Akagi (CV),AkagiF.gif,AkagiB.gif
 Japan,Naval,Navy,10,12,7,3,,,Soryu (CV),SoryuF.gif,SoryuB.gif
 Japan,Naval,Navy,10,12,7,3,,,Taiho (CV),TaihoF.gif,TaihoB.gif

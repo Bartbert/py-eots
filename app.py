@@ -5,12 +5,37 @@ from dash import dcc
 from dash.dependencies import Input, Output, State
 import plotly.graph_objs as go
 import pandas as pd
+from dash.exceptions import PreventUpdate
+from combat_unit import CombatUnit
+from battle_analyzer import BattleAnalyzer
+import enums
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 app.title = 'EOTS'
 app._favicon = 'static/images/EnterpriseF.gif'
 
 server = app.server
+
+units = pd.read_csv('data/unit_data.csv')
+units['unit_id'] = units.index
+
+an_units = units.loc[units['unit_type'] != 'Ground']
+
+allied_units = an_units.loc[an_units['nationality'] != 'Japan']
+japan_units = an_units.loc[an_units['nationality'] == 'Japan']
+
+allied_unit_list = [CombatUnit(**kwargs) for kwargs in allied_units.to_dict(orient='records')]
+japan_unit_list = [CombatUnit(**kwargs) for kwargs in japan_units.to_dict(orient='records')]
+
+allied_options = []
+
+for unit in allied_unit_list:
+    allied_options.append({"label": unit.unit_name, "value": unit.unit_id})
+
+japan_options = []
+
+for unit in japan_unit_list:
+    japan_options.append({"label": unit.unit_name, "value": unit.unit_id})
 
 """Navbar"""
 APP_LOGO = "assets/static/images/eots.png"
@@ -67,10 +92,147 @@ navbar = dbc.Navbar(
 
 """Navbar END"""
 
+"""Body Content"""
+
+allied_ec_mod = html.Div(
+    [
+        html.P("Allied EC Modifier:", className="m-0"),
+        dbc.Input(type="number", min=-2, max=2, step=1, value=0, id="allied-ed-mod"),
+    ],
+    id="attacker-sp-count-div",
+
+)
+
+japan_ec_mod = html.Div(
+    [
+        html.P("Japan EC Modifier:", className="m-0"),
+        dbc.Input(type="number", min=-2, max=2, step=1, value=0, id="japan-ec-mod"),
+    ],
+    id="attacker-leader-mod-div",
+)
+
+reaction_player = html.Div(
+    [
+        dbc.Label("Reaction Player"),
+        dbc.RadioItems(
+            options=[
+                {"label": "Allies", "value": 1},
+                {"label": "Japan", "value": 2},
+            ],
+            value=1,
+            id="reaction-player",
+        ),
+    ]
+)
+
+intel_condition = html.Div(
+    [
+        dbc.Label("Intelligence Condition"),
+        dbc.RadioItems(
+            options=[
+                {"label": "Intercept", "value": 0},
+                {"label": "Surprise", "value": 3},
+                {"label": "Ambush", "value": 4},
+            ],
+            value=0,
+            id="intel-condition",
+        ),
+    ]
+)
+
+air_power_drm = html.Div(
+    [
+        dbc.Label("Allied Air Power DRM"),
+        dbc.RadioItems(
+            options=[
+                {"label": "+0 (1942)", "value": 0},
+                {"label": "+1 (1943)", "value": 1},
+                {"label": "+3 (1944/1945)", "value": 3},
+            ],
+            value=0,
+            id="air-power-drm",
+        ),
+    ]
+)
+
+analyze_button = html.Div(
+    [
+        dbc.Button("Analyze Battle", color="primary", className="me-1"),
+    ]
+)
+
+allied_selected_units = html.Div(
+    [
+        dcc.Dropdown(id="allied-selected-units", multi=True),
+    ]
+)
+
+japan_selected_units = html.Div(
+    [
+        dcc.Dropdown(id="japan-selected-units", multi=True, className="dash-bootstrap")
+    ]
+)
+
+body = html.Div(
+    [
+        dbc.Row(
+            [
+                dbc.Col(html.Div(), width=1),
+                dbc.Col(html.Div([
+                    dbc.Row(html.Div([
+                        reaction_player,
+                        html.P(),
+                        intel_condition,
+                        html.P(),
+                        air_power_drm,
+                        html.P(),
+                        allied_ec_mod,
+                        html.P(),
+                        japan_ec_mod,
+                        html.P(),
+                        analyze_button,
+                    ],
+                        className="p-2 bg-light border rounded-3 border-primary")),
+                ]), width=2),
+                dbc.Col(html.Div([
+                    dbc.Row([
+                        dbc.Col(html.Div(
+                            [
+                                dbc.Label("Allied Forces"),
+                                allied_selected_units,
+                            ], className="p-2 bg-light border rounded-3 border-primary"),
+                            width=6),
+                        dbc.Col(html.Div(
+                            [
+                                dbc.Label("Japan Forces"),
+                                japan_selected_units,
+                            ], className="p-2 bg-light border rounded-3 border-primary"),
+                            width=6),
+                    ]),
+                    html.P(),
+                    dbc.Row(html.Div([
+                        dcc.Graph(id='expected-winner', animate=True,
+                                  style={'backgroundColor': '#1a2d46', 'color': '#ffffff'})
+                    ])),
+                    html.P(),
+                    dbc.Row(html.Div([
+                        dcc.Graph(id='expected-losses', animate=False,
+                                  style={'backgroundColor': '#1a2d46', 'color': '#ffffff'})
+                    ])),
+                ]), width=8),
+                dbc.Col(html.Div(""), width=1),
+            ]
+        ),
+    ]
+)
+
+"""Body End"""
+
 """Final Layout Render"""
 app.layout = html.Div([
-    navbar
+    navbar, body
 ])
+
 
 # Navbar
 @app.callback(
@@ -82,6 +244,32 @@ def toggle_navbar_collapse(n, is_open):
     if n:
         return not is_open
     return is_open
+
+
+@app.callback(
+    Output("allied-selected-units", "options"),
+    Input("allied-selected-units", "search_value"),
+    State("allied-selected-units", "value")
+)
+def update_allied_selected_units(search_value, value):
+    if not search_value:
+        raise PreventUpdate
+    # Make sure that the set values are in the option list, else they will disappear
+    # from the shown select list, but still part of the `value`.
+    return [o for o in allied_options if search_value.upper() in o["label"].upper() or o["value"] in (value or [])]
+
+
+@app.callback(
+    Output("japan-selected-units", "options"),
+    Input("japan-selected-units", "search_value"),
+    State("japan-selected-units", "value")
+)
+def update_japan_selected_units(search_value, value):
+    if not search_value:
+        raise PreventUpdate
+    # Make sure that the set values are in the option list, else they will disappear
+    # from the shown select list, but still part of the `value`.
+    return [o for o in japan_options if search_value.upper() in o["label"].upper() or o["value"] in (value or [])]
 
 
 if __name__ == '__main__':
