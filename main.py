@@ -9,7 +9,7 @@ import enums
 
 def print_hi():
     units = pd.read_csv('data/unit_data.csv')
-    units['id'] = units.index
+    units['unit_id'] = units.index
 
     an_units = units.loc[units['unit_type'] != 'Ground']
 

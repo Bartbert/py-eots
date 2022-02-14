@@ -163,7 +163,7 @@ analyze_button = html.Div(
 
 allied_selected_units = html.Div(
     [
-        dcc.Dropdown(id="allied-selected-units", multi=True),
+        dcc.Dropdown(id="allied-selected-units", multi=True, options=allied_options),
     ]
 )
 
@@ -200,12 +200,16 @@ body = html.Div(
                             [
                                 dbc.Label("Allied Forces"),
                                 allied_selected_units,
+                                html.P(),
+                                html.Div(id='allied-forces', children=[]),
                             ], className="p-2 bg-light border rounded-3 border-primary"),
                             width=6),
                         dbc.Col(html.Div(
                             [
                                 dbc.Label("Japan Forces"),
                                 japan_selected_units,
+                                html.P(),
+                                html.Div(id="japan-forces", children=[]),
                             ], className="p-2 bg-light border rounded-3 border-primary"),
                             width=6),
                     ]),
@@ -247,29 +251,66 @@ def toggle_navbar_collapse(n, is_open):
 
 
 @app.callback(
-    Output("allied-selected-units", "options"),
-    Input("allied-selected-units", "search_value"),
-    State("allied-selected-units", "value")
+    Output('allied-forces', 'children'),
+    Input('allied-selected-units', 'value'),
+    State('allied-forces', 'children')
 )
-def update_allied_selected_units(search_value, value):
-    if not search_value:
+def update_allied_selected_units(value, children):
+    print(value)
+
+    if value:
+        index = len(value) - 1
+        selected_unit = next((x for x in allied_unit_list if x.unit_id == value[index]), None)
+    else:
         raise PreventUpdate
-    # Make sure that the set values are in the option list, else they will disappear
-    # from the shown select list, but still part of the `value`.
-    return [o for o in allied_options if search_value.upper() in o["label"].upper() or o["value"] in (value or [])]
+
+    if selected_unit:
+        print(selected_unit.unit_name)
+
+        new_element = html.Div(children=
+        [
+            dbc.Row(
+                [
+                    dbc.Col(width=4, children=html.Div(
+                        [
+                            html.Img(id={'type': 'allied-image', 'index': selected_unit.unit_id},
+                                     src=f'assets/static/images/{selected_unit.image_name_front}')
+                        ]
+                    )),
+                    dbc.Col(width=8, children=html.Div(
+                        [
+                            dbc.Checkbox(id={'type': 'allied-unit-flipped', 'index': selected_unit.unit_id},
+                                         label='Flipped?', value=False),
+                            dbc.Checkbox(id={'type': 'allied-unit-extended', 'index': selected_unit.unit_id},
+                                         label='Extended Range?', value=False),
+                            dbc.Checkbox(id={'type': 'allied-unit-battle-hex', 'index': selected_unit.unit_id},
+                                         label='In Battle Hex?', value=False),
+                            dbc.Input(id={'type': 'allied-unit-mod', 'index': selected_unit.unit_id},
+                                      type='number', min=-2, max=2, step=1, value=0)
+                        ]
+                    ))
+                ]
+            )
+        ],
+            className='p-2 bg-light border rounded-3 border-primary'
+        )
+
+        children.append(new_element)
+
+    return children
 
 
 @app.callback(
-    Output("japan-selected-units", "options"),
-    Input("japan-selected-units", "search_value"),
-    State("japan-selected-units", "value")
+    Output('japan-selected-units', 'options'),
+    Input('japan-selected-units', 'search_value'),
+    State('japan-selected-units', 'value')
 )
 def update_japan_selected_units(search_value, value):
     if not search_value:
         raise PreventUpdate
     # Make sure that the set values are in the option list, else they will disappear
     # from the shown select list, but still part of the `value`.
-    return [o for o in japan_options if search_value.upper() in o["label"].upper() or o["value"] in (value or [])]
+    return [o for o in japan_options if search_value.upper() in o['label'].upper() or o['value'] in (value or [])]
 
 
 if __name__ == '__main__':
