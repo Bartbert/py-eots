@@ -202,7 +202,7 @@ body = html.Div(
                                 allied_selected_units,
                                 html.P(),
                                 html.Div(id='allied-forces', children=[]),
-                            ], className="p-2 bg-light border rounded-3 border-primary"),
+                            ], className="p-2 m-2 bg-light border rounded-3 border-primary"),
                             width=6),
                         dbc.Col(html.Div(
                             [
@@ -223,7 +223,7 @@ body = html.Div(
                         dcc.Graph(id='expected-losses', animate=False,
                                   style={'backgroundColor': '#1a2d46', 'color': '#ffffff'})
                     ])),
-                ]), width=8),
+                ], className="p-2 bg-light border rounded-3 border-primary"), width=8),
                 dbc.Col(html.Div(""), width=1),
             ]
         ),
@@ -256,7 +256,6 @@ def toggle_navbar_collapse(n, is_open):
     State('allied-forces', 'children')
 )
 def update_allied_selected_units(value, children):
-    print(value)
 
     if value:
         index = len(value) - 1
@@ -265,7 +264,6 @@ def update_allied_selected_units(value, children):
         raise PreventUpdate
 
     if selected_unit:
-        print(selected_unit.unit_name)
 
         new_element = html.Div(children=
         [
@@ -292,7 +290,7 @@ def update_allied_selected_units(value, children):
                 ]
             )
         ],
-            className='p-2 bg-light border rounded-3 border-primary'
+            className='p-1 m-1 bg-light border rounded-3 border-primary'
         )
 
         children.append(new_element)
