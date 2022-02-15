@@ -1,8 +1,11 @@
+import copy
+import math
+
 import dash
 import dash_bootstrap_components as dbc
 from dash import html
 from dash import dcc
-from dash.dependencies import Input, Output, State
+from dash.dependencies import Input, Output, State, MATCH
 import plotly.graph_objs as go
 import pandas as pd
 from dash.exceptions import PreventUpdate
@@ -26,6 +29,9 @@ japan_units = an_units.loc[an_units['nationality'] == 'Japan']
 
 allied_unit_list = [CombatUnit(**kwargs) for kwargs in allied_units.to_dict(orient='records')]
 japan_unit_list = [CombatUnit(**kwargs) for kwargs in japan_units.to_dict(orient='records')]
+
+allied_combat_force = []
+japan_combat_force = []
 
 allied_options = []
 
@@ -210,7 +216,7 @@ body = html.Div(
                                 japan_selected_units,
                                 html.P(),
                                 html.Div(id="japan-forces", children=[]),
-                            ], className="p-2 bg-light border rounded-3 border-primary"),
+                            ], className="p-2 m-2 bg-light border rounded-3 border-primary"),
                             width=6),
                     ]),
                     html.P(),
@@ -256,7 +262,6 @@ def toggle_navbar_collapse(n, is_open):
     State('allied-forces', 'children')
 )
 def update_allied_selected_units(value, children):
-
     if value:
         index = len(value) - 1
         selected_unit = next((x for x in allied_unit_list if x.unit_id == value[index]), None)
@@ -264,7 +269,6 @@ def update_allied_selected_units(value, children):
         raise PreventUpdate
 
     if selected_unit:
-
         new_element = html.Div(children=
         [
             dbc.Row(
@@ -272,7 +276,13 @@ def update_allied_selected_units(value, children):
                     dbc.Col(width=4, children=html.Div(
                         [
                             html.Img(id={'type': 'allied-image', 'index': selected_unit.unit_id},
-                                     src=f'assets/static/images/{selected_unit.image_name_front}')
+                                     src=f'assets/static/images/{selected_unit.image_name_front}'),
+                            html.P(),
+                            html.Div([
+                                dbc.Label(f'CF: {selected_unit.combat_factor()}'),
+                            ],
+                                id={'type': 'allied-cf', 'index': selected_unit.unit_id}
+                            ),
                         ]
                     )),
                     dbc.Col(width=8, children=html.Div(
@@ -280,10 +290,58 @@ def update_allied_selected_units(value, children):
                             dbc.Checkbox(id={'type': 'allied-unit-flipped', 'index': selected_unit.unit_id},
                                          label='Flipped?', value=False),
                             dbc.Checkbox(id={'type': 'allied-unit-extended', 'index': selected_unit.unit_id},
-                                         label='Extended Range?', value=False),
+                                         label='Extended Range?', value=False,
+                                         disabled=(True if math.isnan(selected_unit.move_range_extended) else False)),
                             dbc.Checkbox(id={'type': 'allied-unit-battle-hex', 'index': selected_unit.unit_id},
-                                         label='In Battle Hex?', value=False),
+                                         label='In Battle Hex?', value=selected_unit.is_in_battle_hex),
                             dbc.Input(id={'type': 'allied-unit-mod', 'index': selected_unit.unit_id},
+                                      type='number', min=-2, max=2, step=1, value=0)
+                        ]
+                    ))
+                ]
+            )
+        ],
+            className='p-1 m-1 bg-light border rounded-3 border-primary'
+        )
+
+        children.append(new_element)
+        allied_combat_force.append(copy.deepcopy(selected_unit))
+
+    return children
+
+
+@app.callback(
+    Output('japan-forces', 'children'),
+    Input('japan-selected-units', 'value'),
+    State('japan-forces', 'children')
+)
+def update_japan_selected_units(value, children):
+    if value:
+        index = len(value) - 1
+        selected_unit = next((x for x in japan_unit_list if x.unit_id == value[index]), None)
+    else:
+        raise PreventUpdate
+
+    if selected_unit:
+        new_element = html.Div(children=
+        [
+            dbc.Row(
+                [
+                    dbc.Col(width=4, children=html.Div(
+                        [
+                            html.Img(id={'type': 'japan-image', 'index': selected_unit.unit_id},
+                                     src=f'assets/static/images/{selected_unit.image_name_front}')
+                        ]
+                    )),
+                    dbc.Col(width=8, children=html.Div(
+                        [
+                            dbc.Checkbox(id={'type': 'japan-unit-flipped', 'index': selected_unit.unit_id},
+                                         label='Flipped?', value=False),
+                            dbc.Checkbox(id={'type': 'japan-unit-extended', 'index': selected_unit.unit_id},
+                                         label='Extended Range?', value=False),
+                            dbc.Checkbox(id={'type': 'japan-unit-battle-hex', 'index': selected_unit.unit_id},
+                                         label='In Battle Hex?', value=False),
+                            dbc.Input(id={'type': 'japan-unit-mod', 'index': selected_unit.unit_id},
                                       type='number', min=-2, max=2, step=1, value=0)
                         ]
                     ))
@@ -296,6 +354,28 @@ def update_allied_selected_units(value, children):
         children.append(new_element)
 
     return children
+
+
+@app.callback(
+    [Output({'type': 'allied-image', 'index': MATCH}, 'src'),
+     Output({'type': 'allied-cf', 'index': MATCH}, 'children')],
+    Input({'type': 'allied-unit-flipped', 'index': MATCH}, 'value'),
+    State({'type': 'allied-unit-flipped', 'index': MATCH}, 'id'),
+)
+def toggle_allied_unit_flipped(value, id):
+    index = id.get('index')
+
+    selected_unit = next((x for x in allied_combat_force if x.unit_id == index), None)
+    selected_unit.is_flipped = value
+
+    if value:
+        src = f'assets/static/images/{selected_unit.image_name_back}'
+    else:
+        src = f'assets/static/images/{selected_unit.image_name_front}'
+
+    cf = dbc.Label(f'CF: {selected_unit.combat_factor()}')
+
+    return [src, cf]
 
 
 @app.callback(

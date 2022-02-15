@@ -60,7 +60,7 @@ class CombatUnit:
         if self.damage_eliminated | (math.isnan(self.move_range) & (not self.is_in_battle_hex)):
             combat_factor = 0
 
-        return combat_factor
+        return int(math.ceil(combat_factor))
 
     def loss_delta(self):
 
