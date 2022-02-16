@@ -1,11 +1,10 @@
 import copy
 import math
-
 import dash
 import dash_bootstrap_components as dbc
 from dash import html
 from dash import dcc
-from dash.dependencies import Input, Output, State, MATCH
+from dash.dependencies import Input, Output, State, MATCH, ALL
 import plotly.graph_objs as go
 import pandas as pd
 from dash.exceptions import PreventUpdate
@@ -204,7 +203,9 @@ body = html.Div(
                     dbc.Row([
                         dbc.Col(html.Div(
                             [
-                                dbc.Label("Allied Forces"),
+                                html.Div([
+                                    dbc.Label("Allied Forces"),
+                                ], id='allied-total-cf'),
                                 allied_selected_units,
                                 html.P(),
                                 html.Div(id='allied-forces', children=[]),
@@ -212,7 +213,9 @@ body = html.Div(
                             width=6),
                         dbc.Col(html.Div(
                             [
-                                dbc.Label("Japan Forces"),
+                                html.Div([
+                                    dbc.Label("Japan Forces"),
+                                ], id='japan-total-cf'),
                                 japan_selected_units,
                                 html.P(),
                                 html.Div(id="japan-forces", children=[]),
@@ -406,6 +409,24 @@ def update_allied_unit_cf(is_flipped, is_battle_hex, is_extended, modifier, is_f
 
 
 @app.callback(
+    Output('allied-total-cf', 'children'),
+    [Input({'type': 'allied-unit-flipped', 'index': ALL}, 'value'),
+     Input({'type': 'allied-unit-battle-hex', 'index': ALL}, 'value'),
+     Input({'type': 'allied-unit-extended', 'index': ALL}, 'value'),
+     Input({'type': 'allied-unit-mod', 'index': ALL}, 'value')]
+)
+def update_allied_total_cf(is_flipped, is_battle_hex, is_extended, modifier):
+    total_cf = sum(map(lambda x: x.combat_factor(), allied_combat_force))
+
+    cf = html.Div([
+        dbc.Label(f'Allied Forces', style={'font-weight': 'bold'}),
+        dbc.Label(f':  {total_cf} Combat Factors', color='red'),
+    ])
+
+    return cf
+
+
+@app.callback(
     Output({'type': 'japan-image', 'index': MATCH}, 'src'),
     Input({'type': 'japan-unit-flipped', 'index': MATCH}, 'value'),
     State({'type': 'japan-unit-flipped', 'index': MATCH}, 'id'),
@@ -442,6 +463,24 @@ def update_japan_unit_cf(is_flipped, is_battle_hex, is_extended, modifier, is_fl
     selected_unit.attack_modifier = modifier
 
     cf = dbc.Label(f'CF: {selected_unit.combat_factor()}')
+
+    return cf
+
+
+@app.callback(
+    Output('japan-total-cf', 'children'),
+    [Input({'type': 'japan-unit-flipped', 'index': ALL}, 'value'),
+     Input({'type': 'japan-unit-battle-hex', 'index': ALL}, 'value'),
+     Input({'type': 'japan-unit-extended', 'index': ALL}, 'value'),
+     Input({'type': 'japan-unit-mod', 'index': ALL}, 'value')]
+)
+def update_japan_total_cf(is_flipped, is_battle_hex, is_extended, modifier):
+    total_cf = sum(map(lambda x: x.combat_factor(), japan_combat_force))
+
+    cf = html.Div([
+        dbc.Label(f'Japan Forces', style={'font-weight': 'bold'}),
+        dbc.Label(f':  {total_cf} Combat Factors', color='red'),
+    ])
 
     return cf
 
