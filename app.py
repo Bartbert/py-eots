@@ -169,13 +169,13 @@ analyze_button = html.Div(
 
 allied_selected_units = html.Div(
     [
-        dcc.Dropdown(id="allied-selected-units", multi=True, options=allied_options),
+        dcc.Dropdown(id="allied-selected-units", multi=True, options=allied_options, className="dash-bootstrap"),
     ]
 )
 
 japan_selected_units = html.Div(
     [
-        dcc.Dropdown(id="japan-selected-units", multi=True, className="dash-bootstrap")
+        dcc.Dropdown(id="japan-selected-units", multi=True, options=japan_options, className="dash-bootstrap")
     ]
 )
 
@@ -330,7 +330,13 @@ def update_japan_selected_units(value, children):
                     dbc.Col(width=4, children=html.Div(
                         [
                             html.Img(id={'type': 'japan-image', 'index': selected_unit.unit_id},
-                                     src=f'assets/static/images/{selected_unit.image_name_front}')
+                                     src=f'assets/static/images/{selected_unit.image_name_front}'),
+                            html.P(),
+                            html.Div([
+                                dbc.Label(f'CF: {selected_unit.combat_factor()}'),
+                            ],
+                                id={'type': 'japan-cf', 'index': selected_unit.unit_id}
+                            ),
                         ]
                     )),
                     dbc.Col(width=8, children=html.Div(
@@ -338,9 +344,10 @@ def update_japan_selected_units(value, children):
                             dbc.Checkbox(id={'type': 'japan-unit-flipped', 'index': selected_unit.unit_id},
                                          label='Flipped?', value=False),
                             dbc.Checkbox(id={'type': 'japan-unit-extended', 'index': selected_unit.unit_id},
-                                         label='Extended Range?', value=False),
+                                         label='Extended Range?', value=False,
+                                         disabled=(True if math.isnan(selected_unit.move_range_extended) else False)),
                             dbc.Checkbox(id={'type': 'japan-unit-battle-hex', 'index': selected_unit.unit_id},
-                                         label='In Battle Hex?', value=False),
+                                         label='In Battle Hex?', value=selected_unit.is_in_battle_hex),
                             dbc.Input(id={'type': 'japan-unit-mod', 'index': selected_unit.unit_id},
                                       type='number', min=-2, max=2, step=1, value=0)
                         ]
@@ -352,13 +359,13 @@ def update_japan_selected_units(value, children):
         )
 
         children.append(new_element)
+        japan_combat_force.append(copy.deepcopy(selected_unit))
 
     return children
 
 
 @app.callback(
-    [Output({'type': 'allied-image', 'index': MATCH}, 'src'),
-     Output({'type': 'allied-cf', 'index': MATCH}, 'children')],
+    Output({'type': 'allied-image', 'index': MATCH}, 'src'),
     Input({'type': 'allied-unit-flipped', 'index': MATCH}, 'value'),
     State({'type': 'allied-unit-flipped', 'index': MATCH}, 'id'),
 )
@@ -373,22 +380,70 @@ def toggle_allied_unit_flipped(value, id):
     else:
         src = f'assets/static/images/{selected_unit.image_name_front}'
 
-    cf = dbc.Label(f'CF: {selected_unit.combat_factor()}')
-
-    return [src, cf]
+    return src
 
 
 @app.callback(
-    Output('japan-selected-units', 'options'),
-    Input('japan-selected-units', 'search_value'),
-    State('japan-selected-units', 'value')
+    Output({'type': 'allied-cf', 'index': MATCH}, 'children'),
+    [Input({'type': 'allied-unit-flipped', 'index': MATCH}, 'value'),
+     Input({'type': 'allied-unit-battle-hex', 'index': MATCH}, 'value'),
+     Input({'type': 'allied-unit-extended', 'index': MATCH}, 'value'),
+     Input({'type': 'allied-unit-mod', 'index': MATCH}, 'value')],
+    State({'type': 'allied-unit-flipped', 'index': MATCH}, 'id'),
 )
-def update_japan_selected_units(search_value, value):
-    if not search_value:
-        raise PreventUpdate
-    # Make sure that the set values are in the option list, else they will disappear
-    # from the shown select list, but still part of the `value`.
-    return [o for o in japan_options if search_value.upper() in o['label'].upper() or o['value'] in (value or [])]
+def update_allied_unit_cf(is_flipped, is_battle_hex, is_extended, modifier, is_flipped_id):
+    index = is_flipped_id.get('index')
+
+    selected_unit = next((x for x in allied_combat_force if x.unit_id == index), None)
+    selected_unit.is_flipped = is_flipped
+    selected_unit.is_in_battle_hex = is_battle_hex
+    selected_unit.is_extended_range = is_extended
+    selected_unit.attack_modifier = modifier
+
+    cf = dbc.Label(f'CF: {selected_unit.combat_factor()}')
+
+    return cf
+
+
+@app.callback(
+    Output({'type': 'japan-image', 'index': MATCH}, 'src'),
+    Input({'type': 'japan-unit-flipped', 'index': MATCH}, 'value'),
+    State({'type': 'japan-unit-flipped', 'index': MATCH}, 'id'),
+)
+def toggle_japan_unit_flipped(value, id):
+    index = id.get('index')
+
+    selected_unit = next((x for x in japan_combat_force if x.unit_id == index), None)
+    selected_unit.is_flipped = value
+
+    if value:
+        src = f'assets/static/images/{selected_unit.image_name_back}'
+    else:
+        src = f'assets/static/images/{selected_unit.image_name_front}'
+
+    return src
+
+
+@app.callback(
+    Output({'type': 'japan-cf', 'index': MATCH}, 'children'),
+    [Input({'type': 'japan-unit-flipped', 'index': MATCH}, 'value'),
+     Input({'type': 'japan-unit-battle-hex', 'index': MATCH}, 'value'),
+     Input({'type': 'japan-unit-extended', 'index': MATCH}, 'value'),
+     Input({'type': 'japan-unit-mod', 'index': MATCH}, 'value')],
+    State({'type': 'japan-unit-flipped', 'index': MATCH}, 'id'),
+)
+def update_japan_unit_cf(is_flipped, is_battle_hex, is_extended, modifier, is_flipped_id):
+    index = is_flipped_id.get('index')
+
+    selected_unit = next((x for x in japan_combat_force if x.unit_id == index), None)
+    selected_unit.is_flipped = is_flipped
+    selected_unit.is_in_battle_hex = is_battle_hex
+    selected_unit.is_extended_range = is_extended
+    selected_unit.attack_modifier = modifier
+
+    cf = dbc.Label(f'CF: {selected_unit.combat_factor()}')
+
+    return cf
 
 
 if __name__ == '__main__':
