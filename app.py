@@ -65,10 +65,69 @@ def plot_expected_winner(df_results):
         xaxis=dict(type='category', title='Battle Winner'),
         yaxis=dict(range=[0, 1], tickformat=".0%", title='Outcome Probability'),
         font=dict(color='white'),
-        title='Expected Battle Outcome'
+        title='Expected Battle Outcome',
+        transition={'duration': 500, 'easing': 'cubic-in-out'},
     )
 
     return {'data': [graph], 'layout': layout}
+
+
+def plot_expected_losses(df_results):
+    df_losses_allies = df_results.groupby(['allied_damage_applied'], as_index=False).agg(
+        damage_count=('allied_damage_applied', 'count'))
+
+    df_losses_allies = df_losses_allies.rename(columns={'allied_damage_applied': 'damage_applied'})
+    df_losses_allies['player'] = enums.Player.ALLIES.name
+
+    df_losses_japan = df_results.groupby(['japan_damage_applied'], as_index=False).agg(
+        damage_count=('japan_damage_applied', 'count'))
+
+    df_losses_japan = df_losses_japan.rename(columns={'japan_damage_applied': 'damage_applied'})
+    df_losses_japan['player'] = enums.Player.JAPAN.name
+
+    df_losses = pd.concat([df_losses_allies, df_losses_japan], ignore_index=True)
+
+    x_allies = df_losses.loc[df_losses['player'] == enums.Player.ALLIES.name]['damage_applied']
+    y_allies = df_losses.loc[df_losses['player'] == enums.Player.ALLIES.name]['damage_count'].apply(lambda z: z / 100)
+
+    x_japan = df_losses.loc[df_losses['player'] == enums.Player.JAPAN.name]['damage_applied']
+    y_japan = df_losses.loc[df_losses['player'] == enums.Player.JAPAN.name]['damage_count'].apply(lambda z: z / 100)
+
+    graph = [
+        go.Bar(
+            x=x_allies,
+            y=y_allies,
+            offsetgroup=0,
+            name=enums.Player.ALLIES.name,
+            marker=dict(color='lightgreen'),
+            text=y_allies.apply(lambda z: '{0:.0f}%'.format(z * 100))
+        ),
+        go.Bar(
+            x=x_japan,
+            y=y_japan,
+            offsetgroup=1,
+            name=enums.Player.JAPAN.name,
+            marker=dict(color='lightblue'),
+            text=y_japan.apply(lambda z: '{0:.0f}%'.format(z * 100))
+        ),
+    ]
+
+    layout = go.Layout(
+        paper_bgcolor='#27293d',
+        plot_bgcolor='rgba(0,0,0,0)',
+        xaxis=dict(type='category', title='Battle Losses'),
+        yaxis=dict(range=[0, 1], tickformat=".0%", title='Loss Probability'),
+        font=dict(color='white'),
+        title='Expected Battle Losses',
+        transition={'duration': 500, 'easing': 'cubic-in-out'},
+    )
+
+    layout.update(title=dict(x=0.5))
+
+    return go.Figure(
+        data=graph,
+        layout=layout
+    )
 
 
 """Navbar"""
@@ -253,7 +312,7 @@ body = html.Div(
                     ]),
                     html.P(),
                     dbc.Row(html.Div([
-                        dcc.Graph(id='expected-winner', animate=True,
+                        dcc.Graph(id='expected-winner', animate=False,
                                   style={'backgroundColor': '#1a2d46', 'color': '#ffffff'})
                     ])),
                     html.P(),
@@ -515,7 +574,7 @@ def update_japan_total_cf(is_flipped, is_battle_hex, is_extended, modifier):
 
 
 @app.callback(
-    Output('expected-winner', 'figure'),
+    [Output('expected-winner', 'figure'), Output('expected-losses', 'figure')],
     [Input('analyze-battle', 'n_clicks'),
      Input('intel-condition', 'value'),
      Input('reaction-player', 'value'),
@@ -543,8 +602,9 @@ def analyze_battle_results(n_clicks, intel_condition_value, reaction_player_valu
     results = analyzer.analyze_battle(allied_combat_force, japan_combat_force)
 
     winner = plot_expected_winner(results)
+    losses = plot_expected_losses(results)
 
-    return winner
+    return [winner, losses]
 
 
 if __name__ == '__main__':
