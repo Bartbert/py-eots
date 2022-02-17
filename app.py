@@ -87,11 +87,18 @@ def plot_expected_losses(df_results):
 
     df_losses = pd.concat([df_losses_allies, df_losses_japan], ignore_index=True)
 
-    x_allies = df_losses.loc[df_losses['player'] == enums.Player.ALLIES.name]['damage_applied']
-    y_allies = df_losses.loc[df_losses['player'] == enums.Player.ALLIES.name]['damage_count'].apply(lambda z: z / 100)
+    df_pivot = pd.pivot_table(df_losses, index=['player'], columns=['damage_applied'], values=['damage_count'],
+                              aggfunc=sum, fill_value=0)
 
-    x_japan = df_losses.loc[df_losses['player'] == enums.Player.JAPAN.name]['damage_applied']
-    y_japan = df_losses.loc[df_losses['player'] == enums.Player.JAPAN.name]['damage_count'].apply(lambda z: z / 100)
+    x_values = []
+    for x in df_pivot.columns:
+        x_values.append(x[1])
+
+    x_allies = pd.DataFrame(x_values)[0]
+    y_allies = pd.DataFrame(df_pivot.values[0])[0].apply(lambda z: z / 100)
+
+    x_japan = pd.DataFrame(x_values)[0]
+    y_japan = pd.DataFrame(df_pivot.values[1])[0].apply(lambda z: z / 100)
 
     graph = [
         go.Bar(
