@@ -174,28 +174,28 @@ def determine_battle_winner(allied_forces: [CombatUnit], japan_forces: [CombatUn
         if (allied_surviving_unit_count == 0) & (japan_surviving_unit_count == 0):
             # Offensive player wins if neither side has any surviving units
             if reaction_player == enums.Player.ALLIES:
-                combat_results.loc[row[0], 'battle_winner'] = enums.Player.JAPAN
+                combat_results.loc[row[0], 'battle_winner'] = enums.Player.JAPAN.name
             else:
-                combat_results.loc[row[0], 'battle_winner'] = enums.Player.ALLIES
+                combat_results.loc[row[0], 'battle_winner'] = enums.Player.ALLIES.name
         elif (allied_surviving_air_count == 0) & (japan_surviving_air_count > 0) & (
                 reaction_player == enums.Player.JAPAN):
             # Reaction player wins if the Offensive player has no Air capable unit but the Reaction player does
-            combat_results.loc[row[0], 'battle_winner'] = enums.Player.JAPAN
+            combat_results.loc[row[0], 'battle_winner'] = enums.Player.JAPAN.name
         elif (japan_surviving_air_count == 0) & (allied_surviving_air_count > 0) & (
                 reaction_player == enums.Player.ALLIES):
             # Reaction player wins if the Offensive player has no Air capable unit but the Reaction player does
-            combat_results.loc[row[0], 'battle_winner'] = enums.Player.ALLIES
+            combat_results.loc[row[0], 'battle_winner'] = enums.Player.ALLIES.name
         elif allied_remaining_cf == japan_remaining_cf:
             # Reaction player wins ties
             if reaction_player == enums.Player.ALLIES:
-                combat_results.loc[row[0], 'battle_winner'] = enums.Player.ALLIES
+                combat_results.loc[row[0], 'battle_winner'] = enums.Player.ALLIES.name
             else:
-                combat_results.loc[row[0], 'battle_winner'] = enums.Player.JAPAN
+                combat_results.loc[row[0], 'battle_winner'] = enums.Player.JAPAN.name
         else:
             if allied_remaining_cf > japan_remaining_cf:
-                combat_results.loc[row[0], 'battle_winner'] = enums.Player.ALLIES
+                combat_results.loc[row[0], 'battle_winner'] = enums.Player.ALLIES.name
             elif japan_remaining_cf > allied_remaining_cf:
-                combat_results.loc[row[0], 'battle_winner'] = enums.Player.JAPAN
+                combat_results.loc[row[0], 'battle_winner'] = enums.Player.JAPAN.name
 
 
 class BattleAnalyzer:

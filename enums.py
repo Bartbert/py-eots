@@ -3,14 +3,14 @@ from enum import IntEnum
 
 
 class IntelCondition(Enum):
-    INTERCEPT = 1
-    SURPRISE = 2
-    AMBUSH = 3
+    INTERCEPT = 0
+    SURPRISE = 3
+    AMBUSH = 4
 
 
 class Player(Enum):
-    JAPAN = 1
-    ALLIES = 2
+    ALLIES = 1
+    JAPAN = 2
     UNKNOWN = 3
 
 

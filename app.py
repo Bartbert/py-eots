@@ -42,6 +42,35 @@ japan_options = []
 for unit in japan_unit_list:
     japan_options.append({"label": unit.unit_name, "value": unit.unit_id})
 
+
+def plot_expected_winner(df_results):
+    df_winner = df_results.groupby(['battle_winner'], as_index=False).agg(winner_count=('battle_winner', 'count'))
+
+    print(df_winner)
+
+    x = df_winner['battle_winner']
+    y = df_winner['winner_count'].apply(lambda z: z / 100)
+
+    graph = go.Bar(
+        x=x,
+        y=y,
+        name='Expected Battle Outcome',
+        marker=dict(color='lightgreen'),
+        text=y.apply(lambda z: '{0:.0f}%'.format(z * 100))
+    )
+
+    layout = go.Layout(
+        paper_bgcolor='#27293d',
+        plot_bgcolor='rgba(0,0,0,0)',
+        xaxis=dict(type='category', title='Battle Winner'),
+        yaxis=dict(range=[0, 1], tickformat=".0%", title='Outcome Probability'),
+        font=dict(color='white'),
+        title='Expected Battle Outcome'
+    )
+
+    return {'data': [graph], 'layout': layout}
+
+
 """Navbar"""
 APP_LOGO = "assets/static/images/eots.png"
 
@@ -102,7 +131,7 @@ navbar = dbc.Navbar(
 allied_ec_mod = html.Div(
     [
         html.P("Allied EC Modifier:", className="m-0"),
-        dbc.Input(type="number", min=-2, max=2, step=1, value=0, id="allied-ed-mod"),
+        dbc.Input(type="number", min=-2, max=2, step=1, value=0, id="allied-ec-mod"),
     ],
     id="attacker-sp-count-div",
 
@@ -162,7 +191,7 @@ air_power_drm = html.Div(
 
 analyze_button = html.Div(
     [
-        dbc.Button("Analyze Battle", color="primary", className="me-1"),
+        dbc.Button("Analyze Battle", id='analyze-battle', color="primary", className="me-1"),
     ]
 )
 
@@ -483,6 +512,39 @@ def update_japan_total_cf(is_flipped, is_battle_hex, is_extended, modifier):
     ])
 
     return cf
+
+
+@app.callback(
+    Output('expected-winner', 'figure'),
+    [Input('analyze-battle', 'n_clicks'),
+     Input('intel-condition', 'value'),
+     Input('reaction-player', 'value'),
+     Input('air-power-drm', 'value'),
+     Input('allied-ec-mod', 'value'),
+     Input('japan-ec-mod', 'value')]
+)
+def analyze_battle_results(n_clicks, intel_condition_value, reaction_player_value,
+                           air_power_drm_value, allied_ec_mod_value, japan_ec_mod_value):
+    if len(allied_combat_force) == 0 | len(japan_combat_force) == 0:
+        raise PreventUpdate
+
+    print(enums.IntelCondition(intel_condition_value))
+    print(enums.Player(reaction_player_value))
+    print(enums.AirPowerModifier(air_power_drm_value))
+    print(allied_ec_mod_value)
+    print(japan_ec_mod_value)
+
+    analyzer = BattleAnalyzer(intel_condition=enums.IntelCondition(intel_condition_value),
+                              reaction_player=enums.Player(reaction_player_value),
+                              air_power_mod=enums.AirPowerModifier(air_power_drm_value),
+                              allied_ec_mod=allied_ec_mod_value,
+                              japan_ec_mod=japan_ec_mod_value)
+
+    results = analyzer.analyze_battle(allied_combat_force, japan_combat_force)
+
+    winner = plot_expected_winner(results)
+
+    return winner
 
 
 if __name__ == '__main__':
