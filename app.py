@@ -319,12 +319,12 @@ body = html.Div(
                     ]),
                     html.P(),
                     dbc.Row(html.Div([
-                        dcc.Graph(id='expected-winner', animate=False,
+                        dcc.Graph(id='expected-losses', animate=False,
                                   style={'backgroundColor': '#1a2d46', 'color': '#ffffff'})
                     ])),
                     html.P(),
                     dbc.Row(html.Div([
-                        dcc.Graph(id='expected-losses', animate=False,
+                        dcc.Graph(id='expected-winner', animate=False,
                                   style={'backgroundColor': '#1a2d46', 'color': '#ffffff'})
                     ])),
                 ], className="p-2 bg-light border rounded-3 border-primary"), width=8),
@@ -360,50 +360,80 @@ def toggle_navbar_collapse(n, is_open):
     State('allied-forces', 'children')
 )
 def update_allied_selected_units(value, children):
-    if value:
-        index = len(value) - 1
-        selected_unit = next((x for x in allied_unit_list if x.unit_id == value[index]), None)
-    else:
+    if (not value) & (len(allied_combat_force) == 0):
         raise PreventUpdate
 
-    if selected_unit:
-        new_element = html.Div(children=
-        [
-            dbc.Row(
-                [
-                    dbc.Col(width=4, children=html.Div(
-                        [
-                            html.Img(id={'type': 'allied-image', 'index': selected_unit.unit_id},
-                                     src=f'assets/static/images/{selected_unit.image_name_front}'),
-                            html.P(),
-                            html.Div([
-                                dbc.Label(f'CF: {selected_unit.combat_factor()}'),
-                            ],
-                                id={'type': 'allied-cf', 'index': selected_unit.unit_id}
-                            ),
-                        ]
-                    )),
-                    dbc.Col(width=8, children=html.Div(
-                        [
-                            dbc.Checkbox(id={'type': 'allied-unit-flipped', 'index': selected_unit.unit_id},
-                                         label='Flipped?', value=False),
-                            dbc.Checkbox(id={'type': 'allied-unit-extended', 'index': selected_unit.unit_id},
-                                         label='Extended Range?', value=False,
-                                         disabled=(True if math.isnan(selected_unit.move_range_extended) else False)),
-                            dbc.Checkbox(id={'type': 'allied-unit-battle-hex', 'index': selected_unit.unit_id},
-                                         label='In Battle Hex?', value=selected_unit.is_in_battle_hex),
-                            dbc.Input(id={'type': 'allied-unit-mod', 'index': selected_unit.unit_id},
-                                      type='number', min=-2, max=2, step=1, value=0)
-                        ]
-                    ))
-                ]
-            )
-        ],
-            className='p-1 m-1 bg-light border rounded-3 border-primary'
-        )
+    # Determine if there are items in the value list that are not in the allied_combat_force list
+    # Any differences need to be added to the UI
+    ui_indexes = set(value)
 
-        children.append(new_element)
-        allied_combat_force.append(copy.deepcopy(selected_unit))
+    unit_ids = set(map(lambda x: x.unit_id, allied_combat_force))
+
+    missing_unit_ids = ui_indexes.difference(unit_ids)
+
+    while len(missing_unit_ids) > 0:
+
+        index = missing_unit_ids.pop()
+        selected_unit = next((x for x in allied_unit_list if x.unit_id == index), None)
+
+        if selected_unit:
+            new_element = html.Div(children=
+            [
+                dbc.Row(
+                    [
+                        dbc.Col(width=4, children=html.Div(
+                            [
+                                html.Img(id={'type': 'allied-image', 'index': selected_unit.unit_id},
+                                         src=f'assets/static/images/{selected_unit.image_name_front}'),
+                                html.P(),
+                                html.Div([
+                                    dbc.Label(f'CF: {selected_unit.combat_factor()}'),
+                                ],
+                                    id={'type': 'allied-cf', 'index': selected_unit.unit_id}
+                                ),
+                            ]
+                        )),
+                        dbc.Col(width=8, children=html.Div(
+                            [
+                                dbc.Checkbox(id={'type': 'allied-unit-flipped', 'index': selected_unit.unit_id},
+                                             label='Flipped?', value=False),
+                                dbc.Checkbox(id={'type': 'allied-unit-extended', 'index': selected_unit.unit_id},
+                                             label='Extended Range?', value=False,
+                                             disabled=(
+                                                 True if math.isnan(selected_unit.move_range_extended) else False)),
+                                dbc.Checkbox(id={'type': 'allied-unit-battle-hex', 'index': selected_unit.unit_id},
+                                             label='In Battle Hex?', value=selected_unit.is_in_battle_hex),
+                                dbc.Input(id={'type': 'allied-unit-mod', 'index': selected_unit.unit_id},
+                                          type='number', min=-2, max=2, step=1, value=0)
+                            ]
+                        ))
+                    ]
+                )
+            ],
+                className='p-1 m-1 bg-light border rounded-3 border-primary',
+                id={'type': 'allied-combat-unit', 'index': selected_unit.unit_id},
+            )
+
+            children.append(new_element)
+            allied_combat_force.append(copy.deepcopy(selected_unit))
+
+    # Determine if there are values in allied_combat_force_list that are not in the value list
+    # Any differences need to be removed from the UI
+    extra_unit_ids = unit_ids.difference(ui_indexes)
+
+    while len(extra_unit_ids) > 0:
+        unit_id = extra_unit_ids.pop()
+
+        for i in range(len(children)):
+            child = children[i]
+            index = child['props']['id']['index']
+
+            if index == unit_id:
+                children.pop(i)
+
+                for j in range(len(allied_combat_force)):
+                    if allied_combat_force[j].unit_id == unit_id:
+                        allied_combat_force.pop(j)
 
     return children
 
@@ -414,50 +444,80 @@ def update_allied_selected_units(value, children):
     State('japan-forces', 'children')
 )
 def update_japan_selected_units(value, children):
-    if value:
-        index = len(value) - 1
-        selected_unit = next((x for x in japan_unit_list if x.unit_id == value[index]), None)
-    else:
+    if (not value) & (len(japan_combat_force) == 0):
         raise PreventUpdate
 
-    if selected_unit:
-        new_element = html.Div(children=
-        [
-            dbc.Row(
-                [
-                    dbc.Col(width=4, children=html.Div(
-                        [
-                            html.Img(id={'type': 'japan-image', 'index': selected_unit.unit_id},
-                                     src=f'assets/static/images/{selected_unit.image_name_front}'),
-                            html.P(),
-                            html.Div([
-                                dbc.Label(f'CF: {selected_unit.combat_factor()}'),
-                            ],
-                                id={'type': 'japan-cf', 'index': selected_unit.unit_id}
-                            ),
-                        ]
-                    )),
-                    dbc.Col(width=8, children=html.Div(
-                        [
-                            dbc.Checkbox(id={'type': 'japan-unit-flipped', 'index': selected_unit.unit_id},
-                                         label='Flipped?', value=False),
-                            dbc.Checkbox(id={'type': 'japan-unit-extended', 'index': selected_unit.unit_id},
-                                         label='Extended Range?', value=False,
-                                         disabled=(True if math.isnan(selected_unit.move_range_extended) else False)),
-                            dbc.Checkbox(id={'type': 'japan-unit-battle-hex', 'index': selected_unit.unit_id},
-                                         label='In Battle Hex?', value=selected_unit.is_in_battle_hex),
-                            dbc.Input(id={'type': 'japan-unit-mod', 'index': selected_unit.unit_id},
-                                      type='number', min=-2, max=2, step=1, value=0)
-                        ]
-                    ))
-                ]
-            )
-        ],
-            className='p-1 m-1 bg-light border rounded-3 border-primary'
-        )
+    # Determine if there are items in the value list that are not in the allied_combat_force list
+    # Any differences need to be added to the UI
+    ui_indexes = set(value)
 
-        children.append(new_element)
-        japan_combat_force.append(copy.deepcopy(selected_unit))
+    unit_ids = set(map(lambda x: x.unit_id, japan_combat_force))
+
+    missing_unit_ids = ui_indexes.difference(unit_ids)
+
+    while len(missing_unit_ids) > 0:
+
+        index = missing_unit_ids.pop()
+        selected_unit = next((x for x in japan_unit_list if x.unit_id == index), None)
+
+        if selected_unit:
+            new_element = html.Div(children=
+            [
+                dbc.Row(
+                    [
+                        dbc.Col(width=4, children=html.Div(
+                            [
+                                html.Img(id={'type': 'japan-image', 'index': selected_unit.unit_id},
+                                         src=f'assets/static/images/{selected_unit.image_name_front}'),
+                                html.P(),
+                                html.Div([
+                                    dbc.Label(f'CF: {selected_unit.combat_factor()}'),
+                                ],
+                                    id={'type': 'japan-cf', 'index': selected_unit.unit_id}
+                                ),
+                            ]
+                        )),
+                        dbc.Col(width=8, children=html.Div(
+                            [
+                                dbc.Checkbox(id={'type': 'japan-unit-flipped', 'index': selected_unit.unit_id},
+                                             label='Flipped?', value=False),
+                                dbc.Checkbox(id={'type': 'japan-unit-extended', 'index': selected_unit.unit_id},
+                                             label='Extended Range?', value=False,
+                                             disabled=(
+                                                 True if math.isnan(selected_unit.move_range_extended) else False)),
+                                dbc.Checkbox(id={'type': 'japan-unit-battle-hex', 'index': selected_unit.unit_id},
+                                             label='In Battle Hex?', value=selected_unit.is_in_battle_hex),
+                                dbc.Input(id={'type': 'japan-unit-mod', 'index': selected_unit.unit_id},
+                                          type='number', min=-2, max=2, step=1, value=0)
+                            ]
+                        ))
+                    ]
+                )
+            ],
+                className='p-1 m-1 bg-light border rounded-3 border-primary',
+                id={'type': 'japan-combat-unit', 'index': selected_unit.unit_id},
+            )
+
+            children.append(new_element)
+            japan_combat_force.append(copy.deepcopy(selected_unit))
+
+    # Determine if there are values in allied_combat_force_list that are not in the value list
+    # Any differences need to be removed from the UI
+    extra_unit_ids = unit_ids.difference(ui_indexes)
+
+    while len(extra_unit_ids) > 0:
+        unit_id = extra_unit_ids.pop()
+
+        for i in range(len(children)):
+            child = children[i]
+            index = child['props']['id']['index']
+
+            if index == unit_id:
+                children.pop(i)
+
+                for j in range(len(japan_combat_force)):
+                    if japan_combat_force[j].unit_id == unit_id:
+                        japan_combat_force.pop(j)
 
     return children
 
