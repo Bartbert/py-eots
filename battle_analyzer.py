@@ -21,7 +21,7 @@ def combat_result(die_roll: int, drm: int):
 
 def select_unit_for_damage(combat_forces: [CombatUnit], damage_to_apply: int, critical_hit: bool,
                            enemy_air_unit_count: int):
-    combat_forces.sort(key=lambda x: (-x.loss_delta(), x.defense))
+    combat_forces.sort(key=lambda x: (x.defense, -x.loss_delta()))
 
     # Find the number of air units that have already received damage
     air_units_damaged = sum(
@@ -35,7 +35,8 @@ def select_unit_for_damage(combat_forces: [CombatUnit], damage_to_apply: int, cr
 
         # Skip this unit if the number of air units that have already received damage equals the
         # enemy_air_unit_count, and this is an air unit that has NOT yet received damage.
-        if (air_units_damaged == enemy_air_unit_count) & (not unit.damage_flipped) & (not unit.damage_eliminated):
+        if (unit.move_range > 0) & (air_units_damaged == enemy_air_unit_count) & \
+                (not unit.damage_flipped) & (not unit.damage_eliminated):
             continue
 
         if critical_hit:
@@ -66,15 +67,20 @@ def select_unit_for_damage(combat_forces: [CombatUnit], damage_to_apply: int, cr
 def apply_damage(total_losses: int, critical_hit, combat_forces, opponent_air_unit_count):
     damage_applied = 0
     damage_to_apply = total_losses
-    allied_losses = total_losses
 
-    while damage_applied < allied_losses:
+    while damage_applied < total_losses:
 
         selected_unit = select_unit_for_damage(combat_forces, damage_to_apply, critical_hit, opponent_air_unit_count)
 
         if selected_unit is not None:
             damage_applied += selected_unit.defense
             damage_to_apply -= selected_unit.defense
+            print(f'Critical Hit: {critical_hit}')
+            print(f'Total Losses: {total_losses}')
+            print(f'Selected unit: {selected_unit.unit_name}')
+            print(f'Damage applied: {damage_applied}')
+            print(f'Damage remaining to apply: {damage_to_apply}')
+            print('============================================')
 
             if selected_unit.is_flipped | selected_unit.damage_flipped:
                 selected_unit.damage_eliminated = True
