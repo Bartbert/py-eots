@@ -424,6 +424,7 @@ def update_allied_selected_units(value, children):
     # Determine if there are values in allied_combat_force_list that are not in the value list
     # Any differences need to be removed from the UI
     extra_unit_ids = unit_ids.difference(ui_indexes)
+    print(f'Extra unit IDs: {extra_unit_ids}')
 
     while len(extra_unit_ids) > 0:
         unit_id = extra_unit_ids.pop()
