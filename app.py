@@ -46,8 +46,6 @@ for unit in japan_unit_list:
 def plot_expected_winner(df_results):
     df_winner = df_results.groupby(['battle_winner'], as_index=False).agg(winner_count=('battle_winner', 'count'))
 
-    print(df_winner)
-
     x = df_winner['battle_winner']
     y = df_winner['winner_count'].apply(lambda z: z / 100)
 
@@ -367,12 +365,9 @@ def update_allied_selected_units(value, children):
     # Any differences need to be added to the UI
     ui_indexes = set(value)
 
-    print(f'Allied unit count foo: {len(allied_combat_force)}')
     unit_ids = set(map(lambda x: x.unit_id, allied_combat_force))
-    print(f'Existing IDs: {unit_ids}')
 
     missing_unit_ids = ui_indexes.difference(unit_ids)
-    print(f'New Unit ID: {missing_unit_ids}')
 
     while len(missing_unit_ids) > 0:
 
@@ -419,13 +414,10 @@ def update_allied_selected_units(value, children):
 
             children.append(new_element)
             allied_combat_force.append(copy.deepcopy(selected_unit))
-            print(f'Allied Unit count: {len(allied_combat_force)}')
-            print(f'Combat Force Object (new): {allied_combat_force}')
 
     # Determine if there are values in allied_combat_force_list that are not in the value list
     # Any differences need to be removed from the UI
     extra_unit_ids = unit_ids.difference(ui_indexes)
-    print(f'Extra unit IDs: {extra_unit_ids}')
 
     while len(extra_unit_ids) > 0:
         unit_id = extra_unit_ids.pop()
@@ -535,15 +527,11 @@ def update_japan_selected_units(value, children):
 )
 def toggle_allied_unit_flipped(value, id):
     index = id.get('index')
-    print(f'Allied Index Flip call: {index}')
-    print(f'Combat Force Object (flip): {allied_combat_force}')
 
     if (not index) | (len(allied_combat_force) == 0):
         raise PreventUpdate
 
-    print(f'Allied unit count Flip call: {len(allied_combat_force)}')
     selected_unit = next((x for x in allied_combat_force if x.unit_id == index), None)
-    print(f'Allied Unit Flip call: {selected_unit}')
     selected_unit.is_flipped = value
 
     if value:
@@ -564,15 +552,11 @@ def toggle_allied_unit_flipped(value, id):
 )
 def update_allied_unit_cf(is_flipped, is_battle_hex, is_extended, modifier, is_flipped_id):
     index = is_flipped_id.get('index')
-    print(f'Index CF call: {index}')
-    print(f'Combat Force Object (cf): {allied_combat_force}')
 
     if (not index) | (len(allied_combat_force) == 0):
         raise PreventUpdate
 
-    print(f'Allied unit count CF call: {len(allied_combat_force)}')
     selected_unit = next((x for x in allied_combat_force if x.unit_id == index), None)
-    print(f'Allied Unit CF call: {selected_unit}')
 
     selected_unit.is_flipped = is_flipped
     selected_unit.is_in_battle_hex = is_battle_hex
@@ -674,12 +658,6 @@ def analyze_battle_results(n_clicks, intel_condition_value, reaction_player_valu
                            air_power_drm_value, allied_ec_mod_value, japan_ec_mod_value):
     if len(allied_combat_force) == 0 | len(japan_combat_force) == 0:
         raise PreventUpdate
-
-    print(enums.IntelCondition(intel_condition_value))
-    print(enums.Player(reaction_player_value))
-    print(enums.AirPowerModifier(air_power_drm_value))
-    print(allied_ec_mod_value)
-    print(japan_ec_mod_value)
 
     analyzer = BattleAnalyzer(intel_condition=enums.IntelCondition(intel_condition_value),
                               reaction_player=enums.Player(reaction_player_value),
