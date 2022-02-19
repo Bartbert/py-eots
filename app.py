@@ -529,6 +529,10 @@ def update_japan_selected_units(value, children):
 )
 def toggle_allied_unit_flipped(value, id):
     index = id.get('index')
+    print(f'Allied Index: {index}')
+
+    if not index:
+        raise PreventUpdate
 
     selected_unit = next((x for x in allied_combat_force if x.unit_id == index), None)
     selected_unit.is_flipped = value
