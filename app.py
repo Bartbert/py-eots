@@ -369,7 +369,7 @@ def update_allied_selected_units(value, children):
 
     print(f'Allied unit count foo: {len(allied_combat_force)}')
     unit_ids = set(map(lambda x: x.unit_id, allied_combat_force))
-    print(f'Missing IDs: {unit_ids})
+    print(f'Missing IDs: {unit_ids}')
 
     missing_unit_ids = ui_indexes.difference(unit_ids)
     print(f'New Unit ID: {missing_unit_ids}')
