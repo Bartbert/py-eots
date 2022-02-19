@@ -420,6 +420,7 @@ def update_allied_selected_units(value, children):
             children.append(new_element)
             allied_combat_force.append(copy.deepcopy(selected_unit))
             print(f'Allied Unit count: {len(allied_combat_force)}')
+            print(f'Combat Force Object (new): {allied_combat_force}')
 
     # Determine if there are values in allied_combat_force_list that are not in the value list
     # Any differences need to be removed from the UI
