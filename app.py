@@ -535,6 +535,7 @@ def update_japan_selected_units(value, children):
 def toggle_allied_unit_flipped(value, id):
     index = id.get('index')
     print(f'Allied Index Flip call: {index}')
+    print(f'Combat Force Object (flip): {allied_combat_force}')
 
     if (not index) | (len(allied_combat_force) == 0):
         raise PreventUpdate
@@ -563,6 +564,7 @@ def toggle_allied_unit_flipped(value, id):
 def update_allied_unit_cf(is_flipped, is_battle_hex, is_extended, modifier, is_flipped_id):
     index = is_flipped_id.get('index')
     print(f'Index CF call: {index}')
+    print(f'Combat Force Object (cf): {allied_combat_force}')
 
     if (not index) | (len(allied_combat_force) == 0):
         raise PreventUpdate
