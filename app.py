@@ -447,21 +447,24 @@ def update_allied_selected_units(value, json_data, children):
 
 
 @app.callback(
-    Output('japan-forces', 'children'),
-    Input('japan-selected-units', 'value'),
+    [Output('japan-forces', 'children'), Output('japan-combat-force', 'data')],
+    [Input('japan-selected-units', 'value'), Input('japan-combat-force', 'data')],
     State('japan-forces', 'children')
 )
-def update_japan_selected_units(value, children):
-    if (not value) & (len(japan_combat_force) == 0):
+def update_japan_selected_units(value, json_data, children):
+    if not value:
         raise PreventUpdate
 
     # Determine if there are items in the value list that are not in the japan_combat_force list
     # Any differences need to be added to the UI
     ui_indexes = set(value)
 
-    unit_ids = set(map(lambda x: x.unit_id, japan_combat_force))
+    if json_data:
+        unit_ids = json.loads(json_data)
+    else:
+        unit_ids = []
 
-    missing_unit_ids = ui_indexes.difference(unit_ids)
+    missing_unit_ids = ui_indexes.difference(set(unit_ids))
 
     while len(missing_unit_ids) > 0:
 
@@ -507,11 +510,11 @@ def update_japan_selected_units(value, children):
             )
 
             children.append(new_element)
-            japan_combat_force.append(copy.deepcopy(selected_unit))
+            unit_ids.append(selected_unit.unit_id)
 
     # Determine if there are values in japan_combat_force list that are not in the value list
     # Any differences need to be removed from the UI
-    extra_unit_ids = unit_ids.difference(ui_indexes)
+    extra_unit_ids = set(unit_ids).difference(ui_indexes)
 
     while len(extra_unit_ids) > 0:
         unit_id = extra_unit_ids.pop()
@@ -521,13 +524,16 @@ def update_japan_selected_units(value, children):
             index = child['props']['id']['index']
 
             if index == unit_id:
+
+                for j in range(len(unit_ids)):
+                    if unit_ids[j] == unit_id:
+                        unit_ids.pop(j)
+                        break
+
                 children.pop(i)
+                break
 
-                for j in range(len(japan_combat_force)):
-                    if japan_combat_force[j].unit_id == unit_id:
-                        japan_combat_force.pop(j)
-
-    return children
+    return [children, json.dumps(unit_ids)]
 
 
 @app.callback(
@@ -620,8 +626,7 @@ def update_allied_total_cf(is_flipped, is_battle_hex, is_extended, modifier, jso
 def toggle_japan_unit_flipped(value, id):
     index = id.get('index')
 
-    selected_unit = next((x for x in japan_combat_force if x.unit_id == index), None)
-    selected_unit.is_flipped = value
+    selected_unit = next((x for x in japan_unit_list if x.unit_id == index), None)
 
     if value:
         src = f'assets/static/images/{selected_unit.image_name_back}'
@@ -642,13 +647,15 @@ def toggle_japan_unit_flipped(value, id):
 def update_japan_unit_cf(is_flipped, is_battle_hex, is_extended, modifier, is_flipped_id):
     index = is_flipped_id.get('index')
 
-    selected_unit = next((x for x in japan_combat_force if x.unit_id == index), None)
-    selected_unit.is_flipped = is_flipped
-    selected_unit.is_in_battle_hex = is_battle_hex
-    selected_unit.is_extended_range = is_extended
-    selected_unit.attack_modifier = modifier
+    selected_unit = next((x for x in japan_unit_list if x.unit_id == index), None)
+    selected_unit_copy = copy.deepcopy(selected_unit)
 
-    cf = dbc.Label(f'CF: {selected_unit.combat_factor()}')
+    selected_unit_copy.is_flipped = is_flipped
+    selected_unit_copy.is_in_battle_hex = is_battle_hex
+    selected_unit_copy.is_extended_range = is_extended
+    selected_unit_copy.attack_modifier = modifier
+
+    cf = dbc.Label(f'CF: {selected_unit_copy.combat_factor()}')
 
     return cf
 
@@ -658,11 +665,26 @@ def update_japan_unit_cf(is_flipped, is_battle_hex, is_extended, modifier, is_fl
     [Input({'type': 'japan-unit-flipped', 'index': ALL}, 'value'),
      Input({'type': 'japan-unit-battle-hex', 'index': ALL}, 'value'),
      Input({'type': 'japan-unit-extended', 'index': ALL}, 'value'),
-     Input({'type': 'japan-unit-mod', 'index': ALL}, 'value')]
+     Input({'type': 'japan-unit-mod', 'index': ALL}, 'value'),
+     Input('japan-combat-force', 'data')]
 )
-def update_japan_total_cf(is_flipped, is_battle_hex, is_extended, modifier):
-    total_cf = sum(map(lambda x: x.combat_factor(), japan_combat_force))
+def update_japan_total_cf(is_flipped, is_battle_hex, is_extended, modifier, json_data):
+    index_list = json.loads(json_data)
+    unit_list = []
 
+    for i in range(len(index_list)):
+        index = index_list[i]
+        current_unit = next((x for x in japan_unit_list if x.unit_id == index), None)
+        current_unit_copy = copy.deepcopy(current_unit)
+
+        current_unit_copy.is_flipped = is_flipped[i]
+        current_unit_copy.is_in_battle_hex = is_battle_hex[i]
+        current_unit_copy.is_extended_range = is_extended[i]
+        current_unit_copy.attack_modifier = modifier[i]
+
+        unit_list.append(current_unit_copy)
+
+    total_cf = sum(map(lambda x: x.combat_factor(), unit_list))
     cf = html.Div([
         dbc.Label(f'Japan Forces', style={'font-weight': 'bold'}),
         dbc.Label(f':  {total_cf} Combat Factors', color='red'),
