@@ -30,9 +30,6 @@ japan_units = an_units.loc[an_units['nationality'] == 'Japan']
 allied_unit_list = [CombatUnit(**kwargs) for kwargs in allied_units.to_dict(orient='records')]
 japan_unit_list = [CombatUnit(**kwargs) for kwargs in japan_units.to_dict(orient='records')]
 
-allied_combat_force = []
-japan_combat_force = []
-
 allied_options = []
 
 for unit in allied_unit_list:
@@ -362,12 +359,12 @@ def toggle_navbar_collapse(n, is_open):
     State('allied-forces', 'children')
 )
 def update_allied_selected_units(value, json_data, children):
-    if not value:
-        raise PreventUpdate
-
     # Determine if there are items in the value list that are not in the allied_combat_force list
     # Any differences need to be added to the UI
-    ui_indexes = set(value)
+    if value:
+        ui_indexes = set(value)
+    else:
+        ui_indexes = set()
 
     if json_data:
         unit_ids = json.loads(json_data)
@@ -452,12 +449,12 @@ def update_allied_selected_units(value, json_data, children):
     State('japan-forces', 'children')
 )
 def update_japan_selected_units(value, json_data, children):
-    if not value:
-        raise PreventUpdate
-
     # Determine if there are items in the value list that are not in the japan_combat_force list
     # Any differences need to be added to the UI
-    ui_indexes = set(value)
+    if value:
+        ui_indexes = set(value)
+    else:
+        ui_indexes = set()
 
     if json_data:
         unit_ids = json.loads(json_data)
@@ -700,11 +697,58 @@ def update_japan_total_cf(is_flipped, is_battle_hex, is_extended, modifier, json
      Input('reaction-player', 'value'),
      Input('air-power-drm', 'value'),
      Input('allied-ec-mod', 'value'),
-     Input('japan-ec-mod', 'value')]
+     Input('japan-ec-mod', 'value')],
+    [State({'type': 'allied-unit-flipped', 'index': ALL}, 'value'),
+     State({'type': 'allied-unit-battle-hex', 'index': ALL}, 'value'),
+     State({'type': 'allied-unit-extended', 'index': ALL}, 'value'),
+     State({'type': 'allied-unit-mod', 'index': ALL}, 'value'),
+     State('allied-combat-force', 'data'),
+     State({'type': 'japan-unit-flipped', 'index': ALL}, 'value'),
+     State({'type': 'japan-unit-battle-hex', 'index': ALL}, 'value'),
+     State({'type': 'japan-unit-extended', 'index': ALL}, 'value'),
+     State({'type': 'japan-unit-mod', 'index': ALL}, 'value'),
+     State('japan-combat-force', 'data')]
 )
 def analyze_battle_results(n_clicks, intel_condition_value, reaction_player_value,
-                           air_power_drm_value, allied_ec_mod_value, japan_ec_mod_value):
-    if len(allied_combat_force) == 0 | len(japan_combat_force) == 0:
+                           air_power_drm_value, allied_ec_mod_value, japan_ec_mod_value,
+                           allied_flipped, allied_battle_hex, allied_extended, allied_mod, allied_json,
+                           japan_flipped, japan_battle_hex, japan_extended, japan_mod, japan_json):
+    if (not n_clicks):
+        raise PreventUpdate
+
+    index_list = json.loads(allied_json)
+
+    allied_combat_force = []
+
+    for i in range(len(index_list)):
+        index = index_list[i]
+        current_unit = next((x for x in allied_unit_list if x.unit_id == index), None)
+        current_unit_copy = copy.deepcopy(current_unit)
+
+        current_unit_copy.is_flipped = allied_flipped[i]
+        current_unit_copy.is_in_battle_hex = allied_battle_hex[i]
+        current_unit_copy.is_extended_range = allied_extended[i]
+        current_unit_copy.attack_modifier = allied_mod[i]
+
+        allied_combat_force.append(current_unit_copy)
+
+    index_list = json.loads(japan_json)
+
+    japan_combat_force = []
+
+    for i in range(len(index_list)):
+        index = index_list[i]
+        current_unit = next((x for x in japan_unit_list if x.unit_id == index), None)
+        current_unit_copy = copy.deepcopy(current_unit)
+
+        current_unit_copy.is_flipped = japan_flipped[i]
+        current_unit_copy.is_in_battle_hex = japan_battle_hex[i]
+        current_unit_copy.is_extended_range = japan_extended[i]
+        current_unit_copy.attack_modifier = japan_mod[i]
+
+        japan_combat_force.append(current_unit_copy)
+
+    if (len(allied_combat_force) == 0) | (len(japan_combat_force) == 0):
         raise PreventUpdate
 
     analyzer = BattleAnalyzer(intel_condition=enums.IntelCondition(intel_condition_value),
