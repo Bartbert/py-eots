@@ -369,7 +369,7 @@ def update_allied_selected_units(value, children):
 
     print(f'Allied unit count foo: {len(allied_combat_force)}')
     unit_ids = set(map(lambda x: x.unit_id, allied_combat_force))
-    print(f'Missing IDs: {unit_ids}')
+    print(f'Existing IDs: {unit_ids}')
 
     missing_unit_ids = ui_indexes.difference(unit_ids)
     print(f'New Unit ID: {missing_unit_ids}')
@@ -533,7 +533,7 @@ def update_japan_selected_units(value, children):
 )
 def toggle_allied_unit_flipped(value, id):
     index = id.get('index')
-    print(f'Allied Index: {index}')
+    print(f'Allied Index Flip call: {index}')
 
     if not index:
         raise PreventUpdate
@@ -560,9 +560,14 @@ def toggle_allied_unit_flipped(value, id):
 )
 def update_allied_unit_cf(is_flipped, is_battle_hex, is_extended, modifier, is_flipped_id):
     index = is_flipped_id.get('index')
+    print(f'Index CF call: {index}')
+
+    if not index:
+        raise PreventUpdate
 
     selected_unit = next((x for x in allied_combat_force if x.unit_id == index), None)
     print(f'Allied Unit CF call: {selected_unit}')
+
     selected_unit.is_flipped = is_flipped
     selected_unit.is_in_battle_hex = is_battle_hex
     selected_unit.is_extended_range = is_extended
