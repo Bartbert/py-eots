@@ -536,7 +536,7 @@ def toggle_allied_unit_flipped(value, id):
     index = id.get('index')
     print(f'Allied Index Flip call: {index}')
 
-    if not index:
+    if (not index) | (len(allied_combat_force) == 0):
         raise PreventUpdate
 
     print(f'Allied unit count Flip call: {len(allied_combat_force)}')
@@ -564,7 +564,7 @@ def update_allied_unit_cf(is_flipped, is_battle_hex, is_extended, modifier, is_f
     index = is_flipped_id.get('index')
     print(f'Index CF call: {index}')
 
-    if not index:
+    if (not index) | (len(allied_combat_force) == 0):
         raise PreventUpdate
 
     print(f'Allied unit count CF call: {len(allied_combat_force)}')
