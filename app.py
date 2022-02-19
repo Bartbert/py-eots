@@ -370,6 +370,7 @@ def update_allied_selected_units(value, children):
     unit_ids = set(map(lambda x: x.unit_id, allied_combat_force))
 
     missing_unit_ids = ui_indexes.difference(unit_ids)
+    print(f'New Unit ID: {missing_unit_ids}')
 
     while len(missing_unit_ids) > 0:
 
@@ -416,6 +417,7 @@ def update_allied_selected_units(value, children):
 
             children.append(new_element)
             allied_combat_force.append(copy.deepcopy(selected_unit))
+            print(f'Allied Unit count: {len(allied_combat_force)}')
 
     # Determine if there are values in allied_combat_force_list that are not in the value list
     # Any differences need to be removed from the UI
