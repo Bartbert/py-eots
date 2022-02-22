@@ -1,0 +1,271 @@
+card_id,ops_value,intel_oc,intel_ec,card_type,reaction_type,title,subtitle,card_text,south_pacific,remove_if_event_played,draw_card,replace_from_discard,reshuffle_deck,pw_change,isr_end,isr_start,intel_status,logistics_value,wie_level,china,india,sub,weather,kamikaze
+1,3,-,-,Military,,Operation Z,Attack on Pearl Harbor,"Activate: Hex 3705; CV Akagi, CV Soryu, CV Shokaku, and BB Kongo 1
+Intelligence: Surprise Attack
+Condtions: These 4 naval units cannot be activated again during this game turn.  Naval units may move 18 hexes.  Must declare hex 5808 (Oahu) a Battle hex.  Allied player does not roll during the AIr Naval Combat Segment and units defend at 1/2 strength.  US Political Will marker is moved +8.  The US CVs in hexes 5410/5609 cannot be attacked and must conduct post battle movement to 5808.
+May only be played as an event as the first card of the December 1941 game turn.
+Remove from play if use as an event.",,Y,,,,8,,,Surprise,,,,,,,
+2,3,-,-,Military,,IAI-Operation No.1,Conquest of SE Asia,"Activate: Any units within range of any Japanese HQ.
+Logistic Value: 20
+Intelligence: Surprise Attack
+Condtions: Use the offensives efficiency of all Japanese HQ.  A total of 26 units may be activated.  If a Japanese naval unit enters a Malaysian coastal hex, Force Z automatically reacts into the hex during reaction movement.  If more than one hex meets this condition, then the Allied player chooses.  No Allied air units project ZOI during this Offensive.
+May only be played as an event as the second card of the December 1941 game turn.
+Remove from play if use as an event.",,Y,,,,,,,Surprise,20,,,,,,
+3,2,4,-,Military,,"Col. Tsugi, Unit 82",Jungle Warfare,"Activate: Any HQ
+Logistic Value: 3
+Intelligence: Surprise Attack
+Conditions: Only Japanese ground units may be activated.
+Bonus: The Japanese player gains a +4 die roll modification in any ground combat that occurs in a Malaya, Jugnle or Mixed terrain hex for the duration of this operation.",,,,,,,,,Surprise,3,,,,,,
+4,1,3,-,Reaction,Intelligence,JN25 Code Change,,"Intelligence: Intercept
+Draw one Strategy Card.",,,Y,,,,,,Intercept,,,,,,,
+5,2,4,-,Resource,,Japanese Aircraft Production Efficiency,War Crime,"2 Air Replacements: The Japanese receive 2 air replacement steps.  These steps may be used immediately or recorded as replacement steps for future use.
+Remove from play if use as an event.",,Y,,,,,,,,,,,,,,
+6,2,4,-,Political,,China Operation,Doolittle Raid Reprisal,"Move the China marker one box to the left toward Government Collaped box, unless this would put the China marker in the China Collapsed box, in which case no effect.
+Remove from play if use as an event.",,Y,,,,,,,,,,1,,,,
+7,2,4,-,Political,,US Joint Staff Debate,US Inter-Service Rivalry,"Flip the US Inter-Service Rivalry Marker from its Strategic Agreement to its Inter-Service Rivalry side.  No additional impact if Inter-Service Rivalry is already in effect.
+Draw one Strategy Card.",,,Y,,,,Y,,,,,,,,,
+8,3,5,7,Military,,Operation C,Indian Ocean Raid,"Activate: Any HQ.
+Logistic Value: 4
+Conditions: May activate only Naval units.
+Bonus: Add 1 to all air-naval battle die rolls if any Commonwealth naval units are present in the battle.",,,,,,,,,,4,,,,,,
+9,3,5,7,Military,,Rear Admiral Matami Ugaki,Seizure of Hawaiian Islands,"Activation: Any HQ.
+Logistic Value: 6
+Conditions: Maximum 1 ground (any size) unit may be activated.
+Bonus: Naval units may move up to 21 hexes.",Y,,,,,,,,,6,,,,,,
+10,3,5,7,Military,,2nd Operational Phase,Solomon Island Expansion,"Activation: Any HQ.
+Logistic Value: 6
+Conditions: May only be played as an event if the Japanese Inter-Service Rivalry marker is on its Strategic Agreement side.",,,,,,,,,,6,,,,,,
+11,2,4,-,Political,,US/British Second Front Conference - Germany First,US Inter-Service Rivalry,"Flip the US Inter-Service Rivalry Marker from its Strategic Agreement to its Inter-Service Rivalry side.  No additional impact if Inter-Service Rivalry is already in effect.
+Draw one Strategy Card.",,,Y,,,,,Y,,,,,,,,
+12,3,5,8,Military,,Operation MI,Battle of Midway,"Activation: Any HQ.
+Logistic Value: 8
+Conditions: All battles must be fought in one hex islands.
+Long Range Reconnaissance of Pearl Harbor: If French Shoals (5508) is not in an Allied air ZOI or within 3 hexes of a US CA naval unit, then the Allies add +4 to any intelligence die roll due to superior Japanese information security.",,,,,,,,,,8,,,,,,
+13,2,4,-,Reaction,Intelligence,JN 25 Code Change,28-May-42,"Intelligence: Intercept
+Conditions: May be played after an intelligence die roll, but not after the play of another intelligence reaction card.
+Remove from play if use as an event.",Y,Y,,,,,,,Intercept,,,,,,,
+14,3,5,7,Military,,Operation MO,Battle of the Coral Sea,"Activation: Any HQ.
+Logistic Value: 5
+Condtions: Only one ground unit (of any size) may be activated.
+Fortuitous Rain Squalls: Japanese CV (not CVL) naval units have their defense strength increased by 2 for the duration of the Offensive.",,,,,,,,,,5,,,,,,
+15,3,5,-,Political,,Mahatma Gandhi,Independence Campaign,"Move the India marker to the unrest box, and if already in the unrest box move the marker to the Unstable box.
+Bonus: The Allies lose 1 ground replacement step next game turn and any other ground replacement steps available during the next game turn can only be used for non-Commonwealth ground units.
+Remove from played if used as an event.",,Y,,,,,,,,,,,1,,,
+16,3,5,7,Military,,Operation RI,New Guinea Offensive,"Activation: Any HQ.
+Logistic Value: 4
+Conditions: Only air and ground units may be activated.",Y,,,,,,,,,4,,,,,,
+17,2,4,-,Reaction,Counteroffensive,Japanese Counterattack at Savo Island,,"Activation: Any HQ.
+Logistic Value: 3
+Intelligence: Intercept.
+Conditions: Only air or naval units may be activated.
+Japanese Night Fighting Advantage: Japanese CA, CL and APD naval units have 2 added to their attack strength for all battles fought during the current Offensive.
+Draw one Strategy Card.",Y,,Y,,,,,,Intercept,3,,,,,,
+18,1,3,-,Political,,Bridge on River Kwai,Death Railroad,"If the Japanese control hexes 2108 and 2109, they become Trans Routes for the remainder of the game.  Place the Bridge Over the River Kwai marker near this location as a reminder.
+Remove from play if used as an event.",,Y,,,,,,,,,,,,,,
+19,2,4,-,Reaction,Weather,Weather,Monsoon Rains Cancel Offensive,Allied Offensive is canceled. All units are placed back at their starting locations.,,,,,,,,,,,,,,,Y,
+20,2,3,5,Military,,Naval Battle of Guadalcanal,,"Activation: Any HQ.
+Logistic Value: 5
+Airfield Bombardment: If a Japanese BB naval unit occupies a battle hex that contains an Allied air unit, but no Allied BB naval unit, then the Allied air unit is reduced (Japanese player's choice) one step prior to air-naval combat (even if this eliminates the unit).",Y,,,,,,,,,5,,,,,,
+21,3,5,-,Reaction,Personage,Mahatma Gandhi,Worker Strikes in India,"Can only be played in reaction to an Offensive activated by the SEAC HQ.  Cancels a SEAC HQ offensive and the Allies must reduce one full strength Indian Corps (cannot eliminate a reduced unit, if none available, no additional effect).
+Draw one Strategy Card.
+Remove from play if used as an event.",,Y,Y,,,,,,,,,,,,,
+22,2,4,-,Reaction,Weather,Weather,Monsoon Rains Cancel Offensive,Allied Offensive is canceled. All units are placed back at their starting locations.,,,,,,,,,,,,,,,Y,
+23,2,4,6,Military,,Operation RE,Attack on Milne Bay,"Activation: Any HQ.
+Logistic Value: 3
+Elite Units: The Japanese player gains a +1 ground combat die modifier if any brigade size ground units are involved in a ground combat during this Offensive.",Y,,,,,,,,,3,,,,,,
+24,1,3,-,Reaction,Attack,Submarine Attack,,"Play during an offensive; at the end of all combat against any active Allied naval units or against any active Allied naval unit, if no battle hexes were declared during the Offensive.  On a die roll of:
+0-4: Allies lose one naval step (Japanese choice; can eliminate a unit).
+5-9: No Effect.
+Draw one Strategy Card.",,,Y,,,,,,,,,,,1,,
+25,3,5,7,Military,,Operation KA,Battle for the Eastern Solomons,"Activation: Any HQ.
+Logistic Value: 4
+Allied Tactical Confusion: US aircraft carrier naval units have their attack strength reduced by 2 for the duration of this Offensive.",Y,,,,,,,,,4,,,,,,
+26,2,4,-,Political,,Chiang Kai-shek,Anti Communist Offensive,"Move the China marker one box to the left toward Government Collaped box, unless this would put the China marker in the China Collapsed box, in which case no effect.
+Remove from play if use as an event.",,Y,,,,,,,,,,1,,,,
+27,1,3,-,Reaction,Attack,Submarine Attack,,"Play during an offensive; at the end of all combat against any active Allied naval units or against any active Allied naval unit, if no battle hexes were declared during the Offensive.  On a die roll of:
+0-4: Lose one naval step*
+5-8: Lose two naval steps*
+9: No Effect.
+*Japanese choice; can eliminate a unit.
+Draw one Strategy Card.",Y,,Y,,,,,,,,,,,2,,
+28,3,5,7,Military,,Big Tokyo Express Operation,Battle of Cape Esperance,"Acitvation: Any HQ.
+Logistic Value: 4
+Conditions: Only one ground unit (of any size) may be activated.
+Bonus: Place the Tokyo Express marker in any Japanese controlled hex.  See Emergency Supply Routes for the use of this marker.",Y,,,,,,,,,4,,,,,,
+29,3,5,7,Military,,Combined Fleet,Battle of Santa Cruz,"Activation: Any HQ.
+Logistic Value: 4
+Conditions: Only air and naval units may be activated.
+Effective Aerial Torpedo Tactics:  Increase Japanese aircraft carrier naval units attack strength by 2 for the duration of the Offensive.",Y,,,,,,,,,4,,,,,,
+30,3,5,-,Resource,,Flight Instructors,Japanese Improve Training and Maintenance.,"3 Air Replacements: The Japanese player receives 3 air replacement steps that may be used immediately or recorded as replacement steps for future use.
+Remove from play if used as an event.",,Y,,,,,,,,,,,,,,
+31,3,5,-,Military,,New Operation Plan,Island Fortifications,"The Japanese player gains a +1 ground combat die roll modification for the remainder of the game in any battle that occurs on a one hex island.  Place the Japanese +1 Defensive Doctrine marker on the game turn track as a remainder.
+Remove from play if used as an event.",,Y,,,,,,,,,,,,,,
+32,3,5,7,Military,,Operation I-Go,Air Offensive,"Acitvation: Any HQ.
+Logistic Value: 4
+Conditions: Only air units may be activated.
+Air Shuttle: The Japanese gain a +1 die roll modification during air-naval combat if the battle is within 6 hexes of an inactive Japanese CV or CVL naval unit.",Y,,,,,,,,,4,,,,,,
+33,2,4,-,Political,,Imperial Intervention,,"This event ends a Japanese inter-service rivalry.  Flip the Japanese Inter-Service Rivalry marker to its Strategic Agreement side.  If the Japanese Inter-Service Rivalry marker is already on Strategic Agreement side there is no additional effect.
+Bonus: If this card is played as an event, the Japanese have the option to discard a card of their choice and re-place it with any card from the discard pile (not those removed from play).",Y,,,Y,,,Y,,,,,,,,,
+34,2,4,-,Political,,US Army/Navy Dispute,Slows US Reinforcements,"Flip the US Inter-Service Rivalry Marker from its Strategic Agreement to its Inter-Service Rivalry side.  No additional impact if Inter-Service Rivalry is already in effect.
+Draw one Strategy Card.",Y,,Y,,,,,Y,,,,,,,,
+35,3,5,-,Military,,Operation KE,Guadalcanal Evacuation,"Choose a Japanese occupied coastal hex.  Up to 3 Japanese ground units in the chose hex and all adjacent hexes (that do not have to be coastal hexes) may conduct strategic naval movement (with no amphibious shipping points required) from these hexes to any single friendly port hex.  No battles may be initiated.  The move is unaffected by Allied air ZOI, however all other conditions for a strategic naval move apply.",Y,,,,,,,,,,,,,,,
+36,1,3,-,Reaction,Attack,Submarine Attack,,"Play during an offensive before the beginning of the combat phase against any active Allied naval units or against any active Allied naval unit, if no battle hexes were declared during the Offensive.  On a die roll of:
+0-4: Allies lose one naval step (Japanese choice; can eliminate a unit).
+5-9: No Effect.
+Draw one Strategy Card.",,,Y,,,,,,,,,,,1,,
+37,3,5,-,Resource,,1st Convoy Escort Fleet,Escort Organization,"The Japanese player places the Escort marker on the game turn track on its +2 side or flips the escort marker to its +4 side if the marker is already in play on its +2 side.  See Submarine Warfare for effects of this die roll modifier.
+Remove from play if used as an event.",,Y,,,,,,,,,,,,,,
+38,3,5,-,Resource,,Grand Escort Command,Improved Escort Organization,"The Japanese player places the Escort marker on the game turn track on its +2 side or flips the escort marker to its +4 side if the marker is already in play on its +2 side.  See Submarine Warfare for effects of this die roll modifier.
+Remove from play if used as an event.",,Y,,,,,,,,,,,,,,
+39,2,4,-,Resource,,Subhas Chandra Bose,Pro-Japanese Indian Army,"2 Ground Replacements: The Japanese gain two ground replacement steps that must be used immediately.  The recipent ground unit must be within 3 hexes of Rangoon (2008) to receive the replacement.
+Remove from play if used as an event.",,Y,,,,,,,,,,,,,,
+40,3,5,7,Military,,Operation U-Go,Burma Offensive,"Acivation: Any HQ.
+Logistic Value: 4
+Conditions: Only Air and Ground units may be activated.",,,,,,,,,,4,,,,,,
+41,3,5,-,Political,,Patrick Hurley,Chinese Nationalist and Communist Reconciliation Fails,"Move the China marker one box to the left toward Government Collaped box, unless this would put the China marker in the China Collapsed box, in which case no effect.
+Remove from play if use as an event.",,Y,,,,,,,,,,1,,,,
+42,3,5,-,Political,,Ichi-Go,China Offensive,"Move the China marker one box to the left toward Government Collaped box, unless this would put the China marker in the China Collapsed box, in which case no effect.
+Remove from play if use as an event.",Y,Y,,,,,,,,,,1,,,,
+43,1,3,-,Political,,Tojo Resigns,Moderates in Power,"If the game turn is 1944 or later, this card must be played as an event otherwise it is a Japanese option to play as an event, an OC, or discard.  Reduce US Political Will by two.  The Allied Manchurian Invasion card's prerequisite has been met.  Flip the game turn marker from its PM Tojo to its Tojo Resigns side as a reminder.
+RESHUFFLE:  If this card is played as an OC or a discard, reshuffle the Japanese deck at the end of this game turn.  This card may not be played as a Future Offensive.
+Remove from play if used as an event.",,Y,,,Maybe,2,,,,,,,,,,
+44,3,5,7,Military,,Tokyo Express,Bougainville Reinforcements,"Activation: Any HQ.
+Logistic Value: 4
+Bonus: The Japanese temporarily gain 2 ASPs that can be used for the duration of this Offensive.  Place the Tokyo Express marker in any Japanese controlled hex.  See Emergency Supply Routes for the use of this marker.",Y,,,,,,,,,4,,,,,,
+45,3,5,-,Reaction,Counteroffensive,Operation Sho-Go,,"Activation: Any HQ.
+Logistic Value: 5 if Combined Fleet HQ, otherwise: 4.
+Intelligence: Intercept.
+Bonus: If a Kamikaze attack reaction card is played in conjunction with this card, increase the effect of the Kamikaze reaction card by one additional Allied naval step loss.
+Remove from play if used as an event.",,Y,,,,,,,Intercept,5,,,,,,
+46,3,5,-,Reaction,Counteroffensive,Operation A-Go,Battle of the Philippine Sea,"Activation: Any HQ.
+Logistic Value: 5 if Combined Fleet HQ, otherwise: 4.
+Intelligence: Intercept.
+Tactical Wire Intercepts:  Allied aircraft carrier units have their defense values increased by two for the duration of the Offensive.
+Remove from play if used as an event.",,Y,,,,,,,Intercept,5,,,,,,
+47,3,5,7,Military,,VADM Kondo,Conquest of the Dutch East Indies,"Activation: South or South Seas HQs only.
+Logistic Value: 7
+Float Plane Tactics: Japanese CA naval units add 2 to their attack strengths for the duration of this Offensive.",,,,,,,,,,7,,,,,,
+48,3,5,7,Military,,General Adachi,New Guinea Offensive,"Activation: South or South Seas HQs only.
+Logistic Value: 5
+Conditions: Only air and ground units may be activated.
+Bonus: Neither the HQ nor the units being activated need to be in supply in order to be activated.",Y,,,,,,,,,5,,,,,,
+49,1,3,-,Reaction,Intelligence,JN25 Code Change,,"Intelligence: Intercept
+Draw one Strategy Card.",Y,,Y,,,,,,Intercept,,,,,,,
+50,3,5,7,Military,,Ha-Go,Burma Offensive,"Activation: South or South Seas HQs only.
+Logistic Value: 6
+Conditions: Only air and ground units may be activated.",,,,,,,,,,6,,,,,,
+51,3,5,-,Political,,WAR IN EUROPE,Minor Axis Victory,"Decrease the War in Europe marker a number of spaces equal to the value associated with the year of the current game turn:
+1942: 2
+1943: 1
+1944: No Effect
+1945: No Effect
+Remove from play if used as an event.",Y,Y,,,,,,,,,Minor,,,,,
+52,3,5,-,Political,,WAR IN EUROPE,Minor Axis Victory,"Decrease the War in Europe marker a number of spaces equal to the value associated with the year of the current game turn:
+1942: 2
+1943: 1
+1944: No Effect
+1945: No Effect
+Remove from play if used as an event.",Y,Y,,,,,,,,,Minor,,,,,
+53,3,5,-,Political,,WAR IN EUROPE,Minor Axis Victory,"Decrease the War in Europe marker a number of spaces equal to the value associated with the year of the current game turn:
+1942: 2
+1943: 1
+1944: No Effect
+1945: No Effect
+Remove from play if used as an event.",,Y,,,,,,,,,Minor,,,,,
+54,3,5,-,Political,,WAR IN EUROPE,Minor Axis Victory,"Decrease the War in Europe marker a number of spaces equal to the value associated with the year of the current game turn:
+1942: 2
+1943: 1
+1944: No Effect
+1945: No Effect
+Remove from play if used as an event.",,Y,,,,,,,,,Minor,,,,,
+55,3,5,-,Political,,WAR IN EUROPE,Major Axis Victory,"Decrease the War in Europe marker a number of spaces equal to the value associated with the year of the current game turn:
+1942: 3
+1943: 2
+1944: 1
+1945: No Effect
+Remove from play if used as an event.",,Y,,,,,,,,,Major,,,,,
+56,3,5,-,Political,,WAR IN EUROPE,Major Axis Victory,"Decrease the War in Europe marker a number of spaces equal to the value associated with the year of the current game turn:
+1942: 3
+1943: 2
+1944: 1
+1945: No Effect
+Remove from play if used as an event.",,Y,,,,,,,,,Major,,,,,
+57,3,5,-,Political,,WAR IN EUROPE,Minor Axis Victory,"Decrease the War in Europe marker a number of spaces equal to the value associated with the year of the current game turn:
+1942: 2
+1943: 1
+1944: No Effect
+1945: No Effect
+Remove from play if used as an event.",,Y,,,,,,,,,Minor,,,,,
+58,3,5,7,Military,,Western Force,Conquest of Sumatra,"Activation: South or South Seas HQs only.
+Logistic Value: 5
+Paratroopers: Eliminate a Dutch regiment that is within extended range of an active Japanese air unit and not within an unneutralized Allied air ZOI, while immediately placing a Japanese control marker in the hex or place a Japanese control marker in any unoccupied hex that is within extended range of an active Japanese air unit and not within an unneutralized Allied air ZOI.",,,,,,,,,,5,,,,,,
+59,3,5,7,Military,,Central Force,Conquest of Borneo,"Activation: South or South Seas HQs only.
+Logistic Value: 5
+Paratroopers: Eliminate a Dutch regiment that is within extended range of an active Japanese air unit and not within an unneutralized Allied air ZOI, while immediately placing a Japanese control marker in the hex or place a Japanese control marker in any unoccupied hex that is within extended range of an active Japanese air unit and not within an unneutralized Allied air ZOI.",,,,,,,,,,5,,,,,,
+60,3,5,7,Military,,East Force,Conquest of Celebes,"Activation: South or South Seas HQs only.
+Logistic Value: 5
+Paratroopers: Eliminate a Dutch regiment that is within extended range of an active Japanese air unit and not within an unneutralized Allied air ZOI, while immediately placing a Japanese control marker in the hex or place a Japanese control marker in any unoccupied hex that is within extended range of an active Japanese air unit and not within an unneutralized Allied air ZOI.",,,,,,,,,,5,,,,,,
+61,2,4,-,Reaction,Attack,Kamikaze Attack,,"Play prior to one battle of the Offensive that is within 11 hexes of Tokyo (3706) and within extended range of a Japanese air unit.  The Japanese player eliminates two Allied naval steps (Japanese player's choice, may not eliminate a unit unless there is no other option), while reducing the Japanese air unit whose range was used one step (even if this would eliminate the air unit).
+Draw One Strategy Card.
+Remove from play if used as an event.",,Y,Y,,,,,,,,,,,,,Y
+62,2,4,-,Reaction,Attack,Kamikaze Attack,,"Play prior to one battle of the Offensive that is within 11 hexes of Tokyo (3706) and within extended range of a Japanese air unit.  The Japanese player eliminates two Allied naval steps (Japanese player's choice, may not eliminate a unit unless there is no other option), while reducing the Japanese air unit whose range was used one step (even if this would eliminate the air unit).
+Draw One Strategy Card.
+Remove from play if used as an event.",,Y,Y,,,,,,,,,,,,,Y
+63,2,4,-,Reaction,Attack,Kamikaze Attack,,"Play prior to one battle of the Offensive that is within 11 hexes of Tokyo (3706) and within extended range of a Japanese air unit.  The Japanese player eliminates two Allied naval steps (Japanese player's choice, may not eliminate a unit unless there is no other option), while reducing the Japanese air unit whose range was used one step (even if this would eliminate the air unit).
+Draw One Strategy Card.
+Remove from play if used as an event.",,Y,Y,,,,,,,,,,,,,Y
+64,2,4,-,Reaction,Weather,Weather,Halsey's Typhoon,"Allied Offensive is canceled. All units are placed back at their starting locations.  The Japanese player may reduce one full strength Allied CA or DD naval unit (Japanese player choice) that was activated for the canceled Offensive.  This can only reduce, not eliminate, the naval unit.  If none of the specified naval units are available, there is no additional effect.
+Draw one Strategy Card.",,,Y,,,,,,,,,,,,Y,
+65,1,4,-,Reaction,Counteroffensive,Yamato Suicide Run,,"Activation: Any HQ
+Intelligence: Intercept
+Logistic Value: One more (+1) than Allied OC value.
+Conditions: Only air and naval units may be activated.  During Post Battle Movement, if the Yamato naval unit is on the map it must be reduced one step, wether it participates in a battle or not.
+Remove from play if used as an event.",,Y,,,,,,,Intercept,,,,,,,
+66,2,4,-,Reaction,Attack,Kamikaze Attack,,"Play prior to one battle of the Offensive that is within 11 hexes of Tokyo (3706) and within extended range of a Japanese air unit.  The Japanese player eliminates two Allied naval steps (Japanese player's choice, may not eliminate a unit unless there is no other option), while reducing the Japanese air unit whose range was used one step (even if this would eliminate the air unit).
+Draw One Strategy Card.
+Remove from play if used as an event.",,Y,Y,,,,,,,,,,,,,Y
+67,2,4,-,Political,,Japanese Army/Navy,Central Agreement,"This event ends a Japanese inter-service rivalry.  Flip the Japanese Inter-Service Rivalry marker to its Strategic Agreement side.  If the Japanese Inter-Service Rivalry marker is already on Strategic Agreement side there is no additional effect.
+Bonus: If this card is played as an event, the Japanese have the option to discard a card of their choice and re-place it with any card from the discard pile (not those removed from play).",,,,Y,,,Y,,,,,,,,,
+68,2,4,-,Political,,Japanese Army/Navy,Central Agreement,"This event ends a Japanese inter-service rivalry.  Flip the Japanese Inter-Service Rivalry marker to its Strategic Agreement side.  If the Japanese Inter-Service Rivalry marker is already on Strategic Agreement side there is no additional effect.
+Bonus: If this card is played as an event, the Japanese have the option to discard a card of their choice and re-place it with any card from the discard pile (not those removed from play).",,,,Y,,,Y,,,,,,,,,
+69,1,3,-,Reaction,Intelligence,JN25 Code Change,,"Intelligence: Intercept
+Draw one Strategy Card.",,,Y,,,,,,Intercept,,,,,,,
+70,1,3,-,Reaction,Intelligence,JN25 Code Change,,"Intelligence: Intercept
+Draw one Strategy Card.",,,Y,,,,,,Intercept,,,,,,,
+71,3,5,-,Military,,High Altitude Interceptors,,"During the next turn's Strategic warfare phase, one B29 bomber is ineffective and does not reduce the Japanese hand size.  Place the High Altitude Interceptors marker on the game turn track as a reminder.",,,,,,,,,,,,,,,,
+72,3,5,-,Resource,,Carrier Conversion,Reinforcement,"3 Naval Replacements: The Japanese player receives 3 naval replacement steps.  These are recorded as replacement steps, and may be used in the current or later turns.
+Remove from play if used as an event.",,Y,,,,,,,,,,,,,,
+73,2,4,-,Resource,,Ants,Japanese Barge Traffic Reinforcement,"If the Allies have not yet played the PT Boats event (Allied card 23) the Japanese receive the Barge marker and flip the Japanese ASP marker to its Barges side.  The Japanese can use Japanese Barge movement until the Allied play of the PT Boats event cancels this capability.
+Remove from play if used as an event.",Y,Y,,,,,,,,,,,,,,
+74,1,3,-,Political,,Tokyo Rose,Mrs. Iva Ikuko D'Aquino,"Reduce US Political Will by one.
+Remove from play if used as an event.",,Y,,,,1,,,,,,,,,,
+75,1,3,-,Reaction,Attack,Submarine Attack,,"Play during an offensive; at the end of all combat against any active Allied naval units or against any active Allied naval unit, if no battle hexes were declared during the Offensive.  On a die roll of:
+0-4: Allies lose one naval step (Japanese choice; can eliminate a unit).
+5-9: No Effect.
+Draw one Strategy Card.",Y,,Y,,,,,,,,,,,1,,
+76,2,4,-,Military,,Special Operation,Japan Attacks a B29 Base with Suicide Drop Squads,"If the Allied player has a B29 LRB unit within 8 hexes of Tokyo (3706) or in the China Air units box, the Japanese player rolls a die.  On a die roll of:
+0-4: Lose one B29 Air step*
+5-6: Lose two B29 Air Steps (can eliminate a B29 air unit)*
+7-9: No Effect
+*Japanese choice
+Remove from play if used as an event.",,Y,,,,,,,,,,,,,,
+77,3,5,-,Military,,Fuel Shortage,Japanese re-deploy fleet,Due to fuel shortages the Japanese player may move the Combined Fleet HQ and up to 4 naval units of any type from their current location to any port hex which is within 3 hexes of a resource space.  The movement of the HQ and naval units may not enter an unneutralized Allied air ZOI.,,,,,,,,,,,,,,,,
+78,1,3,-,Resource,,Tainan Air Unit,Reinforcement,"The Japanese player receives the Tainan Air Unit.  This unit may be placed on any friendly, in supply, airfield that is within range of an in supply Japanese HQ.
+Remove from play if used as an event.",,Y,,,,,,,,,,,,,,
+79,2,4,-,Military,,Tinian Raid,Japanese Attack B29 Base,"If the Allied player has a B29 LRB unit within 8 hexes of Tokyo (3706) or in the China Air units box, the Japanese player rolls a die.  On a die roll of:
+0-4: Lose one B29 Air step*
+5-6: Lose two B29 Air Steps (can eliminate a B29 air unit)*
+7-9: No Effect
+*Japanese choice
+Remove from play if used as an event.",,Y,,,,,,,,,,,,,,
+80,2,4,-,Military,,Submarine Launched Air Attack on the Panama Canal,,"Allied Reinforcements for the next game turn are delayed.  Place those reinforcements in the delay box when they arrive.  If reinforcements are already delayed, there are no additional effects.  Place the Panama Canal Attack marker on the game turn track as a reminder.
+Draw one Strategy Card.
+Remove from play if used as an event.",,Y,Y,,,,,,,,,,,,,
+81,2,4,-,Reaction,Attack,Kamikaze Attack,,"Play prior to one battle of the Offensive that is within 11 hexes of Tokyo (3706) and within extended range of a Japanese air unit.  The Japanese player eliminates two Allied naval steps (Japanese player's choice, may not eliminate a unit unless there is no other option), while reducing the Japanese air unit whose range was used one step (even if this would eliminate the air unit).
+Draw One Strategy Card.
+Remove from play if used as an event.",,Y,Y,,,,,,,,,,,,,Y
+82,3,5,-,Political,,Indian Worker's Strike,,"Move the India marker to the unrest box, and if already in the unrest box move the marker to the Unstable box.
+Bonus: The Allies lose 1 ground replacement step next game turn and any other ground replacement steps available during the next game turn can only be used for non-Commonwealth ground units.",,,,,,,,,,,,,1,,,
+83,2,4,6,Military,,Invasion Java,Battle of the Java Sea,"Activation: South HQ only. Logistic value: 4. Long Lance Torpedoes: Japanese CA, CL, and APD naval units add 2 to their attack strengths for the duration of the Offensive.",,,,,,,,,,4,,,,,,
+84,1,3,0,Reaction,Intelligence,JN25 Code Change,,Intelligence: Intercept. Draw one Strategy Card.,Y,,Y,,,,,,Intercept,,,,,,,
+85,2,4,0,Reaction,Counter Offensive,Battle of Kolumbangara,,Activation: Any HQ. Intelligence: Intercept. Logistics Value: Equal to Allied OC value. Conditions: Only naval units may be activated.,Y,Y,,,,,,,Intercept,,,,,,,
+86,1,3,0,Reaction,Submarine,Submarine Attack,I-58 sinks the USS Indianapolis,Play during an Offensive; At the end of all combat against any active Allied naval units or against any active Allied naval unit if no battle hexes were declared during the Offensive. On a die roll of 0-7: Love one naval step*; 8-9: No Effect. *Japanese choice; can eliminate unit. Draw one Strategy Card.,,,Y,,,,,,,,,,,1,,

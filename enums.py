@@ -29,3 +29,8 @@ class UnitType(Enum):
 class Branch(Enum):
     ARMY = 1
     NAVY = 2
+
+
+class DeckType(Enum):
+    FULL_DECK = 1
+    SOUTH_PACIFIC = 2

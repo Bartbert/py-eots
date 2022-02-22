@@ -1,0 +1,231 @@
+card_id,ops_value,intel_oc,intel_ec,card_type,reaction_type,title,subtitle,card_text,south_pacific,remove_if_event_played,draw_card,replace_from_discard,reshuffle_deck,pw_change,isr_end,isr_start,intel_status,logistics_value,wie_level,china,india,sub,weather,kamikaze
+1,1,1,-,Political,,Bataan Death March,Atrocity,Increase US Political Will by one if the Japanese control Manila (2813).,,Y,,,,1,,,,,,,,,,
+2,1,1,-,Political,,Imperial HQ Debate,Japanese Inter-Service rivalry,Flip the Japanese Inter-Service Rivalry Marker from its Strategic Agreement to its Inter-Service Rivalry side.  No additional impact if Inter-Service Rivarly is already in effect.  Draw one Strategy Card.,,,Y,,,,Y,,,,,,,,,
+3,1,1,-,Resource,,Prime Minister Curtin,,"2 Ground replacements: The Australians get two ground replacements that must be used immediately to bring Australian ground units from reduced to full strength, or from the eliminated plie to reduced strength or full strength, which are placed in any friendly Australian port.  Any unused replacements are forfeit.",,Y,,,,,,,,,,,,,,
+4,1,1,-,Political,,Arcadia Conference,,"This event ends a US inter-service rivalry.  Flip the US Inter-Service Rivalry marker to its Strategic Agreement side.  If the US Inter-Service Rivalry marker is already on Strategic Agreement side there is no additional effect.
+In addition, the Allied player receives the ABDA HQ, which is place in any in supply port in Java, Borneo, Sumatra or Celebes.  If no such port is available this HQ is removed from play for the remained of the game.",,Y,,,,,Y,,,,,,,,,
+5,2,2,-,Reaction,Counteroffensive,Operation Matador,Pre-emptive Malaya Offensive,"Activate: Malaya HQ only.
+Logistic Value: 3
+Intelligence: Intercept
+Conditions: Only ground and air units may be activated, plus the Force Z naval unit may be activated if it is in play and within range of the Malaya HQ.
+Singapore Defenses: If Singapore (2015) is a battle hex add 2 to the Allied air-naval combat die roll for the battle in that hex only.",,Y,,,,,,,Intercept,,,,,,,
+6,3,3,-,Political,,Doolittle Raid,US Bombers Attack Japan,Increase US Political Will by one.  The play of this event is the pre-condition for Japanese card number 6: Doolittle Raid Reprisal.  Place the Doolittle Raid marker on the game turn track as a reminder.,,Y,,,,1,,,,,,,,,,
+7,2,2,4,Military,,Vinegar' Joe Stilwell,Burma Offensive,"Activate: SEAC HQ only.
+Logistic Value: 4
+Conditions: May only activate air and ground units.
+Merrill's Marauders: During any ground combat in any battles initiated by this Offensive, the Allied player adds 2 to all Allied ground combat die rolls for the duration of this Offensive due to the assistance of the 5307th Composite Group.",,Y,,,,,,,,4,,,,,,
+8,1,1,-,Reaction,Intelligence,Australian Coast Watchers,,"Intelligence: Intercept.
+Conditions: Can only be played if Japanese air or naval units are activated for the current Offensive.",Y,Y,Y,,,,,,Intercept,,,,,,,
+9,3,3,5,Military,,Olympic and Coronet,the Invasion of Japan,"Activate: US SW or Central Pacific HQs only.
+Logistic Value: 12
+Conditions: In order for this card to be played as an event at least one Japanese Islands hex must be declared a battle hex and the potential for a ground combat must exist in the designated Japanese Islands battle hex.
+Bonus: The Allies temporarily gain 4 ASPs that can be used for the duration of this Offensive.",,,,,,,,,,12,,,,,,
+10,1,1,-,Political,,General Douglas MacArthur,Pacific First Strategy,"This event ends a US inter-service rivalry.  Flip the US Inter-Service Rivalry marker to its Strategic Agreement side.  If the US Inter-Service Rivalry marker is already on Strategic Agreement side there is no additional effect.
+Bonus: If this card is played as an event, the Allies have the option to discard a card of their choice and re-place it with any card from the discard pile (not those removed from play).",,Y,,Y,,,Y,,,,,,,,,
+11,2,2,-,Political,,WAR IN EUROPE,Minor Allied Victory,"Increase the War in Europe marker a number of spaces equal to the value associated with the year of the current game turn:
+1942: 1
+1943: 1
+1944: 2
+1945: 3",,Y,,,,,,,,,Minor,,,,,
+12,2,2,-,Reaction,Intelligence,Commander Rochefort,HYPO Success - JN25 Code break,"Intelligence: Ambush.
+Bonus: During all battles of this Offensive, the Allied player achieves a critical hit result on all modified air-naval combat die rolls of 9 or greater.",,Y,,,,,,,Ambush,,,,,,,
+13,3,3,-,Military,,Operation Watchtower,Guadalcanal Invasion,"Activation: Any HQ.
+Logistic Value: 5
+Intelligence: Surprise Attack
+Conditions: A maximum of one ground unit may be activated for this Offensive.",Y,,,,,,,,Surprise,5,,,,,,
+14,2,2,-,Political,,WAR IN EUROPE,Minor Allied Victory,"Increase the War in Europe marker a number of spaces equal to the value associated with the year of the current game turn:
+1942: 1
+1943: 1
+1944: 2
+1945: 3",,Y,,,,,,,,,Minor,,,,,
+15,2,2,-,Resource,,Heroic Repair,Emergency Battle Repairs,"2 Naval Replacements: The Allies gain two US naval replacements that must be used immediately.  Unused replacements are lost.  If the Allied Player brings a naval unit from the eliminated pile back into the game it is placed within range of a US or Joint HQ, in any friendly, in supply port.",,,,,,,,,,,,,,,,
+16,1,1,-,Military,,Makin Is. Raid,US Raiders,"One Japanese air unit (Allied Player's choice) that is on a non-Japanese Islands hex within the range of a US HQ is reduced one step, even if this would eliminate the air unit.",,Y,,,,,,,,,,,,,,
+17,2,2,-,Resource,,China Airlift,,"Hump Operations into China: Flip the Burma Road Status marker from its No Hump to Hump side for the remainder of the game.
+Bonus: The AVG air unit (which normally cannot receive replacements) or a 14th AF air unit (either one) immediately receives a replacement step if it is in Northern India, Burma, or the Air units in China box.  This replacement can be used to bring a 14th AF air unit (but no the AVG) back from elimination in any friendly in supply Northern India or Burma airfield.",,Y,,,,,,,,,,,,,,
+18,1,1,-,Resource,,Edwin Booz,Defense Consultant,Allied player immediately receives 1 permanent amphibious shipping point.,,Y,,,,,,,,,,,,,,
+19,2,2,4,Military,,Anakim Operation,Burma Offensive,"Activation: Any HQ.
+Logistic Value: 3
+Conditions: Only ground and air units may be activated.",,,,,,,,,,3,,,,,,
+20,1,1,3,Military,,Halsey Replaces Ghormley,Offensive Spirit,"Activation: Halsey South HQ only.
+Logistic Value: 4
+Conditions: If the Ghormley South HQ is in play, remove it and place Halsey HQ in its location.  If it is not yet in play, it is removed from the game and the Halsey South HQ is brought into play and placed in any friendly in supply port.",Y,Y,,,,,,,,4,,,,,,
+21,3,3,5,Military,,Operation Cartwheel,Breaking the Bismark Barrier,"Activate: Any HQ.
+Logistic Value: 6 if US SW Pac HQ, for all others: 4",Y,,,,,,,,,6,,,,,,
+22,2,2,-,Reaction,Personage,Orde Wingate,Chindits,"Cancel the activation of one Japanese ground unit of the Allied player's choice during an operation in Burma or Northern India.  Place the deactivated unit back in its starting hex.
+77 SF Bde: The Allies gain the 77 Special Forces Brigade as a reinforcement during the next game turn (it cannot be delayed).  Place the unit on the game turn track as a reminder.",,Y,,,,,,,,,,,,,,
+23,2,2,-,Resource,,PT Boats,,Permanently remove the Japanese Barge marker.  Flip the Japanese ASP marker to its No Barges side.  If Japanese Barges are not currently in play (Japanese card 73) that event is permanently superseded.  Place the PT Boat marker on the game turn track as a reminder.,Y,Y,Y,,,,,,,,,,,,,
+24,2,2,-,Reaction,Attack,Skip Bombing Attack,Battle of the Bismark Sea,"Prior to battle, reduce either a Japanese CA, CL or APD naval unit by one step (Allied players choice - even if this eliminates the unit) if, during the current Offensive, an active Japanese CA, CL or APD naval unit moves within the extended range of a U.S. non-LRB air unit.  If more than one possible, Japanese players choice.
+Bonus: The Japanese permanently lose one Amphibious Shipping Point unless it is their last ASP.",Y,Y,Y,,,,,,,,,,,,,
+25,1,2,4,Military,,Operation Lilliput,"Buna, New Guinea Offensive","Activate: SW HQ only.
+Logistic Value: 3
+Conditions: May only activate US air and US/Australian ground units (an exception to the Allied HQ National Command rules).
+US Reservist Enter Combat: US ground units have their attack strength reduced by one for the duration of this Offensive.",Y,,,,,,,,,3,,,,,,
+26,2,2,-,Reaction,Intelligence,US Army Breaks Japanese Army Codes,,"Intelligence: Ambush.
+Bonus: For the duration of the Offensive the Allies gain +4 in any ground combat, in addition to the normal ambush modifier for air-naval combat.",,Y,,,,,,,Ambush,,,,,,,
+27,1,1,-,Military,,Operation Vengeance,The Death Of Yamamoto,Immediately remove the Japanese Yamamoto Combined Fleet HQ from its current hex location and replace it with the Japanese Ozawa Combined Fleet HQ in that location.,Y,Y,,,,,,,,,,,,,,
+28,2,2,4,Military,,Operation Cascade,Woodlark Is. Operation,"Actiavte: Any HQ.
+Logistic Value: 3
+Bonus: If ground units are landed on an unoccupied one hex island, place an Allied control marker on all adjacent unoccupied one hex islands.",Y,,,,,,,,,3,,,,,,
+29,2,2,4,Military,,Operation Toenails,New Georgia Invasion,"Actiavte: Any HQ.
+Logistic Value: 4
+Artillery Support: During all battles for this Offensive, the Allies receive a +1 die roll modifier during Ground combat.",Y,,,,,,,,,4,,,,,,
+30,2,2,4,Military,,Operation Sandcrab-Cottage,Recapture of Attu and Kiska,"Activate: Any HQ.
+Logistic Value: 4
+Conditions: If a Japanese unit occupies one or more hexes in the Aleutian Islands (hexes 4600 to 5100 inclusive), this event must be used to conduct a battle in at least one of these Japanese occupied hexes.  If there are no Japanese units in the Aleutian Islands, this event may only be played as an OC.",,Y,,,,,,,,4,,,,,,
+31,3,3,5,Military,,Black Day,US New Guinea Air Offensive,"Activate: Any HQ.
+Logistic Value: 6
+Conditions: Only air units may be activated.",Y,,,,,,,,,6,,,,,,
+32,3,3,5,Military,,Operation Reno II,Invasion of Rabaul,"Activate: Any HQ.
+Logistic Value: 7 if US SW HQ, for all others: 4",Y,,,,,,,,,7,,,,,,
+33,2,2,4,Military,,Quadrant Conference,Burma Offensive,"Activate: Any HQ.
+Logistic Value: 3
+Conditions: Only air and ground units may be activated.
+Bonus: This event ends a US inter-service rivalry.  Flip the US Inter-Service Rivalry marker to its Strategic Agreement side.  If the US Inter-Service Rivalry marker is already on Strategic Agreement side there is no additional effect.",,,,,,,Y,,,3,,,,,,
+34,2,2,4,Military,,Operation Culverin,Invasion of Sumatra,"Activate: Any Joint or Commonwealth HQ.
+Logistic Value: 4
+Contions: Only Commonwealth units may be activated.",,,,,,,,,,4,,,,,,
+35,2,2,-,Military,,Operation Ash,Vella Lavella Invasion,"Activate: Anzac HQ only.
+Logistic Value: 2
+Intelligence: Surprise Attack.
+Conditions: Any air or naval units may be activated, but the only ground unit that can be activated is the 3rd NZ division.",,,,,,,,,Surprise,2,,,,,,
+36,3,3,5,Military,,Operation Cherry Blossom,Bougainville Landing,"Activate: Any HQ.
+Logistics Value: 5
+Bonus: US CA naval units have 2 added to their attack strength for the duration of this Offensive.",Y,,,,,,,,,5,,,,,,
+37,3,3,-,Military,,Operation Galvanic,Gilbert Islands Invasion,"Activate: Any HQ.
+Logistic Value: 6
+Intelligence: Surprise Attack.
+Conditions: Only one ground unit (any size) may be activated during this Offensive.
+Banzai Charge: For the duration of this Offensive if ground combat occurs in a one hex island, the Allies add 2 to their ground combat die roll.",,,,,,,,,Surprise,6,,,,,,
+38,2,2,4,Military,,Operation Tarzan,Burma Offensive,"Activate: Any HQ.
+Logistic Value: 4
+Conditions: The Allied player may only activate ground and air units, of which one must be a Chinese Army unit IF there is one on the map and in HQ range.  If no such unit is available, this requirement is ignored.",,,,,,,,,,4,,,,,,
+39,2,2,-,Political,,Sextant Conference,Burma Road,"This event ends a US inter-service rivalry.  Flip the US Inter-Service Rivalry marker to its Strategic Agreement side.  If the US Inter-Service Rivalry marker is already on Strategic Agreement side there is no additional effect.
+Bonus: In addition the Allied player immediately receives 3 Chinese ground and 1 Allied air replacement steps that must be used immediately (cannot be saved) on in supply units.  Allied air units can be in the air units in China box.",,Y,,,,,Y,,,,,,,,,
+40,3,3,5,Military,,Operation Dexterity,New Britain Invasion,"Activate: Any HQ.
+Logistic Value: 5 if US SW HQ, for all others: 3",Y,,,,,,,,,5,,,,,,
+41,2,2,-,Political,,WAR IN EUROPE,Minor Allied Victory,"Increase the War in Europe marker a number of spaces equal to the value associated with the year of the current game turn:
+1942: 1
+1943: 1
+1944: 2
+1945: 3",,Y,,,,,,,,,Minor,,,,,
+42,2,2,-,Political,,WAR IN EUROPE,Minor Allied Victory,"Increase the War in Europe marker a number of spaces equal to the value associated with the year of the current game turn:
+1942: 1
+1943: 1
+1944: 2
+1945: 3",,Y,,,,,,,,,Minor,,,,,
+43,1,1,-,Political,,Japanese Army/Navy Dispute,,Flip the Japanese Inter-Service Rivalry Marker from its Strategic Agreement to its Inter-Service Rivalry side.  No additional impact if Inter-Service Rivarly is already in effect.  Draw one Strategy Card.,Y,,Y,,,,,Y,,,,,,,,
+44,2,2,-,Military,,Operation Squarepeg,Green Is. Invasion,"Activate: Anzac HQ only.
+Logistic Value: 2
+Intelligence: Surprise Attack.
+Conditions: Any air or naval units may be activated, but the only ground unit that can be activated is the 3rd NZ division.",Y,,,,,,,,Surprise,2,,,,,,
+45,3,3,5,Military,,Operation Flintlock,Marshall Is. Invasion,"Activate: Any HQ.
+Logistic Value: 8 if US Central Pac HQ, for all others: 4",,,,,,,,,,8,,,,,,
+46,2,2,-,Military,,Operation Brewer,Admiralty Is. Invasion,"Activate: SW HQ only.
+Logistic Value: 1
+Intelligence: Surprise Attack.",Y,,,,,,,,Surprise,1,,,,,,
+47,2,2,-,Political,,WAR IN EUROPE,Major Allied Victory,"Increase the War in Europe marker a number of spaces equal to the value associated with the year of the current game turn:
+1942: 1
+1943: 2
+1944: 3
+1945: 3",,Y,,,,,,,,,Major,,,,,
+48,2,2,4,Military,,New China Army,Stilwell Burma Offensive,"Activate: Any HQ.
+Logistic Value: 4 if SEAC HQ, for all others: 3
+Conditions: Only ground and air units may be activated.
+Bonus: The Allies receive one Chinese ground replacement step for a reduced Chinese unit.  This replacement step cannot be saved and is lost if not used immediately.  Additionally, all Chinese army units may then be activated at no additional activation cost.",,,,,,,,,,4,,,,,,
+49,1,1,-,Political,,Roosevelt Threatens Chungking,Chinese Army Offensive,"Move the China marker one box to the right toward the Stable Front box, unless this would put the China marker in the Stable Front box, in which case no effect.",,Y,,,,,,,,,,1,,,,
+50,2,2,4,Military,,Tornado Taskforce,Hollandia Invasion,"Activate: Any HQ.
+Logistic Value: 4 if US SW Pac HQ, for all others: 3",Y,,,,,,,,,4,,,,,,
+51,2,2,4,Military,,Chenault,14th Air Force Offensive,"Activate: Any HQ.
+Logistic Value: 4
+Condtions: Only air units may be activated.
+Bonus: The Allied player receives the non-LRB 14th AF air unit in any friendly, in supply airbase in North India or in the China air unit box.  If neither of those locations is available, then bring the air unit into any friendly in supply airbase.  If the US AVG air unit is in play, immediately remove it from the game.",,Y,,,,,,,,4,,,,,,
+52,1,1,-,Political,,Roosevelt-Nimitz-MacArthur,End of US Army-Navy Dispute,"This event ends a US inter-service rivalry.  Flip the US Inter-Service Rivalry marker to its Strategic Agreement side.  If the US Inter-Service Rivalry marker is already on Strategic Agreement side there is no additional effect.
+Bonus: If this card is played as an event, the Allies have the option to discard a card of their choice and replace it with any card from the discard pile (not those removed from play).",Y,Y,,Y,,,Y,,,,,,,,,
+53,3,3,5,Military,,Operation Forager II,Invasion of Saipan and Tinian,"Activate: Any HQ.
+Logistic Value: 6 if US Central Pac HQ, for all others: 4",,,,,,,,,,6,,,,,,
+54,2,2,4,Military,,Hurricane Taskforce,Biak Invasion,"Activate: Any HQ.
+Logistic Value: 4 if US SW Pac HQ, for all others: 3",,,,,,,,,,4,,,,,,
+55,3,3,5,Military,,Operation Forager,Marianas Is. Invasion,"Activate: Any HQ.
+Logistic Value: 6 if US Central Pac HQ, for all others: 4
+The Great Marianas Turkey Shoot: Japanese aircraft carrier naval units have their attack strength reduced by 2 for the duration of this Offensive.  In addition, at the conclusion of the Offensive, one active Japanese air unit or an air unit in a battle hex (Allied Player's choice) loses one step, which may eliminate the air unit.",,,,,,,,,,6,,,,,,
+56,2,2,4,Military,,Typhoon Taskforce,New Guinea: Vogelkop Invasion,"Activate: Any HQ.
+Logistic Value: 4 if US SW Pac HQ, for all others: 3",Y,,,,,,,,,4,,,,,,
+57,2,2,4,Military,,Axiom,British Amphibious Rangoon-Singapore Operation.,"Activate: Any Commonwealth or Joint HQ.
+Logistic Value: 5
+Conditions: Only Commonwealth and Chinese units plus US air units may be activated.",,,,,,,,,,5,,,,,,
+58,2,2,4,Military,,Operation Romulus,British Arakan Offensive,"Activate: SEAC HQ only.
+Logistic Value: 4
+Conditions: Only Commonwealth and Chinese units plus US air units may be activated.",,,,,,,,,,4,,,,,,
+59,1,1,-,Reaction,Intelligence,Ultra Information,Japanese Burma Operation is penetrated,"Intelligence: Intercept.
+Draw one Strategy Card.",,,Y,,,,,,Intercept,,,,,,,
+60,3,3,-,Military,,20th Bomber Command,B29 Raids from China,Randomly remove one card from the Japanese hand if a B29 air unit is located in the China air unit box.,,Y,,,,,,,,,,,,,,
+61,1,1,-,Reaction,Attack,Submarine Attack,Darter-Dace,"Play during an Offensive prior to combat against any active Japanese naval units or against any active Japanese naval unit if no battle hexes are declared during the Offensive.  On a die roll of:
+0-4: Japanese lose one naval step*
+5-7: Japanese lose two naval steps* (can eliminate a unit)
+8-9: No Effect.
+*Japanese chooses
+Draw one Strategy Card.",,Y,Y,,,,,,,,,,,2,,
+62,3,3,5,Military,,Operation King II,"A-Day - ""I Have Returned""
+Invasion of Leyte","Activate: Any HQ.
+Logistic Value: 8 if SW Pac HQ, for all others: 6
+Conditions: may only be played as an event if at least one battle hex is declared in a Philippine hex.",,Y,,,,,,,,8,,,,,,
+63,3,3,5,Military,,Operation Stalemate,Invasion of Pelelu and Ulithi,"Activate: Any HQ.
+Logistic Value: 6 if US Central Pac HQ, for all others: 4",,,,,,,,,,6,,,,,,
+64,2,2,4,Military,,Tradewind Taskforce,Morotai Invasion,"Activate: Any HQ.
+Logistic Value: 4 if US SW Pac HQ, for all others: 3",Y,,,,,,,,,6,,,,,,
+65,3,3,5,Military,,"MacArthur ""moral obligation""",US Invades Philippines,"Activate: Any HQ.
+Logistic Value: 8 if SW Pac HQ, for all others: 6
+Conditions: This card may only be played as an event if at least one battle hex is declared in a Philippine hex.
+Bonus: This event ends a US inter-service rivalry.  Flip the US Inter-Service Rivalry marker to its Strategic Agreement side.  If the US Inter-Service Rivalry marker is already on Strategic Agreement side there is no additional effect.",,Y,,,,,,,,8,,,,,,
+66,2,2,-,Political,,WAR IN EUROPE,Major Allied Victory,"Increase the War in Europe marker a number of spaces equal to the value associated with the year of the current game turn:
+1942: 1
+1943: 2
+1944: 3
+1945: 3",Y,Y,,,,,,,,,Major,,,,,
+67,3,3,-,Military,,Curtis LeMay,Firebombing of Japan,Randomly remove one card from the Japanese hand if a B29 Long Range Bomber air unit is on a hex (not Air Units in China Box) within range of Tokyo.,,Y,,,,,,,,,,,,,,
+68,1,1,-,Reaction,Attack,Submarine Attack,Archerfish sinks Shinano,"Play during an Offensive after combat against any active Japanese naval units or against any active Japanese naval unit if no battle hexes are declared during the Offensive.  On a die roll of:
+0-7: Japanese lose one naval step (Allies chooses, can eliminated a unit).
+8-9: No Effect.
+Draw one Strategy Card.",,Y,Y,,,,,,,,,,,1,,
+69,3,3,5,Military,,S-Day,MacArthur Invades Luzon,"Activate: Any HQ.
+Logistic Value: 8 if SW Pac HQ, for all others: 6
+11th Airborne Division: If the 11th Airborne Division is on an airfield with a US air unit, the 11th Airborne division can be placed on any unoccupied hex that is not in an unneutralized Japanese air ZOI and is within the extended range/normal LRB range of the air unit that it is stacked with.",,,,,,,,,,8,,,,,,
+70,2,2,4,Military,,Slim's Burma Offensive,,"Activate: SEAC HQ only.
+Logistic Value: 6
+Conditions: Only Commonwealth and Chinese units plus US air units may be activated.
+In addition, the Allied player receives the 7th Armored Brigade.  Place this unit in any friendly in supply, Indian or Burmese port hex.  If this condition cannot be met, the unit is permanently remove from the game.",,Y,,,,,,,,6,,,,,,
+71,2,2,4,Military,,Victor Plans,MacArthur Liberates The Philippines,"Activate: Any HQ.
+Logistic Value: 6 if SW Pac HQ, for all others: 4",,,,,,,,,,6,,,,,,
+72,2,2,4,Military,,Halsey,Carrier Raids on Japan,"Activate: Any HQ.
+Logistic Value: 8 if US Central Pac HQ, for all others: 4
+Conditions: Only naval units may be activated.
+Bonus: If during the offensive a US aircraft carrier naval unit participates in a battle in a Japanese Islands hex, the Allies randomly remove one card from the Japanese hand.",,,,,,,,,,8,,,,,,
+73,2,2,-,Political,,WAR IN EUROPE,Major Allied Victory,"Increase the War in Europe marker a number of spaces equal to the value associated with the year of the current game turn:
+1942: 1
+1943: 2
+1944: 3
+1945: 3",,Y,,,,,,,,,Major,,,,,
+74,3,3,5,Military,,Operation Iceberg,Okinawa Invasion,"Activate: Any HQ.
+Logistic Value: 8 if US Central Pac HQ, for all others: 4
+Conditions: An Allied ground unit must make an amphibious move to a hex within 10 hexes of Tokyo or this card may only be used as an OC.",,,,,,,,,,8,,,,,,
+75,3,3,5,Military,,Operation Detachment,Iwo Jima,"Activate: Any HQ.
+Logistic Value: 8 if US Central Pac HQ, for all others: 4
+Conditions: An Allied ground unit must make an amphibious move to a hex within 10 hexes of Tokyo or this card may only be used as an OC.",,,,,,,,,,8,,,,,,
+76,2,2,4,Military,,Oboe,Australians Invade Borneo,"Activate: Any HQ.
+Logistic Value: 5
+Conditions: Any nationality air and naval units may be activated, but only Australian ground units may be activated.",,,,,,,,,,5,,,,,,
+77,2,2,-,Political,,Mao Tse Tung,Communits Offensive,"Move the China marker one box to the right toward the Stable Front box, unless this would put the China marker in the Stable Front box, in which case no effect.",,Y,,,,,,,,,,1,,,,
+78,1,1,-,Reaction,Attack,Submarine Attack,British X Craft Attack Singapore,"Play during an offensive before the beginning of the combat phase, or at the conclusion of the Offensive if no battle hexes are declared during the Offensive. On a die roll of:
+0-7: Japanese lose one naval step (Allies chooses, can eliminated a unit).
+8-9: No Effect.
+The target naval unit must be inactive and in a non-Japanese Islands port hex.
+Draw one Strategy Card.",,Y,Y,,,,,,,,,,,1,,
+79,3,3,-,Political,,Soviets Invade Manchuria,,"China: If the Chinese government has not collapsed, move the China marker two boxes to the right toward the Stable Front box, unless this would put the China marker in the Stable Front box, in which case no effect.
+Manchuria: If Tojo has resigned, then this card must be played as an event, and the following additional effect occurs: The Japanese permanently lose two Resource Hexes (3302 and 3303).  Place a Soviet Flag in each hex.
+RESHUFFLE: If played as an Event or an OC, place this card back in the deck and the deck is reshuffled at the end of the game turn.  If the Manchuria condition occurs, permanently remove this card from the deck and do not reshuffle.  This card may not be played as a Future Offensive.",,Maybe,,,Maybe,,,,,,,,,,,
+80,1,1,-,Military,,New Submarine Doctrine,Japanese Escort Destruction Priority,"The play of this card supersedes the events on Japanese cards 37 and 38 for the reminder of the game, even if they have not yet been played.  Remove the Japanese escort marker from the game.
+Additionally, the Japanese lose all Submarine Warfare modifiers for the remainder of the game.",,Y,,,,,,,,,,,,,,
+81,2,2,-,Political,,China Offensive,Counter-Offensive in Kweilin-Liuchow,"Move the China marker one box to the right toward the Stable Front box, unless this would put the China marker in the Stable Front box, in which case no effect.",Y,,,,,,,,,,,1,,,,
+82,2,2,-,Political,,China Offensive,Battle of Changsa-Hengyang,"Move the China marker one box to the right toward the Stable Front box, unless this would put the China marker in the Stable Front box, in which case no effect.",Y,,,,,,,,,,,1,,,,
+83,2,2,-,Political,,China Offensive,Battle for Central Honan,"Move the China marker one box to the right toward the Stable Front box, unless this would put the China marker in the Stable Front box, in which case no effect.",,,,,,,,,,,,1,,,,
+84,3,3,0,Military,,U.S. Carrier Raids,,Activate: US Central Pac HQ only. Logistics Value: 0. Intelligence :Surprise Attack; this intelligence condition cannot be changed by a reaction card. Conditions: Only US carrier units may be activated. This card cannot be cancelled by a weather card. Remove from play if played as an event,,Y,,,,,,,Surprise,0,,,,,,

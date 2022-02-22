@@ -81,3 +81,6 @@ wcwidth==0.2.5
 webencodings==0.5.1
 Werkzeug==2.0.3
 widgetsnbextension==3.5.2
+
+mechanize~=0.4.7
+beautifulsoup4~=4.10.0
