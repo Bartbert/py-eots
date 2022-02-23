@@ -188,7 +188,7 @@ navbar = dbc.Navbar(
 
 """Navbar END"""
 
-"""Body Content"""
+"""Air/Naval Combat Body Content START"""
 
 allied_ec_mod = html.Div(
     [
@@ -269,7 +269,7 @@ japan_selected_units = html.Div(
     ]
 )
 
-body = html.Div(
+body_combat = html.Div(
     [
         dbc.Row(
             [
@@ -330,12 +330,121 @@ body = html.Div(
     ]
 )
 
-"""Body End"""
+"""Air/Naval Combat Body END"""
+
+"""Card Analysis Body START"""
+
+acts_username = html.Div(
+    [
+        dbc.Label("ACTS User Name"),
+        dbc.Input(placeholder="Enter your ACTS username...", type="text", id='acts-username'),
+    ]
+)
+
+acts_password = html.Div(
+    [
+        dbc.Label("ACTS Password"),
+        dbc.Input(placeholder="Enter your ACTS password...", type="password", id='acts-password'),
+    ]
+)
+
+acts_game_name = html.Div(
+    [
+        dbc.Label("ACTS EOTS Game Name"),
+        dbc.Input(placeholder="Enter the name of your game in ACTS...", type="text", id='acts-game-name'),
+    ]
+)
+
+allied_hand_size = html.Div(
+    [
+        html.P("Allied Hand Size:", className="m-0"),
+        dbc.Input(type="number", min=3, max=7, step=1, value=7, id="allied-hand-size"),
+    ],
+)
+
+japan_hand_size = html.Div(
+    [
+        html.P("Japan Hand Size:", className="m-0"),
+        dbc.Input(type="number", min=3, max=7, step=1, value=7, id="japan-hand-size"),
+    ],
+)
+
+analyze_cards_button = html.Div(
+    [
+        dbc.Button("Analyze Cards", id='analyze-cards', color="primary", className="me-1"),
+    ]
+)
+
+body_cards = html.Div(
+    [
+        dbc.Row(
+            [
+                dbc.Col(html.Div(), width=1),
+                dbc.Col(html.Div([
+                    dbc.Row(html.Div([
+                        acts_username,
+                        html.P(),
+                        acts_password,
+                        html.P(),
+                        acts_game_name,
+                        html.P(),
+                        allied_hand_size,
+                        html.P(),
+                        japan_hand_size,
+                        html.P(),
+                        analyze_cards_button,
+                    ],
+                        className="p-2 bg-light border rounded-3 border-primary")),
+                ]), width=2),
+                dbc.Col(html.Div([
+                    dbc.Row(html.Div([
+                        dcc.Graph(id='allied-probability', animate=False,
+                                  style={'backgroundColor': '#1a2d46', 'color': '#ffffff'})
+                    ])),
+                    html.P(),
+                    dbc.Row(html.Div([
+                        dcc.Graph(id='japan-probability', animate=False,
+                                  style={'backgroundColor': '#1a2d46', 'color': '#ffffff'})
+                    ])), ], className="p-2 bg-light border rounded-3 border-primary"), width=8),
+                dbc.Col(html.Div(""), width=1),
+            ]
+        )
+    ]
+)
+
+"""Card Analysis Body END"""
+
+"""Tabs START"""
+
+tab_combat = dbc.Card(
+    dbc.CardBody(
+        [
+            body_combat
+        ]
+    )
+)
+
+tab_cards = dbc.Card(
+    dbc.CardBody(
+        [
+            body_cards
+        ]
+    )
+)
+
+tabs = dbc.Tabs(
+    [
+        dbc.Tab(tab_combat, label='Air/Naval Combat'),
+        dbc.Tab(tab_cards, label='Card Analysis'),
+    ]
+)
+
+"""Tabs END"""
 
 """Final Layout Render"""
 app.layout = html.Div([
     navbar,
-    body,
+    tabs,
     dcc.Store(id='allied-combat-force'),
     dcc.Store(id='japan-combat-force')
 ])

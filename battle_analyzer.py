@@ -75,12 +75,12 @@ def apply_damage(total_losses: int, critical_hit, combat_forces, opponent_air_un
         if selected_unit is not None:
             damage_applied += selected_unit.defense
             damage_to_apply -= selected_unit.defense
-            print(f'Critical Hit: {critical_hit}')
-            print(f'Total Losses: {total_losses}')
-            print(f'Selected unit: {selected_unit.unit_name}')
-            print(f'Damage applied: {damage_applied}')
-            print(f'Damage remaining to apply: {damage_to_apply}')
-            print('============================================')
+            # print(f'Critical Hit: {critical_hit}')
+            # print(f'Total Losses: {total_losses}')
+            # print(f'Selected unit: {selected_unit.unit_name}')
+            # print(f'Damage applied: {damage_applied}')
+            # print(f'Damage remaining to apply: {damage_to_apply}')
+            # print('============================================')
 
             if selected_unit.is_flipped | selected_unit.damage_flipped:
                 selected_unit.damage_eliminated = True
