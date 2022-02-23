@@ -1,6 +1,6 @@
 card_id,ops_value,intel_oc,intel_ec,card_type,reaction_type,title,subtitle,card_text,south_pacific,remove_if_event_played,draw_card,replace_from_discard,reshuffle_deck,pw_change,isr_end,isr_start,intel_status,logistics_value,wie_level,china,india,sub,weather,kamikaze
 1,1,1,-,Political,,Bataan Death March,Atrocity,Increase US Political Will by one if the Japanese control Manila (2813).,,Y,,,,1,,,,,,,,,,
-2,1,1,-,Political,,Imperial HQ Debate,Japanese Inter-Service rivalry,Flip the Japanese Inter-Service Rivalry Marker from its Strategic Agreement to its Inter-Service Rivalry side.  No additional impact if Inter-Service Rivarly is already in effect.  Draw one Strategy Card.,,,Y,,,,Y,,,,,,,,,
+2,1,1,-,Political,,Imperial HQ Debate,Japanese Inter-Service rivalry,Flip the Japanese Inter-Service Rivalry Marker from its Strategic Agreement to its Inter-Service Rivalry side.  No additional impact if Inter-Service Rivarly is already in effect.  Draw one Strategy Card.,,,Y,,,,,Y,,,,,,,,
 3,1,1,-,Resource,,Prime Minister Curtin,,"2 Ground replacements: The Australians get two ground replacements that must be used immediately to bring Australian ground units from reduced to full strength, or from the eliminated plie to reduced strength or full strength, which are placed in any friendly Australian port.  Any unused replacements are forfeit.",,Y,,,,,,,,,,,,,,
 4,1,1,-,Political,,Arcadia Conference,,"This event ends a US inter-service rivalry.  Flip the US Inter-Service Rivalry marker to its Strategic Agreement side.  If the US Inter-Service Rivalry marker is already on Strategic Agreement side there is no additional effect.
 In addition, the Allied player receives the ABDA HQ, which is place in any in supply port in Java, Borneo, Sumatra or Celebes.  If no such port is available this HQ is removed from play for the remained of the game.",,Y,,,,,Y,,,,,,,,,
@@ -176,7 +176,7 @@ Logistic Value: 4 if US SW Pac HQ, for all others: 3",Y,,,,,,,,,6,,,,,,
 65,3,3,5,Military,,"MacArthur ""moral obligation""",US Invades Philippines,"Activate: Any HQ.
 Logistic Value: 8 if SW Pac HQ, for all others: 6
 Conditions: This card may only be played as an event if at least one battle hex is declared in a Philippine hex.
-Bonus: This event ends a US inter-service rivalry.  Flip the US Inter-Service Rivalry marker to its Strategic Agreement side.  If the US Inter-Service Rivalry marker is already on Strategic Agreement side there is no additional effect.",,Y,,,,,,,,8,,,,,,
+Bonus: This event ends a US inter-service rivalry.  Flip the US Inter-Service Rivalry marker to its Strategic Agreement side.  If the US Inter-Service Rivalry marker is already on Strategic Agreement side there is no additional effect.",,Y,,,,,Y,,,8,,,,,,
 66,2,2,-,Political,,WAR IN EUROPE,Major Allied Victory,"Increase the War in Europe marker a number of spaces equal to the value associated with the year of the current game turn:
 1942: 1
 1943: 2

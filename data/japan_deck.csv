@@ -22,7 +22,7 @@ Remove from play if use as an event.",,Y,,,,,,,,,,,,,,
 6,2,4,-,Political,,China Operation,Doolittle Raid Reprisal,"Move the China marker one box to the left toward Government Collaped box, unless this would put the China marker in the China Collapsed box, in which case no effect.
 Remove from play if use as an event.",,Y,,,,,,,,,,1,,,,
 7,2,4,-,Political,,US Joint Staff Debate,US Inter-Service Rivalry,"Flip the US Inter-Service Rivalry Marker from its Strategic Agreement to its Inter-Service Rivalry side.  No additional impact if Inter-Service Rivalry is already in effect.
-Draw one Strategy Card.",,,Y,,,,Y,,,,,,,,,
+Draw one Strategy Card.",,,Y,,,,,Y,,,,,,,,
 8,3,5,7,Military,,Operation C,Indian Ocean Raid,"Activate: Any HQ.
 Logistic Value: 4
 Conditions: May activate only Naval units.

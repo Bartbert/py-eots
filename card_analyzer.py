@@ -67,7 +67,7 @@ class CardAnalyzer:
 
         result_japan = self.analyze_japan_card_deck(deck_type, discard_list)
 
-        return result_allies
+        return [result_allies, result_japan]
 
     def analyze_allies_card_deck(self, deck_type: enums.DeckType, discard_list):
         deck_df = self.allied_card_data
@@ -82,7 +82,9 @@ class CardAnalyzer:
 
         deck_df = deck_df.loc[~deck_df['card_id'].isin(discard_ids)]
 
-        return deck_df
+        deck_attributes = self.deck_attribute_counts(deck_df)
+
+        return deck_attributes
 
     def analyze_japan_card_deck(self, deck_type: enums.DeckType, discard_list):
         deck_df = self.japan_card_data
@@ -92,9 +94,55 @@ class CardAnalyzer:
 
         discard_ids = []
         for card in discard_list:
-            if card.get('player_id') == 1:
+            if card.get('player_id') == 0:
                 discard_ids.append(card.get('card_id'))
 
         deck_df = deck_df.loc[~deck_df['card_id'].isin(discard_ids)]
 
-        return deck_df
+        deck_attributes = self.deck_attribute_counts(deck_df)
+
+        return deck_attributes
+
+    def deck_attribute_counts(self, deck_df: pd.DataFrame):
+        result = []
+
+        item = {'attribute': '1 OP', 'count': len(deck_df.loc[deck_df['ops_value'] == 1])}
+        result.append(item)
+
+        item = {'attribute': '2 OP', 'count': len(deck_df.loc[deck_df['ops_value'] == 2])}
+        result.append(item)
+
+        item = {'attribute': '3 OP', 'count': len(deck_df.loc[deck_df['ops_value'] == 3])}
+        result.append(item)
+
+        item = {'attribute': 'Card Draw', 'count': len(deck_df.loc[deck_df['draw_card'] == 'Y'])}
+        result.append(item)
+
+        item = {'attribute': 'PW', 'count': len(deck_df.loc[deck_df['pw_change'] > 0])}
+        result.append(item)
+
+        item = {'attribute': 'ISR Ender', 'count': len(deck_df.loc[deck_df['isr_end'] == 'Y'])}
+        result.append(item)
+
+        item = {'attribute': 'ISR Starter', 'count': len(deck_df.loc[deck_df['isr_start'] == 'Y'])}
+        result.append(item)
+
+        item = {'attribute': 'Intel Change', 'count': len(deck_df.loc[~deck_df['intel_status'].isna()])}
+        result.append(item)
+
+        item = {'attribute': 'Logistics 4+', 'count': len(deck_df.loc[deck_df['logistics_value'] > 3])}
+        result.append(item)
+
+        item = {'attribute': 'WIE', 'count': len(deck_df.loc[~deck_df['wie_level'].isna()])}
+        result.append(item)
+
+        item = {'attribute': 'Sub', 'count': len(deck_df.loc[deck_df['sub'] > 0])}
+        result.append(item)
+
+        item = {'attribute': 'Weather', 'count': len(deck_df.loc[deck_df['weather'] == 'Y'])}
+        result.append(item)
+
+        item = {'attribute': 'Kamikaze', 'count': len(deck_df.loc[deck_df['kamikaze'] == 'Y'])}
+        result.append(item)
+
+        return result
