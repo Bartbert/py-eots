@@ -54,22 +54,82 @@ def retrieve_discards(user_name, pw, game_name):
     return card_list
 
 
+def deck_attribute_counts(deck_df: pd.DataFrame):
+    result = []
+
+    item = {'attribute': '1 OP', 'count': len(deck_df.loc[deck_df['ops_value'] == 1]), 'probability': 0.0}
+    result.append(item)
+
+    item = {'attribute': '2 OP', 'count': len(deck_df.loc[deck_df['ops_value'] == 2]), 'probability': 0.0}
+    result.append(item)
+
+    item = {'attribute': '3 OP', 'count': len(deck_df.loc[deck_df['ops_value'] == 3]), 'probability': 0.0}
+    result.append(item)
+
+    item = {'attribute': 'Card Draw', 'count': len(deck_df.loc[deck_df['draw_card'] == 'Y']), 'probability': 0.0}
+    result.append(item)
+
+    item = {'attribute': 'PW', 'count': len(deck_df.loc[deck_df['pw_change'] > 0]), 'probability': 0.0}
+    result.append(item)
+
+    item = {'attribute': 'ISR Ender', 'count': len(deck_df.loc[deck_df['isr_end'] == 'Y']), 'probability': 0.0}
+    result.append(item)
+
+    item = {'attribute': 'ISR Starter', 'count': len(deck_df.loc[deck_df['isr_start'] == 'Y']), 'probability': 0.0}
+    result.append(item)
+
+    item = {'attribute': 'Intel Change', 'count': len(deck_df.loc[~deck_df['intel_status'].isna()]), 'probability': 0.0}
+    result.append(item)
+
+    item = {'attribute': 'Logistics 4+', 'count': len(deck_df.loc[deck_df['logistics_value'] > 3]), 'probability': 0.0}
+    result.append(item)
+
+    item = {'attribute': 'WIE', 'count': len(deck_df.loc[~deck_df['wie_level'].isna()]), 'probability': 0.0}
+    result.append(item)
+
+    item = {'attribute': 'Sub', 'count': len(deck_df.loc[deck_df['sub'] > 0]), 'probability': 0.0}
+    result.append(item)
+
+    item = {'attribute': 'Weather', 'count': len(deck_df.loc[deck_df['weather'] == 'Y']), 'probability': 0.0}
+    result.append(item)
+
+    item = {'attribute': 'Kamikaze', 'count': len(deck_df.loc[deck_df['kamikaze'] == 'Y']), 'probability': 0.0}
+    result.append(item)
+
+    return result
+
+
+def calculate_probability(deck_count: int, attribute_count: int, draw_count: int):
+    if attribute_count == 0:
+        return 0.0
+
+    probability = 1.0
+    for i in range(draw_count):
+        probability *= (1 - (attribute_count / deck_count))
+        deck_count -= 1
+
+    return 1 - probability
+
+
 class CardAnalyzer:
     def __init__(self):
         self.allied_card_data = load_card_data(enums.Player.ALLIES)
         self.japan_card_data = load_card_data(enums.Player.JAPAN)
 
-    def analyze_card_deck(self, user_name, pw, game_name, deck_type: enums.DeckType):
+    def analyze_card_deck(self, user_name, pw, game_name, deck_type: enums.DeckType,
+                          allies_draw_count: int, japan_draw_count: int):
 
         discard_list = retrieve_discards(user_name, pw, game_name)
 
-        result_allies = self.analyze_allies_card_deck(deck_type, discard_list)
+        result_allies = self.analyze_allies_card_deck(deck_type=deck_type,
+                                                      draw_count=allies_draw_count, discard_list=discard_list)
 
-        result_japan = self.analyze_japan_card_deck(deck_type, discard_list)
+        result_japan = self.analyze_japan_card_deck(deck_type=deck_type,
+                                                    draw_count=japan_draw_count, discard_list=discard_list)
 
         return [result_allies, result_japan]
 
-    def analyze_allies_card_deck(self, deck_type: enums.DeckType, discard_list):
+    def analyze_allies_card_deck(self, deck_type: enums.DeckType, draw_count: int, discard_list):
         deck_df = self.allied_card_data
 
         if deck_type == enums.DeckType.SOUTH_PACIFIC:
@@ -82,11 +142,17 @@ class CardAnalyzer:
 
         deck_df = deck_df.loc[~deck_df['card_id'].isin(discard_ids)]
 
-        deck_attributes = self.deck_attribute_counts(deck_df)
+        deck_attributes = deck_attribute_counts(deck_df)
+
+        for attribute in deck_attributes:
+            probability = calculate_probability(deck_count=len(deck_df),
+                                                attribute_count=attribute.get('count'), draw_count=draw_count)
+
+            attribute.update({'probability': probability})
 
         return deck_attributes
 
-    def analyze_japan_card_deck(self, deck_type: enums.DeckType, discard_list):
+    def analyze_japan_card_deck(self, deck_type: enums.DeckType, draw_count: int, discard_list):
         deck_df = self.japan_card_data
 
         if deck_type == enums.DeckType.SOUTH_PACIFIC:
@@ -99,50 +165,12 @@ class CardAnalyzer:
 
         deck_df = deck_df.loc[~deck_df['card_id'].isin(discard_ids)]
 
-        deck_attributes = self.deck_attribute_counts(deck_df)
+        deck_attributes = deck_attribute_counts(deck_df)
+
+        for attribute in deck_attributes:
+            probability = calculate_probability(deck_count=len(deck_df),
+                                                attribute_count=attribute.get('count'), draw_count=draw_count)
+
+            attribute.update({'probability': probability})
 
         return deck_attributes
-
-    def deck_attribute_counts(self, deck_df: pd.DataFrame):
-        result = []
-
-        item = {'attribute': '1 OP', 'count': len(deck_df.loc[deck_df['ops_value'] == 1])}
-        result.append(item)
-
-        item = {'attribute': '2 OP', 'count': len(deck_df.loc[deck_df['ops_value'] == 2])}
-        result.append(item)
-
-        item = {'attribute': '3 OP', 'count': len(deck_df.loc[deck_df['ops_value'] == 3])}
-        result.append(item)
-
-        item = {'attribute': 'Card Draw', 'count': len(deck_df.loc[deck_df['draw_card'] == 'Y'])}
-        result.append(item)
-
-        item = {'attribute': 'PW', 'count': len(deck_df.loc[deck_df['pw_change'] > 0])}
-        result.append(item)
-
-        item = {'attribute': 'ISR Ender', 'count': len(deck_df.loc[deck_df['isr_end'] == 'Y'])}
-        result.append(item)
-
-        item = {'attribute': 'ISR Starter', 'count': len(deck_df.loc[deck_df['isr_start'] == 'Y'])}
-        result.append(item)
-
-        item = {'attribute': 'Intel Change', 'count': len(deck_df.loc[~deck_df['intel_status'].isna()])}
-        result.append(item)
-
-        item = {'attribute': 'Logistics 4+', 'count': len(deck_df.loc[deck_df['logistics_value'] > 3])}
-        result.append(item)
-
-        item = {'attribute': 'WIE', 'count': len(deck_df.loc[~deck_df['wie_level'].isna()])}
-        result.append(item)
-
-        item = {'attribute': 'Sub', 'count': len(deck_df.loc[deck_df['sub'] > 0])}
-        result.append(item)
-
-        item = {'attribute': 'Weather', 'count': len(deck_df.loc[deck_df['weather'] == 'Y'])}
-        result.append(item)
-
-        item = {'attribute': 'Kamikaze', 'count': len(deck_df.loc[deck_df['kamikaze'] == 'Y'])}
-        result.append(item)
-
-        return result
