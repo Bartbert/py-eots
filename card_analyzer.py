@@ -150,7 +150,10 @@ class CardAnalyzer:
 
             attribute.update({'probability': probability})
 
-        return deck_attributes
+        result_df = pd.DataFrame(data=deck_attributes)
+        result_df = result_df.loc[~result_df['attribute'].isin(['Weather', 'Kamikaze'])]
+
+        return result_df
 
     def analyze_japan_card_deck(self, deck_type: enums.DeckType, draw_count: int, discard_list):
         deck_df = self.japan_card_data
@@ -173,4 +176,6 @@ class CardAnalyzer:
 
             attribute.update({'probability': probability})
 
-        return deck_attributes
+        result_df = pd.DataFrame(data=deck_attributes)
+
+        return result_df

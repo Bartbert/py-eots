@@ -10,6 +10,7 @@ import pandas as pd
 from dash.exceptions import PreventUpdate
 from combat_unit import CombatUnit
 from battle_analyzer import BattleAnalyzer
+from card_analyzer import CardAnalyzer
 import enums
 import json
 
@@ -131,6 +132,31 @@ def plot_expected_losses(df_results):
         data=graph,
         layout=layout
     )
+
+
+def plot_card_analysis(df_results, player: enums.Player):
+    x = df_results['attribute']
+    y = df_results['probability']
+
+    graph = go.Bar(
+        x=x,
+        y=y,
+        name='Card Attribute Probability',
+        marker=dict(color='lightgreen'),
+        text=y.apply(lambda z: '{0:.0f}%'.format(z * 100))
+    )
+
+    layout = go.Layout(
+        paper_bgcolor='#27293d',
+        plot_bgcolor='rgba(0,0,0,0)',
+        xaxis=dict(type='category', title='Card Attribute'),
+        yaxis=dict(range=[0, 1], tickformat=".0%", title='Probability of Drawing 1+ Cards w/ Attribute'),
+        font=dict(color='white'),
+        title=f'{player.name} Hand Analysis',
+        transition={'duration': 500, 'easing': 'cubic-in-out'},
+    )
+
+    return {'data': [graph], 'layout': layout}
 
 
 """Navbar"""
@@ -369,6 +395,20 @@ japan_hand_size = html.Div(
     ],
 )
 
+card_deck_type = html.Div(
+    [
+        dbc.Label("Card Deck"),
+        dbc.RadioItems(
+            options=[
+                {"label": "Full Game Deck", "value": 1},
+                {"label": "South Pacific Deck", "value": 2},
+            ],
+            value=1,
+            id="card-deck-type",
+        ),
+    ]
+)
+
 analyze_cards_button = html.Div(
     [
         dbc.Button("Analyze Cards", id='analyze-cards', color="primary", className="me-1"),
@@ -387,6 +427,8 @@ body_cards = html.Div(
                         acts_password,
                         html.P(),
                         acts_game_name,
+                        html.P(),
+                        card_deck_type,
                         html.P(),
                         allied_hand_size,
                         html.P(),
@@ -872,6 +914,30 @@ def analyze_battle_results(n_clicks, intel_condition_value, reaction_player_valu
     losses = plot_expected_losses(results)
 
     return [winner, losses]
+
+
+@app.callback(
+    [Output('allied-probability', 'figure'), Output('japan-probability', 'figure')],
+    Input('analyze-cards', 'n_clicks'),
+    [State('acts-username', 'value'), State('acts-password', 'value'), State('acts-game-name', 'value'),
+     State('allied-hand-size', 'value'), State('japan-hand-size', 'value'), State('card-deck-type', 'value')]
+)
+def analyze_cards(n_clicks, acts_username_value, acts_password_value, acts_game_name_value,
+                  allied_hand_size_value, japan_hand_size_value, card_deck_type_value):
+    if (not acts_username_value) | (not acts_password_value) | (not acts_game_name_value) | (not n_clicks):
+        raise PreventUpdate
+
+    analyzer = CardAnalyzer()
+
+    results = analyzer.analyze_card_deck(user_name=acts_username_value, pw=acts_password_value,
+                                         game_name=acts_game_name_value, deck_type=card_deck_type_value,
+                                         allies_draw_count=allied_hand_size_value,
+                                         japan_draw_count=japan_hand_size_value)
+
+    allied_plot = plot_card_analysis(df_results=results[0], player=enums.Player.ALLIES)
+    japan_plot = plot_card_analysis(df_results=results[1], player=enums.Player.JAPAN)
+
+    return [allied_plot, japan_plot]
 
 
 if __name__ == '__main__':
