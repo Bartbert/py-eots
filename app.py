@@ -902,6 +902,12 @@ def analyze_battle_results(n_clicks, intel_condition_value, reaction_player_valu
     if (len(allied_combat_force) == 0) | (len(japan_combat_force) == 0):
         raise PreventUpdate
 
+    print(f'Intel Condition: {enums.IntelCondition(intel_condition_value).name}, '
+          f'Reaction Player: {enums.Player(reaction_player_value).name}')
+    print(f'Allied Force: {allied_json}')
+    print(f'Japan Force: {japan_json}')
+    print('============================')
+
     analyzer = BattleAnalyzer(intel_condition=enums.IntelCondition(intel_condition_value),
                               reaction_player=enums.Player(reaction_player_value),
                               air_power_mod=enums.AirPowerModifier(air_power_drm_value),
@@ -928,6 +934,10 @@ def analyze_cards(n_clicks, acts_username_value, acts_password_value, acts_game_
         raise PreventUpdate
 
     analyzer = CardAnalyzer()
+
+    print(f'Deck Type: {enums.DeckType(card_deck_type_value).name}, '
+          f'Allied Hand Size: {allied_hand_size_value}, Japan Hand Size: {japan_hand_size_value}')
+    print('======================================')
 
     results = analyzer.analyze_card_deck(user_name=acts_username_value, pw=acts_password_value,
                                          game_name=acts_game_name_value, deck_type=card_deck_type_value,
