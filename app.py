@@ -556,6 +556,7 @@ def update_allied_selected_units(value, json_data, children):
                                                  True if math.isnan(selected_unit.move_range_extended) else False)),
                                 dbc.Checkbox(id={'type': 'allied-unit-battle-hex', 'index': selected_unit.unit_id},
                                              label='In Battle Hex?', value=selected_unit.is_in_battle_hex),
+                                html.P("EC Modifier:", className="m-0"),
                                 dbc.Input(id={'type': 'allied-unit-mod', 'index': selected_unit.unit_id},
                                           type='number', min=-2, max=2, step=1, value=0)
                             ]
@@ -646,6 +647,7 @@ def update_japan_selected_units(value, json_data, children):
                                                  True if math.isnan(selected_unit.move_range_extended) else False)),
                                 dbc.Checkbox(id={'type': 'japan-unit-battle-hex', 'index': selected_unit.unit_id},
                                              label='In Battle Hex?', value=selected_unit.is_in_battle_hex),
+                                html.P("EC Modifier:", className="m-0"),
                                 dbc.Input(id={'type': 'japan-unit-mod', 'index': selected_unit.unit_id},
                                           type='number', min=-2, max=2, step=1, value=0)
                             ]
